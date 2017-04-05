@@ -1,0 +1,43 @@
+body {
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+    margin: 0;
+    padding: 0;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-default {
+    margin-bottom: 0;
+    padding: 1.5em 0;
+    background: transparent;
+    border-radius: 0!important;
+    border: none;
+    .navbar-brand {
+        color: #fff;
+        font-size: 2em;
+        font-family: 'Raleway', sans-serif;
+    }
+    .navbar-right {
+        a {
+            color: #fff!important;
+            font-size: 1.8em;
+            font-family: 'Raleway', sans-serif;
+
+        }
+    }
+}
