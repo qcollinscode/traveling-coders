@@ -1,1 +1,5 @@
-<img src="project1.jpg" />
+Home
+<img src="projecthome.jpg" />
+
+Article
+<img src="project.jpg" />

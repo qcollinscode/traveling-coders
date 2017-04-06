@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="jumbotron">
+        <div class="home-jumbotron jumbotron">
             <div class="logo">
                 <img src="assets/img/logo3.svg" alt="">
             </div>
@@ -88,12 +88,12 @@
             <div class="row articles text-center">
                 <?php
                     $i = 0;
-                    while($i < 8) {
-                        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                    while($i < 5) {
+                        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-12'>
                             <div>
                                 <figure>
                                     <div class='row'>
-                                        <img src='assets/img/tianjin.jpg' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                                        <img src='assets/img/sky.png' alt='' class='col-xs-12 col-sm-12 img-responsive'>
                                     </div>
                                     <figcaption>
                                         <h1>Lorem ipsum dolor sit amet, consectetur adipisicin</h1>

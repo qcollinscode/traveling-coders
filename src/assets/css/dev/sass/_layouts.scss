@@ -1,8 +1,9 @@
-.wrapper {
+html, body {
     background: rgb(236, 240, 241);
+    height: 100%;
 }
 
-.jumbotron {
+.home-jumbotron {
     border-radius: 0!important;
     height: 100vh;
     background: transparent;
@@ -26,6 +27,188 @@
     }
 }
 
-.main {
+.post {
+    position: relative;
+    height: 100%;
+    .row {
+        height: 100%;
+    }
+}
 
+.post-jumbotron {
+    border-radius: 0!important;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+    background: url('../img/clouds.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    .post-info {
+        .title {
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 5.9em;
+            margin-bottom: 1em;
+        }
+        .nm-date {
+            margin-top: 2.5em;
+            .user-nm {
+                font-style: italic;
+                font-weight: 500;
+            }
+            .post-date {
+                font-style: italic;
+                font-weight: 500;
+            }
+        }
+        img {
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+    }
+}
+
+.about-section {
+    text-align: center!important;
+    padding-top: 13em;
+    h1 {
+        font-size: 2.8em;
+        text-transform: uppercase;
+    }
+    .img-con {
+        display: flex;
+        justify-content: center;
+        img {
+            border-radius: 100%;
+            width: 120px;
+        }
+    }
+    .txt-con {
+        display: flex;
+        justify-content: center;
+        p {
+            margin-top: 2em;
+            font-size: 1.4em;
+            text-align: center;
+        }
+    }
+    .font-con {
+        display: flex;
+        justify-content: center;
+        i {
+            font-size: 2.3em;
+            color: $mainColor!important;
+            &:visited, &:hover, &:focus {
+                color: rgba(6,47,79,0.7)!important;
+            }
+        }
+    }
+}
+
+.comment-counts {
+    margin: 13em 0;
+    text-align: center;
+    background: rgba(6,47,79,0.1);
+    border-radius: 10px;
+    p {
+        font-size: 4em;
+    }
+}
+
+.comments {
+    .comment {
+        margin-top: 3em;
+        h1 {
+            font-size: 2em;
+            font-weight: 800;
+        }
+        .date {
+            padding: 0.9em 0;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .ln {
+            background: rgba(6,47,79,0.3);
+            height: 3px;
+            min-width: 12em;
+            width: 20em;
+            max-width: 20em;
+            display: block;
+            margin: 0.4em 0 0.6em 0;
+        }
+        .comment-comment {
+            font-size: 1.5em;
+        }
+        button {
+            margin-top: 0.6em;
+        }
+    }
+    .sub {
+        margin-top: 3em;
+        padding: 0 0 0 2em;
+        border-left: 2px dotted rgba(6,47,79,0.3);
+    }
+}
+
+.leave-reply {
+    margin: 9em 0;
+    h1 {
+        text-transform: uppercase;
+        font-weight: 900;
+        margin-bottom: 0.4em;
+    }
+    p {
+        font-size: 1.4em;
+    }
+}
+
+form {
+    margin-top: 3em;
+    .form-input {
+        display: flex;
+        flex-direction: column;
+    }
+    textarea {
+        margin-bottom: 3em;
+        border: none;
+        background: rgba(6,47,79,0.1);
+        border-radius: 3px;
+        max-width: 100%;
+        color: $mainColor;
+        font-size: 1.5em;
+    }
+    input {
+        border: none;
+        background: rgba(6,47,79,0.1);
+        border-radius: 3px;
+        font-size: 1.5em;
+        padding: 0 0.2em;
+        color: $mainColor!important;
+        //padding: 10px 0;
+        height: 40px;
+        &[placeholder] {
+            line-height: 40px;
+        }
+    }
+    label {
+        color: rgba(6,47,79,1);
+        font-size: 1.3em;
+        text-transform: uppercase;
+    }
+    button {
+        margin-top: 36px;
+
+    }
+}
+
+.mt {
+    margin-top: 5em;
 }
