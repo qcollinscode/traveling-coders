@@ -1,0 +1,12 @@
+{
+    "name": "qcollins/travelingcoders",
+    "description": "Traveling information site for coders",
+    "authors": [
+        {
+            "name": "qcollinscode",
+            "email": "qcollins@qraynix.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
