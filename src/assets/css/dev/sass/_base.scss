@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6, p, span {
 
 }
 
+h1 {
+    color: $mainColor!important;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
@@ -19,24 +23,30 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     font-family: 'Roboto', sans-serif;
+    color: $mainColor!important;
 }
 
 .navbar-default {
     margin-bottom: 0;
-    padding: 1.5em 0;
-    background: transparent;
+    background: $mainColor;
     border-radius: 0!important;
     border: none;
     .navbar-brand {
         color: #fff;
-        font-size: 2em;
-        font-family: 'Raleway', sans-serif;
+        font-size: 1.8em;
+        font-weight: 900;
+        text-transform: uppercase;
     }
     .navbar-right {
         a {
             color: #fff!important;
-            font-size: 1.8em;
+            font-size: 1.4em;
             font-family: 'Raleway', sans-serif;
+            transition: 0.2s ease-out;
+            &:hover {
+                background: white!important;
+                color: $mainColor!important;
+            }
 
         }
     }

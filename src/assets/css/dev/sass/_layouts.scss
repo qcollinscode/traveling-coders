@@ -1,13 +1,29 @@
+.wrapper {
+    background: rgb(236, 240, 241);
+}
+
 .jumbotron {
     border-radius: 0!important;
     height: 100vh;
     background: transparent;
-    background: url('../img/travel.jpg');
+    background: url('../img/pexels-photo-167699.jpeg');
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 110% 150%;
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    .logo {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        position: relative;
+        top: -4em;
+        height: 100%;
+    }
 }
 
 .main {

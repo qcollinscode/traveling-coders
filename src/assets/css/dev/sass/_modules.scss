@@ -3,30 +3,31 @@
         font-size: 1.4em;
         padding: 1.56em;
         text-transform: uppercase;
-        border-bottom: 1px solid rgb(230, 230, 230);
+        background: rgb(236, 240, 241);
+        color: rgb(30, 30, 30);
+        margin-bottom: 6px;
     }
     ul {
-        padding: 0;
+        padding-left: 1.4em;
         margin: 0;
         list-style: none;
-        border-right: 1px solid rgb(230, 230, 230);
         li {
-            border-bottom: 1px solid rgb(230, 230, 230);
-            margin: 0;
-            background: orange;
+            margin-bottom: 6px;
+            background: $mainColor;
             a {
-                color: rgb(20, 20, 20);
+                color: rgb(30, 30, 30);
                 text-transform: capitalize;
                 font-family: 'Raleway', sans-serif;
                 display: block;
                 font-size: 1.1em;
                 font-weight: bold;
                 padding: 1.5em 0;
-                background: white;
+                background: rgb(236, 240, 241);
                 margin-right: 0;
-                transition: margin-right 0.1s ease-in;
+                transition: margin-right 0.1s ease-in, color 0.1s ease-in;
                 &:nth-child(1):hover {
                     margin-right: 0.3em;
+                    color: $mainColor;
                 }
                 &:hover, &:visited, &:focus {
                     text-decoration: none;
@@ -40,28 +41,31 @@
 }
 
 .latest-videos {
-    border-right: 1px solid rgb(230, 230, 230);
     h1 {
         font-size: 1.4em;
-        padding: 0.96em;
+        padding: 1.56em;
         text-transform: uppercase;
-        border-bottom: 1px solid rgb(230, 230, 230);
+        background: rgb(236, 240, 241);
+        color: rgb(30, 30, 30);
+        margin-top: 6px;
     }
     figure {
         padding: 0em 1.3em;
         margin: 1.45em 0em;
+        img {
+        }
         figcaption {
             min-height: 7em;
-            background: rgb(240, 240, 240);
+            background: rgb(236, 240, 241);
         }
     }
 }
 
 .main-section {
     .header {
-        border-bottom: 1px solid rgb(230, 230, 230);
+        background: rgb(236, 240, 241);
         overflow: hidden;
-        height: 6em;
+        height: 5.95em;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -71,13 +75,12 @@
             margin-top: 0.3em;
             display: block;
             text-align: center;
-            text-transform: uppercase;
-            color: lightgrey;
+            color: grey!important;
             user-select: none;
             pointer-events: none;
             .selected {
-                color: rgb(20, 20, 20);
-                border-bottom: 3px solid orange;
+                color: $mainColor;
+                border-bottom: 3px solid $mainColor;
                 padding-bottom: 6px;
             }
             span {
@@ -85,7 +88,7 @@
                 user-select: none;
                 cursor: pointer;
                 margin-left: 1em;
-                text-transform: capitalize;
+                text-transform: uppercase;
                 &:nth-child(3) {
                     text-transform: uppercase;
                 }
@@ -98,25 +101,32 @@
     h1 {
         font-size: 1.4em;
         padding: 1.56em;
+        margin-bottom: 6px;
+        background: rgb(236, 240, 241);
         text-transform: uppercase;
-        border-bottom: 1px solid rgb(230, 230, 230);
+        color: $mainColor;
     }
     ul {
-        border-left: 1px solid rgb(230, 230, 230);
         list-style: none;
-        padding-left: 0;
+        padding-left: 10px;
         li {
             position: relative;
-            border-bottom: 1px solid rgb(230, 230, 230);
+            margin-bottom: 6px;
+            border-top: 1px solid $mainColor;
             a {
                 position: relative;
                 width: 100%;
                 height: 100%;
                 padding: 1.2em 0;
                 left: 0;
-                color: black;
+                color: $mainColor;
                 display: flex;
                 flex-direction: row;
+                transition: color 0.2s ease-out;
+                h4 {
+                    font-weight: 700;
+                    color: $mainColor;
+                }
                 &:hover, &:visited, &:focus {
                     text-decoration: none;
                 }
@@ -143,18 +153,147 @@
 }
 
 .articles {
-    margin: 3em 1em 0em 1em;
+    padding-top: 2.5em;
+    & > .col-lg-6 {
+        margin-bottom: 5em;
+    }
+    h1 {
+        font-size: 1.8em;
+        padding: 18px 0px 18px 0px;
+        text-align: left;
+        font-weight: 700;
+    }
+    p {
+        padding: 8px 0px 25px 0px;
+        text-align: left;
+        font-size: 1.4em;
+        font-weight: 100;
+        color: rgb(90, 90, 90);
+    }
     figure {
         & + div {
             min-height: 3.8em;
-            background: rgb(190, 190, 190);
+            & > div:nth-child(1) {
+                text-align: left;
+                font-size: 1.3em;
+                .nm {
+                    color: $mainColor;
+                }
+                & + div {
+                    text-align: right;
+                    font-size: 1.3em;
+                    i {
+                        padding-right: 0.5em;
+                        color: $mainColor;
+                    }
+                & > i:first-child + span {
+                        padding-right: 0.7em;
+                    }
+                }
+            }
         }
         figcaption {
             min-height: 10em;
-            background: rgb(240, 240, 240);
         }
     }
     & > div {
         margin-bottom: 2em;
     }
+}
+
+footer {
+    background: $mainColor;
+    min-height: 10em;
+    padding: 2em 0 2em 0;
+    .copy {
+        color: white;
+        text-transform: uppercase;
+        text-align: left;
+        display: block;
+        padding-top: 1em;
+        @include bp-xlarge {
+            text-align: center;
+        }
+        @include bp-large {
+            text-align: center;
+        }
+        @include bp-medium {
+            text-align: center
+        }
+        @include bp-small {
+            text-align: center;
+        }
+    }
+    .icons {
+        a {
+            color: white;
+            i {
+                font-size: 1.8em;
+                padding-top: 0.7em;
+                pointer-events: auto;
+                cursor: pointer;
+            }
+        }
+    }
+    h3 {
+        color: white;
+        font-size: 1.9em;
+        font-weight: 900;
+        text-transform: uppercase;
+        & + div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            & > span {
+                color: white;
+                font-size: 1.2em;
+                text-transform: uppercase;
+                & + span {
+
+                }
+            }
+        }
+    }
+    nav {
+        ul {
+            list-style: none;
+            li {
+                border-right: 1px solid white;
+                text-align: center;
+
+                &:nth-child(4) {
+                    border: none;
+                }
+                a {
+                    font-size: 1.9em;
+                    color: white;
+                    font-weight: 900;
+                    &:hover, &:visited, &:focus {
+                        color: white;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+button {
+    background: rgb(236, 240, 241);
+    font-size: 1.3em!important;
+    border: 1px solid $mainColor!important;
+    color: white;
+    font-weight: 600!important;
+    text-transform: uppercase;
+    border-radius: 0!important;
+    transition: background 0.1s ease-out, color 0.2s ease-out;
+    background: $mainColor;
+    &:hover, &:focus, &:active {
+        color: $mainColor!important;
+        background: transparent;
+    }
+}
+
+.rm-p {
+    padding: 0;
 }
