@@ -31,6 +31,7 @@ p {
     background: $mainColor;
     border-radius: 0!important;
     border: none;
+    z-index: 10000000000;
     .navbar-brand {
         color: #fff;
         font-size: 1.8em;
@@ -44,8 +45,15 @@ p {
             font-family: 'Raleway', sans-serif;
             transition: 0.2s ease-out;
             &:hover {
-                background: white!important;
-                color: $mainColor!important;
+                background: rgba(6,147,179,1)!important;
+
+            }
+            i {
+                color: white!important;
+                font-size: 1em;
+                margin-right: 0.3em;
+                transition: 0.1s ease-out;
+                background: transparent!important;
             }
 
         }

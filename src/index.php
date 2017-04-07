@@ -1,7 +1,6 @@
 <?php
     include "includes/header.php";
 ?>
-
 <div class="container-fluid">
     <div class="row">
         <div class="home-jumbotron jumbotron">
@@ -19,7 +18,7 @@
                 <nav class="latest-news col-lg-12">
                     <h1>Latest News</h1>
                     <ul>
-                        <li><a href="#"><i class="fa fa-user"></i>All</a></li>
+                        <li><a href="#"><i class="fa fa-user"></i>Home</a></li>
                         <li><a href="#"><i class="fa fa-user"></i>Travel</a></li>
                         <li><a href="#"><i class="fa fa-user"></i>Life</a></li>
                         <li><a href="#"><i class="fa fa-user"></i>Money</a></li>
@@ -34,7 +33,7 @@
                             $x = 0;
                             while($x < 4) {
                                 echo "<li class='col-xs-12 col-sm-6 col-md-3 col-lg-12'>
-                                        <a href='#a'>
+                                        <a href='post.php'>
                                             <img src='assets/img/73.jpg'/>
                                             <div>
                                                 <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
@@ -59,7 +58,7 @@
                             $y = 0;
                             while($y < 6) {
                                 echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
-                                        <a href='#'>
+                                        <a href='post.php'>
                                             <img src='assets/img/tianjin.jpg' alt=''>
                                             <div>
                                                 <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus iste, sint.</h4>
