@@ -1,37 +1,58 @@
-    <footer class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <h3 class="col-xs-12 col-md-12 col-lg-4 text-center">Traveling Coders</h3>
-                </div>
-            </div>
-            <nav class="col-xs-12 col-md-6 col-lg-6">
-                <ul class="row rm-p">
-                    <li class="col-xs-12 col-lg-3"><a href="#">Home</a></li>
-                    <li class="col-xs-12 col-lg-3"><a href="#">Travel</a></li>
-                    <li class="col-xs-12 col-lg-3"><a href="#">Life</a></li>
-                    <li class="col-xs-12 col-lg-3"><a href="#">Money</a></li>
+<footer id="footer" class="panel">
+    <div class="inner split">
+        <div>
+            <section>
+                <h2>Magna feugiat sed adipiscing</h2>
+                <p>Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
+            </section>
+            <section>
+                <h2>Follow me on ...</h2>
+                <ul class="icons">
+                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                    <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
                 </ul>
-            </nav>
+            </section>
+            <p class="copyright">
+                &copy; <a href="#">Qraynix</a>.
+            </p>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-xs-12 col-md-6 col-lg-10">
-                        <h4 class="copy">copyright &copy; 2017 Q Collins</h4>
+        <div>
+            <section>
+                <h2>Get in touch</h2>
+                <form method="post" action="#">
+                    <div class="field half first">
+                        <input type="text" name="name" id="name" placeholder="Name" />
                     </div>
-                    <div class="col-xs-12 col-md-6 col-lg-2 text-center">
-                        <div class="row icons">
-                            <a href="#t"><i class="col-lg-3 fa fa-twitter"></i></a>
-                            <a href="#f"><i class="col-lg-3 fa fa-facebook"></i></a>
-                            <a href="#i"><i class="col-lg-3 fa fa-instagram"></i></a>
-                            <a href="#h"><i class="col-lg-3 fa fa-heart"></i></a>
-                        </div>
+                    <div class="field half">
+                        <input type="text" name="email" id="email" placeholder="Email" />
                     </div>
-                </div>
-            </div>
+                    <div class="field">
+                        <textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" name="submit" value="Send" class="special" /></li>
+                        <li><input type="reset" value="Reset" /></li>
+                    </ul>
+                </form>
+            </section>
         </div>
-    </footer>
-    <script src="assets/js/main-min.js"></script>
-</body>
-</html>
+    </div>
+</footer>
+
+</div>
+
+<!-- Scripts
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.poptrox.min.js"></script> -->
+<!--<script src="assets/js/react.js"></script>-->
+<!--
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script> -->
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<!--<script src="assets/js/gallery.js"></script>-->
+<script src="assets/js/dev/common.js" charset="utf-8"></script>
+<script src="assets/js/dev/main.js"></script>

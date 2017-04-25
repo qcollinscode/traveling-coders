@@ -48,16 +48,16 @@ const returnFiles  = (root, files) => {
  * Options
  **************************/
 const
-    connectPHPOptions           =   new Options({ hostname: 'localhost', port: 9008, base: 'src', open: false }),
+    connectPHPOptions           =   new Options({ hostname: 'localhost', port: 9000, base: 'src', open: false }),
     browserSyncServerOptions    =   new Options({ baseDir  : 'src', middleware: (req, res, next) => {
         const
             proxy   =   httpProxy.createProxyServer({}),
             url     = req.url;
 
-            !url.match(/^\/(styles|fonts|bower_components)\//) ? proxy.web(req, res, { target: 'http://127.0.0.1:9008' }) : next();
+            !url.match(/^\/(styles|fonts|bower_components)\//) ? proxy.web(req, res, { target: 'http://127.0.0.1:9000' }) : next();
         }
     }),
-    browserSyncOptions          =   new Options({ port: 9009, server: browserSyncServerOptions.options() }),
+    browserSyncOptions          =   new Options({ port: 9001, server: browserSyncServerOptions.options() }),
     gulpBabel                   =   new Options({ presets: 'es2015' }),
     gulpRename                  =   new Options({ fileNameCSS: 'main.css', fileNameJS: 'main.js', baseName: 'main', extName: '.js' }),
     gulpImageMinify             =   new Options({ progressive: true, optimizationLevel: 5 });
@@ -76,8 +76,12 @@ const
     allSassFiles                =   './src/assets/css/dev/sass/**/*.scss',
     allJSFiles                  =   './src/assets/js/dev/**/*.js',
     allPHPFiles                 =   './src/**/*.php',
-    jsFiles                     =   returnFiles('./src/assets/js/dev/', ['jquery.min.js', 'bootstrap.min.js', 'main.js']),
-    cssFiles                    =   returnFiles('./src/assets/css/dev/', ['normalize.min.css', 'bootstrap.min.css', 'font-awesome.min.css', 'mainstyle.css']);
+    devCssDir                   =   './src/assets/css/dev/',
+    jsFiles                  =   returnFiles('./src/assets/js/dev/', ['jquery.min.js', 'bootstrap.min.js', 'main.js']),
+    cssFiles                 =   returnFiles(devCssDir, ['normalize.min.css', 'bootstrap.min.css', 'font-awesome.min.css', 'mainstyle.css']),
+    postCssFiles                =   returnFiles('./src/assets/css/', ['dev/normalize.min.css', 'dev/bootstrap.min.css', 'dev/font-awesome.min.css', 'post/blog-post.css']),
+    homeCssFiles                =   returnFiles('./src/assets/css/', ['dev/normalize.min.css', 'dev/bootstrap.min.css', 'dev/font-awesome.min.css', 'home/blog-home.css']),
+    adminCssFiles               =   returnFiles('./src/assets/css/', ['dev/normalize.min.css', 'dev/bootstrap.min.css', 'dev/font-awesome.min.css', 'admin/sb-admin.css']);
 
 /***************************
 * Development
@@ -141,11 +145,11 @@ gulp.task('watch', ['connect'], function() {
     gulp.watch(allPHPFiles).on('change', function () {
         browserSync.reload();
     });
-    gulp.watch(allJSFiles, ['js']);
+    //gulp.watch(allJSFiles, ['js']);
     gulp.watch(allSassFiles, ['css']);
 });
 
 /***************************
  * Default
  **************************/
-gulp.task('default', ['js', 'css', 'img', 'watch']);
+gulp.task('default', ['css', 'img', 'watch']);
