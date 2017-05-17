@@ -24,22 +24,39 @@ import watch          from   'gulp-watch';
 /***************************
  * Helpers
  **************************/
-class Options {
-    constructor (obj, key) {
-        this.obj = obj
-        this.options(key)
-    }
-    options (key) {
-        return arguments.length <=0 ? this.obj : this.obj[key];
-    }
+// class Options {
+//     constructor (obj, key) {
+//         this.obj = obj
+//         this.getOptions(key)
+//     }
+//     getOptions (key) {
+
+//         /** Return the whole options object if no key name was passed. */
+//         return arguments.length <= 0 ? this.obj : this.obj[key];
+//     }
+// }
+
+
+/** Options Helper */
+const options = {
+  init: function(obj) {
+    this.obj = obj;
+    return this;
+  },
+  getOptions: function(key) {
+
+      /** Return the options object if no key name was passed. */
+    return arguments.length <= 0 ? this.obj : this.obj[key];
+  }
 }
 
-const returnFiles  = (root, files) => {
+
+const returnFiles  = (src, files) => {
     const arr = [],
           len = files.length;
     for(let file in files) {
-        let newfile = root + files[file];
-        arr.push(newfile);
+        let filePath = src + files[file];
+        arr.push(filePath);
     }
     return arr;
 }
@@ -48,25 +65,16 @@ const returnFiles  = (root, files) => {
  * Options
  **************************/
 const
-    connectPHPOptions           =   new Options({ hostname: 'localhost', port: 9008, base: 'src', open: false }),
-    browserSyncServerOptions    =   new Options({ baseDir  : 'src', middleware: (req, res, next) => {
-        const
-            proxy   =   httpProxy.createProxyServer({}),
-            url     = req.url;
-
-            !url.match(/^\/(styles|fonts|bower_components)\//) ? proxy.web(req, res, { target: 'http://127.0.0.1:9008' }) : next();
-        }
-    }),
-    browserSyncOptions          =   new Options({ port: 9009, server: browserSyncServerOptions.options() }),
-    gulpBabel                   =   new Options({ presets: 'es2015' }),
-    gulpRename                  =   new Options({ fileNameCSS: 'main.css', fileNameJS: 'main.js', baseName: 'main', extName: '.js' }),
-    gulpImageMinify             =   new Options({ progressive: true, optimizationLevel: 5 });
+    browserSyncOptions          =   Object.create(options).init({ proxy: 'localhost/traveling-coders/src' }),
+    gulpBabel                   =   Object.create(options).init({ presets: 'es2015' }),
+    gulpRename                  =   Object.create(options).init({ fileNameCSS: 'main.css', fileNameJS: 'main.js', baseName: 'main', extName: '.js' }),
+    gulpImageMinify             =   Object.create(options).init({ progressive: true, optimizationLevel: 5 });
 
 /***************************
 * Variables
 **************************/
 const
-    renameFileNameJS            =   gulpRename.options('fileNameJS'),
+    renameFileNameJS            =   gulpRename.getOptions('fileNameJS'),
     mainCssFile                 =   'main.css',
     imageRoot                   =   './src/assets/img/',
     jsRoot                      =   './src/assets/js/',
@@ -88,7 +96,7 @@ gulp.task('js', () => {
     return gulp.src(jsFiles)
         .pipe(plumber())
         .pipe(sourcemaps.init())
-        .pipe(babel(gulpBabel.options()))
+        .pipe(babel(gulpBabel.getOptions()))
         .pipe(concatJS(renameFileNameJS))
         .pipe(minifyJS())
         .pipe(sourcemaps.write())
@@ -100,9 +108,7 @@ gulp.task('js', () => {
 gulp.task('sass', () => {
     return gulp.src(allSassFiles)
         .pipe(plumber())
-        .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest(cssDevRoot))
 });
 
@@ -122,28 +128,29 @@ gulp.task('img', () => {
   return watch(allImages, () => {
     gulp.src(allImages)
       .pipe(plumber())
-      .pipe(imagemin(gulpImageMinify.options()))
+      .pipe(imagemin(gulpImageMinify.getOptions()))
       .pipe(gulp.dest(imageRoot))
       .pipe(browserSync.stream());
   });
 });
 
-// Browser-sync PHP Server
+// Browser-sync Server
 gulp.task('connect', () => {
-    connectPHP.server( connectPHPOptions.options() );
-    browserSync( browserSyncOptions.options() );
+    browserSync( browserSyncOptions.getOptions() );
 });
 
-/***************************
- * Production
- **************************/
-gulp.task('watch', ['connect'], function() {
-    gulp.watch(allPHPFiles).on('change', function () {
+gulp.task('watch', ['connect'], () => {
+    gulp.watch(allPHPFiles).on('change', () => {
         browserSync.reload();
     });
     gulp.watch(allJSFiles, ['js']);
     gulp.watch(allSassFiles, ['css']);
 });
+
+
+/***************************
+ * Production
+ **************************/
 
 /***************************
  * Default
