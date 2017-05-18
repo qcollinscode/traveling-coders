@@ -7,9 +7,9 @@ function check_query($result) {
     }
 }
 
-function getById($str, $id) {
+function getById($str, $column, $id) {
     global $connection;
-    $query = "SELECT * FROM {$str} WHERE user_id = {$id}";
+    $query = "SELECT * FROM {$str} WHERE {$column}={$id}";
     $result = mysqli_query($connection, $query);
     check_query($result);
     $row = mysqli_fetch_assoc($result);

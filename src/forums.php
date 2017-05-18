@@ -17,6 +17,12 @@
         case "posts";
             include "includes/posts.php";
         break;
+        case "create_thread";
+            include "includes/create_thread.php";
+        break;
+        case "create_post";
+            include "includes/create_post.php";
+        break;
         default:
             include "wrongpage.php";
         break;

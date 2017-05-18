@@ -1,8 +1,21 @@
 <?php 
-    $id = $_SESSION['userId'];
+    $id;
+    if(isset($_SESSION['userId'])) {
+        $id = $_SESSION['userId'];
+    }
+    
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid threads-section">
+<?php
+    if(isset($_SESSION['userId'])) {
+        echo "<div class='row'>
+                <div class='col-md-12 text-right'>
+                    <p><a href='<?php echo $root; ?>forums?p=create_thread'><button>Create New Tread</button></a></p>
+                </div>
+            </div>";
+    }
+?>
     <div class="row">
         <table class="table table-responsive">
             <tr class="info">
@@ -17,13 +30,15 @@
                 $result = mysqli_query($connection, $query);
                 check_query($result);
                 while($thread = mysqli_fetch_assoc($result)) {
+                    $category_id = $thread['category_id'];
+                    $category = getById("categories", "category_id", $category_id);
             ?>
 
                 <tr>
-                    <th><a href='<?php echo $root; ?>forums?p=posts&thread_id=<?php echo $thread["thread_id"]?>'><?php echo $thread['thread_title']; ?></a></th>
+                    <th class="col-md-10"><a href='<?php echo $root; ?>forums?p=posts&thread=<?php echo $thread["thread_id"]?>'><?php echo $thread['thread_title']; ?></a></th>
                     <th><?php echo $thread['thread_views_count']; ?></th>
                     <th><?php echo $thread['thread_users_count']; ?></th>
-                    <th><?php echo $thread['thread_category']; ?></th>
+                    <th><?php echo $category['category_name']; ?></th>
                 </tr>
 
 

@@ -63,13 +63,13 @@ html, body {
 body {
   padding-top: 50px; }
 
-.signup-section, .login-section {
-  height: 100vh; }
-  .signup-section form, .login-section form {
+.signup-section, .create-thread-section, .create-post-section, .login-section {
+  min-height: 100vh; }
+  .signup-section form, .create-thread-section form, .create-post-section form, .login-section form {
     margin-top: 14em; }
 
 .wrongpage {
-  height: 100vh; }
+  min-height: 100vh; }
 
 .login-section .signup-container {
   text-align: right; }
@@ -377,6 +377,18 @@ form {
       color: white !important;
       font-size: 1.5em;
       padding: 1em 0 0 0; }
+
+.threads-section {
+  min-height: 100vh; }
+
+.posts-section {
+  min-height: 100vh; }
+
+.text-right p {
+  padding: 2em 0; }
+
+.img-responsive {
+  width: 100%; }
 
 .latest-news h1 {
   font-size: 1.4em;

@@ -8,14 +8,22 @@ body {
 }
 
 .signup-section {
-    height: 100vh;
+    min-height: 100vh;
     form {
         margin-top: 14em;
     }
 }
 
+.create-thread-section {
+    @extend .signup-section;
+}
+
+.create-post-section {
+    @extend .signup-section;
+}
+
 .wrongpage {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .login-section {
@@ -428,4 +436,22 @@ form {
     .posts {
 
     }
+}
+
+.threads-section {
+    min-height: 100vh;
+}
+
+.posts-section {
+    min-height: 100vh;
+}
+
+.text-right {
+    p {
+        padding: 2em 0;
+    }
+}
+
+.img-responsive {
+    width:100%;
 }

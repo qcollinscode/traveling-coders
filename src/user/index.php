@@ -1,8 +1,6 @@
 <?php 
     include_once("includes/user_header.php");
 ?>
-<h1><?php echo $_SESSION['userId']?></h1>
-
 <div class="page">
 
     <?php 
@@ -24,9 +22,6 @@
             break;
             case "likes";
                 include "includes/all_likes.php";
-            break;
-            case "threads";
-                include "includes/all_threads.php";
             break;
             case "messages";
                 include "includes/all_messages.php";

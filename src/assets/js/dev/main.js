@@ -5,7 +5,6 @@
               searchFormButtom = document.querySelector('.search-form .fa-search'),
               body             = document.body,
               navSearchButton  = document.querySelector('.navbar-default .search-icon-lnk');
-
         searchFormButtom.addEventListener("click", function () {
             searchForm.submit();
         });

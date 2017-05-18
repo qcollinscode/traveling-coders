@@ -31,14 +31,21 @@
                     <ul class="row">
                         <?php
                             $x = 0;
-                            while($x < 4) {
+                            $posts = getAll("posts");
+                            $len = mysqli_num_rows($posts);
+                            while($x < $len) {
+                                $row = mysqli_fetch_assoc($posts);
+                                $thread_id = $row["thread_id"];
+                                $thread = getById("threads", "thread_id", $thread_id);
+                                $thread_category_id = $thread['category_id'];
+                                $category = getById("categories", "category_id", $thread_category_id);
                                 echo "<li class='col-xs-12 col-sm-6 col-md-3 col-lg-12'>
                                         <a href='post.php'>
                                             <img src='assets/img/73.jpg'/>
                                             <div>
-                                                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+                                                <h4>{$row['post_title']}</h4>
                                                 <span>5 hrs ago</span>
-                                                <span>travel</span>
+                                                <span>{$category['category_name']}</span>
                                             </div>
                                         </a>
                                     </li>";
@@ -56,14 +63,19 @@
                     <ul class="row">
                         <?php
                             $y = 0;
-                            while($y < 6) {
+                            $threads = getAll("threads");
+                            $len = mysqli_num_rows($threads);
+                            while($y < $len) {
+                                $row = mysqli_fetch_assoc($threads);
+                                $category_id = $row["category_id"];
+                                $category = getById("categories", "category_id", $category_id);
                                 echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
                                         <a href='post.php'>
                                             <img src='assets/img/tianjin.jpg' alt=''>
                                             <div>
-                                                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus iste, sint.</h4>
-                                                <span>10 comments</span>
-                                                <span>travel</span>
+                                                <h4>{$row["thread_title"]}</h4>
+                                                <span>{$row["thread_users_count"]} Users</span>
+                                                <span>{$category["category_name"]}</span>
                                             </div>
                                         </a>
                                     </li>";
@@ -87,21 +99,34 @@
             <div class="row articles text-center">
                 <?php
                     $i = 0;
-                    while($i < 5) {
+                    $posts = getAll("posts");
+                    $len = mysqli_num_rows($posts);
+                    while($i < $len) {
+                        $row = mysqli_fetch_assoc($posts);
+                        $thread_id = $row["thread_id"];
+                        $thread = getById("threads", "thread_id", $thread_id);
+                        $thread_category_id = $thread['category_id'];
+                        $category = getById("categories", "category_id", $thread_category_id);
+                        $user_id = $row['user_id'];
+                        $user = getById("users", "user_id", $user_id);
+                        $user_name_first = $user['user_name_first'];
+                        $user_name_last = $user['user_name_last'];
+                        $user_name_full = $user_name_first." ".$user_name_last;
+
                         echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-12'>
                             <div>
                                 <figure>
                                     <div class='row'>
-                                        <img src='assets/img/sky.png' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                                        <img src='assets/img/{$row['post_image']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
                                     </div>
                                     <figcaption>
-                                        <h1>Lorem ipsum dolor sit amet, consectetur adipisicin</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <h1>{$row['post_title']}</h1>
+                                        <p>{$row['post_content']}</p>
                                     </figcaption>
                                 </figure>
                                 <div class='row'>
-                                    <div class='col-xs-12 col-sm-6'><span class='nm'>Jane Jose</span> | <span>3</span>hrs Ago</div>
-                                    <div class='col-xs-12 col-sm-6'><i class='fa fa-user'></i> <span>1,209</span> <i class='fa fa-heart'></i> <span>293</span></div>
+                                    <div class='col-xs-12 col-sm-6'><span class='nm'>{$user_name_full}</span> | <span>3</span>hrs Ago</div>
+                                    <div class='col-xs-12 col-sm-6'><i class='fa fa-user'></i> <span>{$row['post_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['post_likes_count']}</span></div>
                                 </div>
                             </div>
                         </div>";
