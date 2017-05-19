@@ -57,7 +57,7 @@
                         <p><button type="submit" class="btn" name="login">Log In</button></p>
                     </div>
                     <div class="col-md-6 signup-container">
-                        <p><a href='sw?p=signup'><i class='fa fa-sign-in'></i>Sign Up</a></p>
+                        <p><a href='sw.php?p=signup'><i class='fa fa-sign-in'></i>Sign Up</a></p>
                     </div>
                 </div>
             </div>

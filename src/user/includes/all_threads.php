@@ -21,7 +21,7 @@
         ?>
 
             <tr>
-                <th class="col-md-10"><a href='<?php echo $root; ?>forums?p=posts&thread=<?php echo $thread["thread_id"]?>'><?php echo $thread['thread_title']; ?></a></th>
+                <th class="col-md-10"><a href='../forums.php?p=posts&thread=<?php echo $thread["thread_id"]?>'><?php echo $thread['thread_title']; ?></a></th>
                 <th><?php echo $thread['thread_views_count']; ?></th>
                 <th><?php echo $thread['thread_users_count']; ?></th>
                 <th><?php echo $category['category_name']; ?></th>

@@ -12,7 +12,7 @@
         if(isset($_SESSION['userId'])) {
             echo "<div class='row'>
                 <div class='col-md-12 text-right'>
-                    <p><a href='{$root}forums?p=create_thread&board={$boardId}'><button>Create New Thread</button></a></p>
+                    <p><a href='forums.php?p=create_thread&board={$boardId}'><button>Create New Thread</button></a></p>
                 </div>
             </div>";
         }
@@ -41,7 +41,7 @@
                 ?>
 
                     <tr>
-                        <td class="col-md-8"><a href='<?php echo $root; ?>threads?tid=<?php echo $row['thread_id']."&p=comments"; ?>'><?php echo $row['thread_title']; ?></a></td>
+                        <td class="col-md-8"><a href='threads.php?tid=<?php echo $row['thread_id']."&p=comments"; ?>'><?php echo $row['thread_title']; ?></a></td>
                         <td class="col-md-1 text-center"><?php echo $row['thread_views_count']; ?></td>
                         <td class="col-md-1 text-center"><?php echo $row['thread_likes_count']; ?></td>
                         <td class="col-md-1 text-center"><?php echo $count['Total'] === NULL ? 0 : $count['Total']; ?></td>

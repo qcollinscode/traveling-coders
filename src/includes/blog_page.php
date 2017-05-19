@@ -6,7 +6,7 @@
         if(isset($_SESSION['userId'])) {
             echo "<div class='row'>
                 <div class='col-md-12 text-right'>
-                    <p><a href='{$root}blogs?p=create_blog&catId={$cat_id_row['category_id']}'><button>Create New Blog</button></a></p>
+                    <p><a href='blogs.php?p=create_blog&catId={$cat_id_row['category_id']}'><button>Create New Blog</button></a></p>
                 </div>
             </div>";
         }

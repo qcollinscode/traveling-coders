@@ -1,4 +1,4 @@
-<?php $root = "/traveling-coders/src/";?>
+
 
 <div class="search hideSearch container-fluid">
     <div class="form-container row">
@@ -18,13 +18,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=<?php echo $root; ?>>Traveling Coders</a>
+            <a class="navbar-brand" href="/">Traveling Coders</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-            <li><a href=<?php echo $root; ?>>Homepage</a></li>
+            <li><a href="/">Homepage</a></li>
             <?php 
                 $nav = getAll("categories");
                 while($row = mysqli_fetch_assoc($nav)) {
@@ -32,7 +32,7 @@
                     $category_id = $row['category_id'];
                     $category_name_url = strtolower($category_name);
             ?>
-                <li><a href="<?php echo $root.'sw?p='.$category_name_url; ?>"><?php echo $category_name;?></a></li>
+                <li><a href="<?php echo 'sw.php?p='.$category_name_url; ?>"><?php echo $category_name;?></a></li>
             <?php 
             
                 } 
@@ -46,13 +46,13 @@
                 $url_encoded = $url . "?p=" . urlencode($text);
 
                 if(!isset($_SESSION['userId'])) {
-                echo "<li><a href='{$root}sw?p=login'><i class='fa fa-sign-in'></i>Login</a></li>";
+                echo "<li><a href='sw.php?p=login'><i class='fa fa-sign-in'></i>Login</a></li>";
                 } else {
-                echo "<li><a href='{$root}sw?p=logout'><i class='fa fa-sign-out'></i>Logout</a></li>";
-                echo "<li><a href='{$root}user'><i class='fa fa-cog'></i>Account</a></li>";
+                echo "<li><a href='sw.php?p=logout'><i class='fa fa-sign-out'></i>Logout</a></li>";
+                echo "<li><a href='/user'><i class='fa fa-cog'></i>Account</a></li>";
                 }
             ?>
-            <li><a href="<?php echo $root.htmlspecialchars($url_encoded); ?>"><i class="fa fa-newspaper-o"></i> Forums</a></li>
+            <li><a href="<?php echo htmlspecialchars($url_encoded); ?>"><i class="fa fa-newspaper-o"></i> Forums</a></li>
             <li><a href="#" class="search-icon-lnk"><i class="fa fa-search"></i></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

@@ -10,7 +10,7 @@
     if(isset($_SESSION['userId'])) {
         echo "<div class='row'>
                 <div class='col-md-12 text-right'>
-                    <p><a href='{$root}forums?p=create_board'><button>Create New Board</button></a></p>
+                    <p><a href='forums.php?p=create_board'><button>Create New Board</button></a></p>
                 </div>
             </div>";
     }
@@ -34,7 +34,7 @@
             ?>
 
                 <tr>
-                    <th class="col-md-10"><a href='<?php echo $root; ?>forums?p=threads&board=<?php echo $board["board_id"]?>'><?php echo $board['board_title']; ?></a></th>
+                    <th class="col-md-10"><a href=forums.php?p=threads&board=<?php echo $board["board_id"]?>'><?php echo $board['board_title']; ?></a></th>
                     <th><?php echo $board['board_views_count']; ?></th>
                     <th><?php echo $board['board_users_count']; ?></th>
                     <th><?php echo $category['category_name']; ?></th>
