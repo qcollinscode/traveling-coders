@@ -14,6 +14,10 @@ body {
     }
 }
 
+.boards-section {
+    @extend .signup-section;
+}
+
 .create-thread-section {
     @extend .signup-section;
 }
@@ -48,6 +52,16 @@ body {
     min-height: 100%;
     width: 100%;
     margin: 5.9em 0 2.9em 0;
+    .post {
+        margin-bottom: 3em;
+    }
+}
+
+.blog-page {
+    background: #ecf0f1;
+    min-height: 100%;
+    width: 100%;
+    margin: 0em 0 2.9em 0;
     .post {
         margin-bottom: 3em;
     }
@@ -101,7 +115,6 @@ body {
     height: 100vh;
     background: transparent;
     background: url('../img/pexels-photo-167699.jpeg');
-    background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -215,29 +228,42 @@ body {
     }
 }
 
+
+.comments-page-hd {
+    height: 20em;
+    background: url('./../img/waves.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
 .comments {
+    height: 100vh;
+    margin: 2em 0;
     .comment {
         margin-top: 3em;
+        padding: 2em;
+        background: lightgrey;
         h1 {
-            font-size: 2em;
+            font-size: 1.3em;
             font-weight: 800;
         }
         .date {
             padding: 0.9em 0;
             text-transform: uppercase;
-            font-weight: 600;
         }
         .ln {
             background: rgba(6,47,79,0.3);
             height: 3px;
             min-width: 12em;
-            width: 20em;
+            width: 30%;
             max-width: 20em;
             display: block;
             margin: 0.4em 0 0.6em 0;
         }
         .comment-comment {
-            font-size: 1.5em;
+            font-size: 1.1em;
         }
         button {
             margin-top: 0.6em;
@@ -275,6 +301,8 @@ form {
         border-radius: 3px;
         max-width: 100%;
         color: $mainColor;
+        height: 10em;
+        resize: none;
         font-size: 1.5em;
     }
     input {
@@ -294,10 +322,6 @@ form {
         color: rgba(6,47,79,1);
         font-size: 1.3em;
         text-transform: uppercase;
-    }
-    button {
-        margin-top: 36px;
-
     }
 }
 
@@ -438,18 +462,30 @@ form {
     }
 }
 
+.create-board-section {
+    min-height: 100vh;
+}
+
+.create-blog-section {
+    min-height: 100vh;
+}
+
 .threads-section {
     min-height: 100vh;
 }
 
-.posts-section {
-    min-height: 100vh;
+.blog-textarea {
+    height: 19em!important;
 }
 
 .text-right {
     p {
         padding: 2em 0;
     }
+}
+
+.blogs-section {
+    min-height: 100vh;
 }
 
 .img-responsive {

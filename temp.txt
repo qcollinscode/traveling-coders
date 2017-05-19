@@ -1,0 +1,13 @@
+<div class="form-group col-md-6">
+                <label for="category_id">Category</label>
+                <select name="category_id" class="form-control" required>
+                    <?php 
+                        $query = "SELECT * FROM categories";
+                        $result = mysqli_query($connection, $query);
+                        check_query($result);
+                        while($row = mysqli_fetch_assoc($result)) { 
+                    ?>
+                    <option value='<?php echo $row['category_id']; ?>'><?php echo $row['category_name']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>

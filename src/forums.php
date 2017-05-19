@@ -11,17 +11,17 @@
     }
 
     switch($source) {
+        case "boards";
+            include "includes/boards.php";
+        break;
         case "threads";
             include "includes/threads.php";
         break;
-        case "posts";
-            include "includes/posts.php";
+        case "create_board";
+            include "includes/create_board.php";
         break;
         case "create_thread";
             include "includes/create_thread.php";
-        break;
-        case "create_post";
-            include "includes/create_post.php";
         break;
         default:
             include "wrongpage.php";

@@ -25,13 +25,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
             <li><a href=<?php echo $root; ?>>Homepage</a></li>
-            <li><a href="#">Travel</a></li>
-            <li><a href="post.php">Life</a></li>
-            <li><a href="post.php">Money</a></li>
+            <?php 
+                $nav = getAll("categories");
+                while($row = mysqli_fetch_assoc($nav)) {
+                    $category_name = $row['category_name'];
+                    $category_id = $row['category_id'];
+                    $category_name_url = strtolower($category_name);
+            ?>
+                <li><a href="<?php echo $root.'sw?p='.$category_name_url; ?>"><?php echo $category_name;?></a></li>
+            <?php 
+            
+                } 
+            ?>
             <?php
 
                 $url_page = "forums";
-                $text = "threads";
+                $text = "boards";
 
                 $url = urlencode($url_page);
                 $url_encoded = $url . "?p=" . urlencode($text);

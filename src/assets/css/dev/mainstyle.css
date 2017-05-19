@@ -63,9 +63,9 @@ html, body {
 body {
   padding-top: 50px; }
 
-.signup-section, .create-thread-section, .create-post-section, .login-section {
+.signup-section, .boards-section, .create-thread-section, .create-post-section, .login-section {
   min-height: 100vh; }
-  .signup-section form, .create-thread-section form, .create-post-section form, .login-section form {
+  .signup-section form, .boards-section form, .create-thread-section form, .create-post-section form, .login-section form {
     margin-top: 14em; }
 
 .wrongpage {
@@ -86,6 +86,14 @@ body {
   width: 100%;
   margin: 5.9em 0 2.9em 0; }
   .search-page .post {
+    margin-bottom: 3em; }
+
+.blog-page {
+  background: #ecf0f1;
+  min-height: 100%;
+  width: 100%;
+  margin: 0em 0 2.9em 0; }
+  .blog-page .post {
     margin-bottom: 3em; }
 
 .search {
@@ -130,7 +138,6 @@ body {
   height: 100vh;
   background: transparent;
   background: url("../img/pexels-photo-167699.jpeg");
-  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -221,32 +228,42 @@ body {
   .comment-counts p {
     font-size: 4em; }
 
-.comments .comment {
-  margin-top: 3em; }
-  .comments .comment h1 {
-    font-size: 2em;
-    font-weight: 800; }
-  .comments .comment .date {
-    padding: 0.9em 0;
-    text-transform: uppercase;
-    font-weight: 600; }
-  .comments .comment .ln {
-    background: rgba(6, 47, 79, 0.3);
-    height: 3px;
-    min-width: 12em;
-    width: 20em;
-    max-width: 20em;
-    display: block;
-    margin: 0.4em 0 0.6em 0; }
-  .comments .comment .comment-comment {
-    font-size: 1.5em; }
-  .comments .comment button {
-    margin-top: 0.6em; }
+.comments-page-hd {
+  height: 20em;
+  background: url("./../img/waves.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; }
 
-.comments .sub {
-  margin-top: 3em;
-  padding: 0 0 0 2em;
-  border-left: 2px dotted rgba(6, 47, 79, 0.3); }
+.comments {
+  height: 100vh;
+  margin: 2em 0; }
+  .comments .comment {
+    margin-top: 3em;
+    padding: 2em;
+    background: lightgrey; }
+    .comments .comment h1 {
+      font-size: 1.3em;
+      font-weight: 800; }
+    .comments .comment .date {
+      padding: 0.9em 0;
+      text-transform: uppercase; }
+    .comments .comment .ln {
+      background: rgba(6, 47, 79, 0.3);
+      height: 3px;
+      min-width: 12em;
+      width: 30%;
+      max-width: 20em;
+      display: block;
+      margin: 0.4em 0 0.6em 0; }
+    .comments .comment .comment-comment {
+      font-size: 1.1em; }
+    .comments .comment button {
+      margin-top: 0.6em; }
+  .comments .sub {
+    margin-top: 3em;
+    padding: 0 0 0 2em;
+    border-left: 2px dotted rgba(6, 47, 79, 0.3); }
 
 .leave-reply {
   margin: 9em 0; }
@@ -269,6 +286,8 @@ form {
     border-radius: 3px;
     max-width: 100%;
     color: #062F4F;
+    height: 10em;
+    resize: none;
     font-size: 1.5em; }
   form input {
     border: none;
@@ -284,8 +303,6 @@ form {
     color: #062f4f;
     font-size: 1.3em;
     text-transform: uppercase; }
-  form button {
-    margin-top: 36px; }
 
 .post {
   position: relative;
@@ -378,14 +395,23 @@ form {
       font-size: 1.5em;
       padding: 1em 0 0 0; }
 
+.create-board-section {
+  min-height: 100vh; }
+
+.create-blog-section {
+  min-height: 100vh; }
+
 .threads-section {
   min-height: 100vh; }
 
-.posts-section {
-  min-height: 100vh; }
+.blog-textarea {
+  height: 19em !important; }
 
 .text-right p {
   padding: 2em 0; }
+
+.blogs-section {
+  min-height: 100vh; }
 
 .img-responsive {
   width: 100%; }

@@ -1,52 +1,59 @@
-<?php 
+<?php
+
+    $boardId = $_GET['board'];
     $id;
     if(isset($_SESSION['userId'])) {
         $id = $_SESSION['userId'];
     }
-    
 ?>
 
 <div class="container-fluid threads-section">
-<?php
-    if(isset($_SESSION['userId'])) {
-        echo "<div class='row'>
+    <?php 
+        if(isset($_SESSION['userId'])) {
+            echo "<div class='row'>
                 <div class='col-md-12 text-right'>
-                    <p><a href='<?php echo $root; ?>forums?p=create_thread'><button>Create New Tread</button></a></p>
+                    <p><a href='{$root}forums?p=create_thread&board={$boardId}'><button>Create New Thread</button></a></p>
                 </div>
             </div>";
-    }
-?>
+        }
+    
+    ?>
     <div class="row">
-        <table class="table table-responsive">
-            <tr class="info">
-                <th>Title</th>
-                <th>Views</th>
-                <th>Users</th>
-                <th>Category</th>
-            </tr>
-
-            <?php 
-                $query = "SELECT * FROM threads";
-                $result = mysqli_query($connection, $query);
-                check_query($result);
-                while($thread = mysqli_fetch_assoc($result)) {
-                    $category_id = $thread['category_id'];
-                    $category = getById("categories", "category_id", $category_id);
-            ?>
-
-                <tr>
-                    <th class="col-md-10"><a href='<?php echo $root; ?>forums?p=posts&thread=<?php echo $thread["thread_id"]?>'><?php echo $thread['thread_title']; ?></a></th>
-                    <th><?php echo $thread['thread_views_count']; ?></th>
-                    <th><?php echo $thread['thread_users_count']; ?></th>
-                    <th><?php echo $category['category_name']; ?></th>
+        <div class="table-responsive">
+            <table class="table table-responsive table-hover">
+                <tr class="info">
+                    <th>Title</th>
+                    <th class="text-center">Views</th>
+                    <th class="text-center">Likes</th>
+                    <th class="text-center">Comments</th>
                 </tr>
 
+                <?php 
 
-            <?php
-                }
-            ?>
+                    $query = "SELECT * FROM threads WHERE board_id={$boardId}";
+                    $result = mysqli_query($connection, $query);
+                    check_query($result);
+                    $countQuery = "SELECT count(comments.comment_id) as Total FROM comments JOIN threads WHERE threads.thread_id=comments.thread_id GROUP BY threads.thread_id";
+                    $countResult = mysqli_query($connection, $countQuery);
+                    check_query($countResult);
+                    while($row = mysqli_fetch_assoc($result)) {
+                          $count = mysqli_fetch_assoc($countResult);
+                ?>
+
+                    <tr>
+                        <td class="col-md-8"><a href='<?php echo $root; ?>threads?tid=<?php echo $row['thread_id']."&p=comments"; ?>'><?php echo $row['thread_title']; ?></a></td>
+                        <td class="col-md-1 text-center"><?php echo $row['thread_views_count']; ?></td>
+                        <td class="col-md-1 text-center"><?php echo $row['thread_likes_count']; ?></td>
+                        <td class="col-md-1 text-center"><?php echo $count['Total'] === NULL ? 0 : $count['Total']; ?></td>
+                    </tr>
 
 
-        </table>
+                <?php
+                    }
+                ?>
+
+
+            </table>
+        </div>
     </div>
 </div>
