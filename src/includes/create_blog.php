@@ -2,14 +2,17 @@
     if(isset($_POST['add_blog'])) {
         $blog_title = mysqli_real_escape_string($connection, $_POST['board_title']);
         $blog_image = mysqli_real_escape_string($connection, $_FILES['blog_image']["name"]);
-        $blog_image_temp = mysqli_real_escape_string($connection, $_FILES['blog_image']["tmp_name"]);
         $blog_tags = mysqli_real_escape_string($connection, $_POST['blog_tags']);
         $blog_content = mysqli_real_escape_string($connection, $_POST['blog_content']);
         $blog_category = $_GET['catId'];
         $blog_time = date("Y-m-d H:i:s");
         $user_id = $_SESSION['userId'];
 
-        move_uploaded_file($blog_image_temp, "../assets/img/$blog_image");
+        $uploads_dir = getcwd() . '\assets\img';
+
+        $tmp_name = $_FILES["blog_image"]["tmp_name"];
+        $name = basename($_FILES["blog_image"]["name"]);
+        move_uploaded_file($tmp_name, "$uploads_dir/$blog_image");
 
         $query = "INSERT INTO blogs(blog_title, blog_image, category_id, blog_tags, blog_content, blog_time, user_id)";
         $query .= "VALUES('{$blog_title}', '{$blog_image}', {$blog_category}, '{$blog_tags}', '{$blog_content}', '{$blog_time}', {$user_id})";

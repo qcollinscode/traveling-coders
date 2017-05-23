@@ -28,7 +28,7 @@
                 $timeSincePost = time_elapsed_string($time);
                 echo "<div class='post col-md-3'>
                     <a  class='overlay' href='{$url}{$row['blog_id']}'></a>
-                    <img src='assets/img/tianjin.jpg' class='img-responsive col-lg-12' alt=''>
+                    <img src='assets/img/{$row['blog_image']}' class='img-responsive col-lg-12' alt=''>
                     <div>
                         <h1 class='col-lg-12'>{$row['blog_title']}</h1>
                         <p class='col-lg-12'>{$row['blog_content']}</p>
