@@ -11,7 +11,7 @@
         $create_thread = mysqli_query($connection, $query);
 
         check_query($create_thread);
-        header("Location: forums?p=threads&board=$board_id");
+        header("Location: forums.php?p=threads&board=$board_id");
     }
 ?>
 

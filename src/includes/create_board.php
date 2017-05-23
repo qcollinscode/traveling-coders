@@ -10,7 +10,7 @@
         $create_board = mysqli_query($connection, $query);
 
         check_query($create_board);
-        header("Location: forums?p=boards");
+        header("Location: forums.php?p=boards");
     }
 ?>
 

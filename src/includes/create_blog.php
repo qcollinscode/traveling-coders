@@ -20,7 +20,7 @@
         $cat_name_url = $cat_name_row['category_name'];
         $cat_name_url = strtolower($cat_name_url);
         check_query($cat_name_row);
-        header("Location: sw?p=$cat_name_url");
+        header("Location: /sw.php?p=$cat_name_url");
     }
 ?>
 

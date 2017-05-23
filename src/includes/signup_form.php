@@ -11,7 +11,7 @@
         $insert_user = mysqli_query($connection, $query);
 
         check_query($insert_user);
-        header("Location: sw.php?p=login");
+        header("Location: /sw.php?p=login");
     }
 ?>
 
