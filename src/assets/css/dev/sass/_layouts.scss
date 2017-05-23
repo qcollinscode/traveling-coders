@@ -7,6 +7,10 @@ body {
     padding-top: 50px;
 }
 
+.wrapper {
+    margin-bottom: 4em;
+}
+
 .signup-section {
     min-height: 100vh;
     form {
@@ -230,16 +234,20 @@ body {
 
 
 .comments-page-hd {
-    height: 20em;
+    min-height: 20em;
     background: url('./../img/waves.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 
+.comments-page-bd {
+    min-height: 100vh!important;
+}
+
 
 .comments {
-    height: 100vh;
+    min-height: 100vh;
     margin: 2em 0;
     .comment {
         margin-top: 3em;

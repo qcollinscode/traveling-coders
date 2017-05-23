@@ -34,7 +34,7 @@
             ?>
 
                 <tr>
-                    <th class="col-md-10"><a href=forums.php?p=threads&board=<?php echo $board["board_id"]?>'><?php echo $board['board_title']; ?></a></th>
+                    <th class="col-md-10"><a href='forums.php?p=threads&board=<?php echo $board["board_id"]?>'><?php echo $board['board_title']; ?></a></th>
                     <th><?php echo $board['board_views_count']; ?></th>
                     <th><?php echo $board['board_users_count']; ?></th>
                     <th><?php echo $category['category_name']; ?></th>

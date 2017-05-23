@@ -41,7 +41,7 @@
                 ?>
 
                     <tr>
-                        <td class="col-md-8"><a href='threads.php?tid=<?php echo $row['thread_id']."&p=comments"; ?>'><?php echo $row['thread_title']; ?></a></td>
+                        <td class="col-md-8"><a href='../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'><?php echo $row['thread_title']; ?></a></td>
                         <td class="col-md-1 text-center"><?php echo $row['thread_views_count']; ?></td>
                         <td class="col-md-1 text-center"><?php echo $row['thread_likes_count']; ?></td>
                         <td class="col-md-1 text-center"><?php echo $count['Total'] === NULL ? 0 : $count['Total']; ?></td>

@@ -33,8 +33,10 @@
                             $x = 0;
                             $blogs = getAll("blogs");
                             $len = mysqli_num_rows($blogs);
-                            while($x < 5) {
+                            while($x < $len) {
                                 $row = mysqli_fetch_assoc($blogs);
+                                $time = $row['blog_time'];
+                                $timeSincePost = time_elapsed_string($time);
                                 $blog_id = $row["blog_id"];
                                 $blog = getById("blogs", "blog_id", $blog_id);
                                 echo "<li class='col-xs-12 col-sm-6 col-md-3 col-lg-12'>
@@ -42,7 +44,7 @@
                                             <img src='assets/img/73.jpg'/>
                                             <div>
                                                 <h4>{$row['blog_title']}</h4>
-                                                <span>5 hrs ago</span>
+                                                <span>{$timeSincePost}</span>
                                             </div>
                                         </a>
                                     </li>";

@@ -32,7 +32,7 @@
                     $category_id = $row['category_id'];
                     $category_name_url = strtolower($category_name);
             ?>
-                <li><a href="<?php echo 'sw.php?p='.$category_name_url; ?>"><?php echo $category_name;?></a></li>
+                <li><a href="<?php echo '/sw.php?p='.$category_name_url; ?>"><?php echo $category_name;?></a></li>
             <?php 
             
                 } 
@@ -46,13 +46,13 @@
                 $url_encoded = $url . "?p=" . urlencode($text);
 
                 if(!isset($_SESSION['userId'])) {
-                echo "<li><a href='sw.php?p=login'><i class='fa fa-sign-in'></i>Login</a></li>";
+                echo "<li><a href='/sw.php?p=login'><i class='fa fa-sign-in'></i>Login</a></li>";
                 } else {
-                echo "<li><a href='sw.php?p=logout'><i class='fa fa-sign-out'></i>Logout</a></li>";
-                echo "<li><a href='/user'><i class='fa fa-cog'></i>Account</a></li>";
+                echo "<li><a href='/sw.php?p=logout'><i class='fa fa-sign-out'></i>Logout</a></li>";
+                echo "<li><a href='/user.php'><i class='fa fa-cog'></i>Account</a></li>";
                 }
             ?>
-            <li><a href="<?php echo htmlspecialchars($url_encoded); ?>"><i class="fa fa-newspaper-o"></i> Forums</a></li>
+            <li><a href="/forums.php?p=boards"><i class="fa fa-newspaper-o"></i> Forums</a></li>
             <li><a href="#" class="search-icon-lnk"><i class="fa fa-search"></i></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
