@@ -132,7 +132,7 @@ function blog_gallery_home($str, $sort, $order) {
                     </figcaption>
                 </figure>
                 <div class='row'>
-                    <div class='col-xs-12 col-sm-6'><span class='nm'>{$user_name_full}</span> <br> <span>{$timeSincePost}</span></div>
+                    <div class='col-xs-12 col-sm-6 text-info-container'><span class='nm'>{$user_name_full}</span> <br> <span>{$timeSincePost}</span></div>
                     <div class='col-xs-12 col-sm-6'><i class='fa fa-user'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
                 </div>
             </div>

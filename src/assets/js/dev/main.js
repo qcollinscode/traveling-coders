@@ -12,16 +12,20 @@ window.onbeforeunload = function() {
               blogGallery = document.querySelector('.blogs'),
               popular = document.querySelectorAll('.sort>h1>span');
 
+              $('.loader-container').hide();
+
         popular.forEach((el) => {
             el.addEventListener("click", (e) => {
                 if(e.target === popular[0] && e.target.classList.contains("selected") === false) {
                     removeClass(popular, "selected");
                     el.classList.add("selected");
+                    $('.loader-container').show();
                     $('.blogs').fadeOut(() => {
                         $.ajax({
                             cache: false,
                             url: "/blog_gallery_pop.php",
                             success: function(response) {
+                                $('.loader-container').hide();
                                 let oldResponse;
                                 $('.blogs').html(response).fadeIn();
                                 oldResponse = response;
