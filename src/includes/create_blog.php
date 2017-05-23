@@ -1,4 +1,5 @@
 <?php
+    echo getcwd();
     if(isset($_POST['add_blog'])) {
         $blog_title = mysqli_real_escape_string($connection, $_POST['board_title']);
         $blog_image = mysqli_real_escape_string($connection, $_FILES['blog_image']["name"]);
