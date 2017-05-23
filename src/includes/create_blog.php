@@ -1,5 +1,5 @@
 <?php
-    echo getcwd();
+
     if(isset($_POST['add_blog'])) {
         $blog_title = mysqli_real_escape_string($connection, $_POST['board_title']);
         $blog_image = mysqli_real_escape_string($connection, $_FILES['blog_image']["name"]);
@@ -9,7 +9,7 @@
         $blog_time = date("Y-m-d H:i:s");
         $user_id = $_SESSION['userId'];
 
-        $uploads_dir = getcwd() . '\assets\img';
+        $uploads_dir = getcwd() . '/assets/img';
 
         $tmp_name = $_FILES["blog_image"]["tmp_name"];
         $name = basename($_FILES["blog_image"]["name"]);
