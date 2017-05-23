@@ -1,4 +1,5 @@
 <?php
+include_once "includes/db.php";
 
 function check_query($result) {
     global $connection;
@@ -48,6 +49,14 @@ function getAll($str) {
     return $result;
 }
 
+function getAllSort($str, $sort, $order) {
+    global $connection;
+    $query = "SELECT * FROM {$str} ORDER BY {$sort} {$order}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    return $result;
+}
+
 function getIdByUsername($username) {
     global $connection;
     $query = "SELECT user_id FROM users WHERE user_username = '{$username}'";
@@ -84,4 +93,50 @@ function time_elapsed_string($datetime, $full = false) {
 
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
+}
+
+function blog_gallery_home($str, $sort, $order) {
+    global $connection;
+    $i = 0;
+    $blogs = getAllSort($str, $sort, $order);
+    $len = mysqli_num_rows($blogs);
+    while($i < $len) {
+        $row = mysqli_fetch_assoc($blogs);
+        $blog_id = $row["blog_id"];
+        $blog = getById("blogs", "blog_id", $blog_id);
+        $user_id = $row['user_id'];
+        $user = getById("users", "user_id", $user_id);
+        $userRow = mysqli_fetch_assoc($user);
+        $user_name_first = $userRow['user_name_first'];
+        $user_name_last = $userRow['user_name_last'];
+        $user_name_full = $user_name_first." ".$user_name_last;
+        $time = $row['blog_time'];
+        $blog_content = $row['blog_content'];
+        $blog_content = strip_tags($blog_content);
+        if(strlen($blog_content) > 500) {
+
+            $limitStr = substr($blog_content, 0, 200);
+
+            $blog_content = substr($limitStr, 0, strrpos($limitStr, ' ')).'... <a href="#">Read More</a>';
+        }
+        $timeSincePost = time_elapsed_string($time);
+        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 blog'>
+            <div>
+                <figure>
+                    <div class='row'>
+                        <img src='assets/img/{$row['blog_image']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                    </div>
+                    <figcaption>
+                        <h1>{$row['blog_title']}</h1>
+                        <p>$blog_content</p>
+                    </figcaption>
+                </figure>
+                <div class='row'>
+                    <div class='col-xs-12 col-sm-6'><span class='nm'>{$user_name_full}</span> <br> <span>{$timeSincePost}</span></div>
+                    <div class='col-xs-12 col-sm-6'><i class='fa fa-user'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
+                </div>
+            </div>
+        </div>";
+        $i++;
+    }
 }
