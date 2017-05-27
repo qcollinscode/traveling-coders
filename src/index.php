@@ -40,7 +40,7 @@
                                 $blog_id = $row["blog_id"];
                                 $blog = getById("blogs", "blog_id", $blog_id);
                                 echo "<li class='col-xs-12 col-sm-6 col-md-3 col-lg-12'>
-                                        <a href='post.php'>
+                                        <a href='post.php?p={$blog_id}'>
                                             <img src='assets/img/73.jpg'/>
                                             <div>
                                                 <h4>{$row['blog_title']}</h4>
@@ -111,7 +111,7 @@
                         $user_name_last = $userRow['user_name_last'];
                         $user_name_full = $user_name_first." ".$user_name_last;
                         $time = $row['blog_time'];
-                        $blog_content = $row['blog_content'];
+                        $blog_content = $row['blog_content_sect_01'];
                         $blog_content = strip_tags($blog_content);
                         if(strlen($blog_content) > 100) {
 
@@ -124,7 +124,7 @@
                             <div>
                                 <figure>
                                     <div class='row'>
-                                        <img src='assets/img/{$row['blog_image']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                                        <img src='assets/img/{$row['blog_image_preview']}' style='height: 350px' alt='' class='col-xs-12 col-sm-12 img-responsive'>
                                     </div>
                                     <figcaption>
                                         <h1>{$row['blog_title']}</h1>

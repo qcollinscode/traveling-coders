@@ -295,11 +295,19 @@ button {
 }
 
 .post-section {
+    .post-info {
+        padding: 3em 0;
+        h1 {
+            font-size: 3.5em;
+            font-weight: bolder;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    }
     img {
         max-height: 40em;
         width: 100%;
         border-radius: 6px;
-        margin-top: 4em;
     }
     .img-hf {
         padding-right: 15px;
@@ -381,3 +389,15 @@ button {
 .rm-p {
     padding: 0;
 }
+
+.post-section {
+    .row:nth-child(5) {
+        .para {
+            p {
+                text-indent: 19px;
+                padding-top: 0;
+            }
+        }
+    }
+}
+

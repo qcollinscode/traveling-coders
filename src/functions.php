@@ -111,32 +111,31 @@ function blog_gallery_home($str, $sort, $order) {
         $user_name_last = $userRow['user_name_last'];
         $user_name_full = $user_name_first." ".$user_name_last;
         $time = $row['blog_time'];
-        $blog_content = $row['blog_content'];
+        $blog_content = $row['blog_content_sect_01'];
         $blog_content = strip_tags($blog_content);
-        if(strlen($blog_content) > 500) {
-
-            $limitStr = substr($blog_content, 0, 200);
+        if(strlen($blog_content) > 100) {
+            $limitStr = substr($blog_content, 0, 350);
 
             $blog_content = substr($limitStr, 0, strrpos($limitStr, ' ')).'... <a href="#">Read More</a>';
         }
         $timeSincePost = time_elapsed_string($time);
         echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 blog'>
-            <div>
-                <figure>
+                <div>
+                    <figure>
+                        <div class='row'>
+                            <img src='assets/img/{$row['blog_image_preview']}' style='height: 350px' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                        </div>
+                        <figcaption>
+                            <h1>{$row['blog_title']}</h1>
+                            <p>{$blog_content}</p>
+                        </figcaption>
+                    </figure>
                     <div class='row'>
-                        <img src='assets/img/{$row['blog_image']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                        <div class='col-xs-12 col-sm-6 text-info-container'><span class='nm'>{$user_name_full}</span> | <span>{$timeSincePost}</span></div>
+                        <div class='col-xs-12 col-sm-6 info-icons'><i class='fa fa-user'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
                     </div>
-                    <figcaption>
-                        <h1>{$row['blog_title']}</h1>
-                        <p>$blog_content</p>
-                    </figcaption>
-                </figure>
-                <div class='row'>
-                    <div class='col-xs-12 col-sm-6 text-info-container'><span class='nm'>{$user_name_full}</span> <br> <span>{$timeSincePost}</span></div>
-                    <div class='col-xs-12 col-sm-6'><i class='fa fa-user'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
                 </div>
-            </div>
-        </div>";
+            </div>";
         $i++;
     }
 }

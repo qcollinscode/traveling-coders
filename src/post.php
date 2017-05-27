@@ -1,58 +1,54 @@
 <?php
     include "includes/header.php";
+    $blog_id = $_GET['p'];
+    $blogData = getById("blogs", "blog_id", $blog_id);
+    $blog = mysqli_fetch_assoc($blogData);
+    $userData = getById("users", "user_id", $blog['user_id']);
+    $user = mysqli_fetch_assoc($userData);
 ?>
 
-<div class="container-fluid post">
-    <div class="row post-row">
-        <div class="post-jumbotron jumbotron">
-            <div class="post-info">
-                <h1 class="title">A Common Language</h1>
-                <div class="user"><img src='assets/img/73.jpg'/></div>
-                <div class="nm-date">
-                    <p class="user-nm">Jone Jones</p>
-                    <p class="post-date">Febuary 39, 2014</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <section class="post-section container">
     <div class="row">
+        <div class="col-lg-12">
+            <div class="post-info">
+                <h1 class="title"><?php echo $blog['blog_title']; ?></h1>
+            </div>
+        </div>
         <div class="col-lg-12 para">
-            <img src="assets/img/mountain.jpg" alt="" class="img-responsive">
+            <img src="assets/img/<?php echo $blog['blog_image_01']; ?>" alt="" class="img-responsive">
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 para">
-            <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.</p>
+            <p><?php echo $blog['blog_content_sect_01']; ?></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 para">
-            <blockquote cite="http://">For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</blockquote>
+            <blockquote cite="http://"><?php echo $blog['blog_content_quote_01']; ?></blockquote>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 para">
-            <p>The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</p>
+            <p><?php echo $blog['blog_content_sect_02']; ?></p>
         </div>
     </div>
     <div class="row">
         <div class="para col-xs-12 col-lg-6 para">
-            <img src="assets/img/sky.png" alt="" class="img-hf img-responsive">
+            <img src="assets/img/<?php echo $blog['blog_image_02']; ?>" alt="" class="img-hf img-responsive">
         </div>
         <div class="para col-xs-12 col-lg-6">
-            <p> It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</p>
+            <p><?php echo $blog['blog_content_sect_03']; ?></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 para">
-            <blockquote cite="http://">The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</blockquote>
+            <blockquote cite="http://"><?php echo $blog['blog_content_quote_02']; ?></blockquote>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 para">
-            <p>To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is. The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common.</p>
+            <p><?php echo $blog['blog_content_sect_04']; ?></p>
         </div>
     </div>
     <div class="row tags-soc">
@@ -77,7 +73,7 @@
         <div>
             <div class="col-lg-12">
                 <div class="row">
-                    <h1>About The Author</h1>
+                    <h1><?php echo $user['user_name_first']." ".$user['user_name_last']; ?></h1>
                 </div>
             </div>
             <div class="col-lg-12">
@@ -90,7 +86,7 @@
             <div class="col-lg-12">
                 <div class="row txt-con">
                     <div class="col-lg-6">
-                        <p>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! </p>
+                        <p>About Arthur</p>
                     </div>
                 </div>
             </div>
