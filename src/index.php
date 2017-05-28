@@ -15,17 +15,6 @@
     <div class="row">
         <aside class="col-lg-3">
             <div class="row">
-                <nav class="latest-news col-lg-12">
-                    <h1>Latest News</h1>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-user"></i>Home</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i>Travel</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i>Life</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i>Money</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="row">
                 <div class="user-blog col-lg-12">
                     <h1>User Blogs</h1>
                     <ul class="row">

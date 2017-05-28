@@ -41,6 +41,66 @@ function getByIdLength($str, $column, $id) {
     return $len;
 }
 
+function getAllThreadsByUser($id) {
+    global $connection;
+    $query = "SELECT * FROM threads WHERE user_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    return $result;
+}
+
+function getSingleThread($id) {
+    global $connection;
+    $query = "SELECT * FROM threads WHERE thread_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+}
+
+function getAllBlogsByUser($id) {
+    global $connection;
+    $query = "SELECT * FROM blogs WHERE user_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    return $result;
+}
+
+function getSingleCat($id) {
+    global $connection;
+    $query = "SELECT * FROM categories WHERE category_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+}
+
+function getAllCommentsByUser($id) {
+    global $connection;
+    $query = "SELECT * FROM comments WHERE user_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    return $result;
+}
+
+function getSingleThreadBoard($id) {
+    global $connection;
+    $query = "SELECT * FROM boards WHERE board_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+}
+
+function getSingleUser($id) {
+    global $connection;
+    $query = "SELECT * FROM users WHERE user_id={$id}";
+    $result = mysqli_query($connection, $query);
+    check_query($result);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+}
+
 function getAll($str) {
     global $connection;
     $query = "SELECT * FROM {$str}";

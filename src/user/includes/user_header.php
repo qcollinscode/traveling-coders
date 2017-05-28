@@ -6,8 +6,8 @@
   include_once('../includes/db.php');
   include_once("../functions.php");
   session_start();
-  $user = $_SESSION['userId'];
-  $user = getById("users", "user_id", $user);
+  $userId = $_SESSION['userId'];
+  $user = getSingleUser($userId);
 ?>
 
 <!DOCTYPE html>
@@ -29,58 +29,17 @@
                     <div class="user-name">
                         <a href="../index?p=avatar"><img src="../assets/img/73.jpg" alt=""></a>
                         <h1><?php echo $user['user_name_first']." ".$user['user_name_last']; ?></h1>
-                        <p class="title">Fisher at Park</p>
+                        <p class="title"><?php echo $user['user_title'] ?></p>
                     </div>
                     <nav>
                         <ul>
-                            <li><a href="index?p=posts"><i class="fa fa-sticky-note-o"></i> Posts</a></li>
-                            <li><a href=""><i class="fa fa-comment"></i> Comments</a></li>
-                            <li><a href=""><i class="fa fa-thumbs-up"></i> Likes</a></li>
-                            <li><a href="threads?p=view_all"><i class="fa fa-newspaper-o"></i> Threads</a></li>
-                            <li><a href=""><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a></li>
-                            <li class="settings">
-                                <a href=""><i class="fa fa-th" aria-hidden="true"></i> Settings</a>
-                                <ul>
-                                    <li><a href="">Username</a></li>
-                                    <li><a href="">Password</a></li>
-                                    <li><a href="">Preview</a></li>
-                                </ul>    
-                            </li>
+                            <li><a href="/user/?p=blogs"><i class="fa fa-sticky-note-o"></i> Blogs</a></li>
+                            <li><a href="/user/?p=comments"><i class="fa fa-comment"></i> Comments</a></li>
+                            <li><a href="/user/?p=threads"><i class="fa fa-newspaper-o"></i> Threads</a></li>
+                            <li><a href="/user/?p=messages"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a></li>
+                            <li><a href=""><i class="fa fa-th" aria-hidden="true"></i> Settings</a></li>
                         </ul>
                     </nav>
                 </div>
             </aside>
             <section class="col-md-10">
-
-
-                <!--<aside class="col-md-2 user-aside">
-                <div class="user-info">
-                    <div class="user-name">
-                        <img src="../assets/img/73.jpg" alt="">
-                        <h1><?php echo $user['user_name_first']." ".$user['user_name_last']; ?></h1>
-                        <p class="title">Fisher at Park</p>
-                        <p><?php echo $user['user_email']; ?></p>
-                    </div>
-                    <p class="button-container"><button type="button">Follow</button></p>
-                    <hr/>
-                    <div class="social">
-                        <p>Social</p>
-                        <i class="fa fa-twitter"></i>
-                    </div>
-                    <hr/>
-                    <div class="following">
-                        <p>Following</p>
-                        <p>170</p>
-                    </div>
-                    <hr>
-                    <div class="followers">
-                        <p>Followers</p>
-                        <p>400</p>
-                    </div>
-                    <hr/>
-                    <div class="posts">
-                        <p>Posts</p>
-                        <p>12</p>
-                    </div>
-                </div>
-            </aside>-->

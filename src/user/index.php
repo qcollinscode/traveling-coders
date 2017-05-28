@@ -14,11 +14,14 @@
             case "avatar";
                 include "includes/avatar.php";
             break;
-            case "posts";
-                include "includes/all_posts.php";
+            case "blogs";
+                include "includes/all_blogs.php";
             break;
             case "comments";
                 include "includes/all_comments.php";
+            break;
+            case "threads";
+                include "includes/all_threads.php";
             break;
             case "likes";
                 include "includes/all_likes.php";
@@ -36,7 +39,7 @@
                 include "includes/preview.php";
             break;
             default:
-                include "includes/latest.php";
+                include "includes/all_blogs.php";
             break;
         }
     ?>

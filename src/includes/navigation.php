@@ -49,7 +49,7 @@
                 echo "<li><a href='/sw.php?p=login'><i class='fa fa-sign-in'></i>Login</a></li>";
                 } else {
                 echo "<li><a href='/sw.php?p=logout'><i class='fa fa-sign-out'></i>Logout</a></li>";
-                echo "<li><a href='/user.php'><i class='fa fa-cog'></i>Account</a></li>";
+                echo "<li><a href='/user/'><i class='fa fa-cog'></i>Account</a></li>";
                 }
             ?>
             <li><a href="/forums.php?p=boards"><i class="fa fa-newspaper-o"></i> Forums</a></li>

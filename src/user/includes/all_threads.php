@@ -1,5 +1,6 @@
 <?php 
     $user_id = $_SESSION['userId'];
+    $user = getSingleUser($userId);
 ?>
 
 <div class="row">
@@ -7,23 +8,23 @@
         <tr class="info">
             <th>Title</th>
             <th>Views</th>
-            <th>Users</th>
+            <th>Comments</th>
             <th>Category</th>
         </tr>
 
         <?php 
-            $query = "SELECT * FROM threads WHERE user_id={$user_id}";
-            $result = mysqli_query($connection, $query);
-            check_query($result);
+            $result = getAllThreadsByUser($user_id);
             while($thread = mysqli_fetch_assoc($result)) {
-                $category_id = $thread['category_id'];
-                $category = getById("categories", "category_id", $category_id);
+                $boardId = $thread['board_id'];
+                $board = getSingleThreadBoard($boardId);
+                $category_id = $board['category_id'];
+                $category = getSingleCat($category_id);
         ?>
 
             <tr>
                 <th class="col-md-10"><a href='../forums.php?p=posts&thread=<?php echo $thread["thread_id"]?>'><?php echo $thread['thread_title']; ?></a></th>
                 <th><?php echo $thread['thread_views_count']; ?></th>
-                <th><?php echo $thread['thread_users_count']; ?></th>
+                <th><?php echo $thread['thread_comments_count']; ?></th>
                 <th><?php echo $category['category_name']; ?></th>
             </tr>
 
