@@ -3,6 +3,7 @@
   error_reporting(E_ALL);
   ini_set("display_errors", 1);
   include_once('includes/db.php');
+  include_once('includes/objects.php');
   include_once("functions.php");
   if(!isset($_SESSION)) {
       session_start();

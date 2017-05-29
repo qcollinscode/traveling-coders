@@ -1,10 +1,13 @@
 <?php
     include "includes/header.php";
-    $blog_id = $_GET['p'];
-    $blogData = getById("blogs", "blog_id", $blog_id);
-    $blog = mysqli_fetch_assoc($blogData);
-    $userData = getById("users", "user_id", $blog['user_id']);
-    $user = mysqli_fetch_assoc($userData);
+    $blogObj = new Blogs($connection);
+    $userObj = new Users($connection);
+    $blogObj->set_id($_GET['p']);
+    $blog = $blogObj->get_blog_by_id();
+    $userObj->set_id($blog['user_id']);
+    $user = $userObj->get_user_by_id();
+    // $userData = getById("users", "user_id", $blog['user_id']);
+    // $user = mysqli_fetch_assoc($userData);
 ?>
 
 <section class="post-section container">

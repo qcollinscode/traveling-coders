@@ -1,23 +1,23 @@
 <?php
 
-    // $db['db_host'] = 'localhost';  
-    // $db['db_user'] = 'root';
-    // $db['db_pass'] = '';
-    // $db['db_name'] = 'traveling_coders';
+    class database {
+        // private $host = "us-cdbr-iron-east-03.cleardb.net";
+        // private $user = "b221ad66af70e8";
+        // private $password = "295a8efe";
+        // private $db = "heroku_0b0118ba54f5bdc";
 
+        private $host = "localhost";
+        private $user = "root";
+        private $password = "";
+        private $db = "traveling_coders";
+        private $conn;
 
-    $db['db_host'] = 'us-cdbr-iron-east-03.cleardb.net';  
-    $db['db_user'] = 'b221ad66af70e8';
-    $db['db_pass'] = '295a8efe';
-    $db['db_name'] = 'heroku_0b0118ba54f5bdc';
-
-
-    foreach($db as $key => $value) {
-        define(strtoupper($key), $value);
+        function connect() {
+            $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db);
+            if(!$this->conn) die('Connection Failed');
+            return $this->conn;
+        }
     }
 
-    $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-    if(!$connection) {
-        die('Connection Failed');
-    }
+    $database = new database();
+    $connection = $database->connect();

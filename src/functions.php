@@ -1,5 +1,6 @@
 <?php
 include_once "includes/db.php";
+include_once "includes/objects.php";
 
 function check_query($result) {
     global $connection;
@@ -197,5 +198,79 @@ function blog_gallery_home($str, $sort, $order) {
                 </div>
             </div>";
         $i++;
+    }
+}
+
+function limit_blog_preview_content_length($blog_content) {
+    $blog_content = strip_tags($blog_content);
+    if(strlen($blog_content) > 100) {
+        $limitStr = substr($blog_content, 0, 400);
+        return $blog_content = substr($limitStr, 0, strrpos($limitStr, ' '));
+    }
+}
+
+
+function blogs_aside() {
+    global $connection;
+    $blogObj = new Blogs($connection);
+    $blogs = $blogObj->get_all_blogs_sorted("blog_time", "ASC");
+    while($row = mysqli_fetch_assoc($blogs)) {
+        $timeSincePost = time_elapsed_string($row['blog_time']);
+        echo "<li class='col-xs-12 col-sm-6 col-md-3 col-lg-12'>
+                <a href='post.php?p={$row["blog_id"]}'>
+                    <img src='assets/img/73.jpg'/>
+                    <div>
+                        <h4>{$row['blog_title']}</h4>
+                        <span>{$timeSincePost}</span>
+                    </div>
+                </a>
+            </li>";
+    };
+}
+
+function threads_aside() {
+    global $connection;
+    $threadObj = new Threads($connection);
+    $threads = $threadObj->get_all_threads_sorted("thread_time", "ASC");
+    while($row = mysqli_fetch_assoc($threads)) {
+        echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
+                <a href='post.php'>
+                    <img src='assets/img/tianjin.jpg' alt=''>
+                    <div>
+                        <h4>{$row["thread_title"]}</h4>
+                        <span>{$row["thread_views_count"]} Users</span>
+                    </div>
+                </a>
+            </li>";
+    };
+}
+
+function blogs_preview() {
+    global $connection;
+    $blogObj = new Blogs($connection);
+    $userObj = new Users($connection);
+    $blogs = $blogObj->get_all_blogs_sorted("blog_time", "ASC");
+    while($row = mysqli_fetch_assoc($blogs)) {
+        $user = $userObj->get_user_by_id($row['user_id']);
+        $user_name_full = $user['user_name_first']." ".$user['user_name_last'];
+        $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).'... <a href="#">Read More</a>';
+        $timeSincePost = time_elapsed_string($row['blog_time']);
+        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 blog'>
+            <div>
+                <figure>
+                    <div class='row'>
+                        <img src='assets/img/{$row['blog_image_preview']}' style='height: 350px' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                    </div>
+                    <figcaption>
+                        <h1>{$row['blog_title']}</h1>
+                        <p>{$blog_content}</p>
+                    </figcaption>
+                </figure>
+                <div class='row'>
+                    <div class='col-xs-12 col-sm-6 text-info-container'><span class='nm'>{$user_name_full}</span> | <span>{$timeSincePost}</span></div>
+                    <div class='col-xs-12 col-sm-6 info-icons'><i class='fa fa-user'></i> <span>{$row['blog_view_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
+                </div>
+            </div>
+        </div>";
     }
 }
