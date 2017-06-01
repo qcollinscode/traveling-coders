@@ -2,12 +2,28 @@
     include "includes/header.php";
     $blogObj = new Blogs($connection);
     $userObj = new Users($connection);
-    $blogObj->set_id($_GET['p']);
+    $commentObj = new Comments($connection);
+
+    $blog_id = $_GET['p'];
+
+    // Blog ID
+    $blogObj->set_id($blog_id);
+
+    // Get blog by blog ID
     $blog = $blogObj->get_blog_by_id();
+
+    // User ID
     $userObj->set_id($blog['user_id']);
+
+    // Get user by user ID
     $user = $userObj->get_user_by_id();
-    // $userData = getById("users", "user_id", $blog['user_id']);
-    // $user = mysqli_fetch_assoc($userData);
+
+    if(isset($_SESSION['userId'])) {
+        $user_id = $_SESSION['userId'];
+    }
+
+    $commentObj->set_blog($blog_id);
+    
 ?>
 
 <section class="post-section container">
@@ -89,20 +105,19 @@
             <div class="col-lg-12">
                 <div class="row txt-con">
                     <div class="col-lg-6">
-                        <p>About Arthur</p>
+                        <p><?php echo $user['user_description']; ?></p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12 mt">
                 <div class="row font-con">
-                    <div class="col-lg-1"><a href="#"><i class="fa fa-twitter"></i></a></div>
-                    <div class="col-lg-1"><a href="#"><i class="fa fa-facebook"></i></a></div>
-                    <div class="col-lg-1"><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    <div class="col-lg-1"><a href="#"><i class="fa fa-heart"></i></a></div>
+                    <?php social($user['user_id']); ?>
                 </div>
             </div>
         </div>
     </div>
+    <h1 class="display-test"></h1>
+    <button class="button-test" value="<?php echo $_GET['p']; ?>">Test</button>
     <div class="row direction">
         <div class="col-lg-6">
             <div>
@@ -125,139 +140,15 @@
     </div>
     <div class="row comment-counts">
         <div class="col-lg-12">
-            <p><span>12</span> Comments</p>
+            <p><span><?php echo $blogObj->get_blog_comment_count(); ?></span> Comments</p>
         </div>
     </div>
     <div class="row comments">
         <div class="col-lg-12">
-            <div class="comment">
-                <h1>JOHN DOE</h1>
-                <p class="date"><span>August 5, 2016</span></p>
-                <span class="ln"></span>
-                <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                <button>reply</button>
-            </div>
-            <div class="sub">
-                <div class="comment">
-                    <h1>JOHN DOE</h1>
-                    <p class="date"><span>August 5, 2016</span></p>
-                    <span class="ln"></span>
-                    <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                    <button>reply</button>
-                </div>
-                <div class="comment">
-                    <h1>JOHN DOE</h1>
-                    <p class="date"><span>August 5, 2016</span></p>
-                    <span class="ln"></span>
-                    <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                    <button>reply</button>
-                </div>
-                <div class="sub">
-                    <div class="comment">
-                        <h1>JOHN DOE</h1>
-                        <p class="date"><span>August 5, 2016</span></p>
-                        <span class="ln"></span>
-                        <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                        <button>reply</button>
-                    </div>
-                    <div class="comment">
-                        <h1>JOHN DOE</h1>
-                        <p class="date"><span>August 5, 2016</span></p>
-                        <span class="ln"></span>
-                        <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                        <button>reply</button>
-                    </div>
-                    <div class="sub">
-                        <div class="comment">
-                            <h1>JOHN DOE</h1>
-                            <p class="date"><span>August 5, 2016</span></p>
-                            <span class="ln"></span>
-                            <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                            <button>reply</button>
-                        </div>
-                        <div class="comment">
-                            <h1>JOHN DOE</h1>
-                            <p class="date"><span>August 5, 2016</span></p>
-                            <span class="ln"></span>
-                            <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                            <button>reply</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row comments">
-        <div class="col-lg-12">
-            <div class="comment">
-                <h1>JOHN DOE</h1>
-                <p class="date"><span>August 5, 2016</span></p>
-                <span class="ln"></span>
-                <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                <button>reply</button>
-            </div>
-            <div class="sub">
-                <div class="comment">
-                    <h1>JOHN DOE</h1>
-                    <p class="date"><span>August 5, 2016</span></p>
-                    <span class="ln"></span>
-                    <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                    <button>reply</button>
-                </div>
-                <div class="comment">
-                    <h1>JOHN DOE</h1>
-                    <p class="date"><span>August 5, 2016</span></p>
-                    <span class="ln"></span>
-                    <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                    <button>reply</button>
-                </div>
-                <div class="sub">
-                    <div class="comment">
-                        <h1>JOHN DOE</h1>
-                        <p class="date"><span>August 5, 2016</span></p>
-                        <span class="ln"></span>
-                        <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                        <button>reply</button>
-                    </div>
-                    <div class="comment">
-                        <h1>JOHN DOE</h1>
-                        <p class="date"><span>August 5, 2016</span></p>
-                        <span class="ln"></span>
-                        <p class="comment-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis saepe iste iure labore cum temporibus eveniet nisi provident, accusamus ab non ullam quae rem, maiores voluptatibus. Facilis doloribus, ipsa repellendus.</p>
-                        <button>reply</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row leave-reply">
-        <div class="col-lg-12">
-            <div>
-                <h1>Leave a reply</h1>
-                <p>Your email address will not be published. Required fields.</p>
-                <form action="#" method="#" class="row">
-                    <div class="form-input col-lg-12">
-                        <label for="comment-box">Comment</label>
-                        <textarea name="comment-box" type="textarea"></textarea>
-                    </div>
-                    <div class="form-input col-lg-3">
-                        <label for="name">Name</label>
-                        <input type="text" name="name">
-                    </div>
-                    <div class="form-input col-lg-3">
-                        <label for="name">Email</label>
-                        <input type="email" name="email">
-                    </div>
-                    <div class="form-input col-lg-3">
-                        <label for="website">Website</label>
-                        <input type="text" name="website">
-                    </div>
-                    <div class="col-lg-3 text-center">
-                        <button type="submit" style="">Post comment</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <?php
+
+            comments($blog_id);
+        ?>
     </div>
 </section>
 

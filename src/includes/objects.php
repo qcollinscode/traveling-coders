@@ -1,5 +1,139 @@
 <?php
 
+class Comments {
+    protected $comment_id;
+    protected $comment_content;
+    protected $user_id;
+    protected $comment_time;
+    protected $thread_id;
+    protected $blog_id;
+    protected $comment_replied_to_id;
+    protected $comment_replies_count;
+    protected $comment_likes_count;
+    protected $comment_edited_time;
+    private $conn;
+
+    function __construct($connection) {
+        $this->conn = $connection;
+    }
+
+    function check_query($result) {
+        if(!$result) {
+            die("Query Failed: " . mysqli_error($this->conn));
+        }
+    }
+
+    function get_all_comments() {
+        $query = "SELECT * FROM comments";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return $result;
+    }
+
+    function get_all_comments_sorted($where, $value, $order = "DESC", $column = "comment_time") {
+        $columnStr = mysqli_real_escape_string($this->conn, $column);
+        $orderStr = mysqli_real_escape_string($this->conn, $order);
+        $query = "SELECT * FROM comments WHERE {$where}=$value ORDER BY {$columnStr} {$orderStr}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return $result;
+    }
+
+
+
+    function get_comment_replies_count() {
+        $query = "SELECT comment_replies_count FROM comments WHERE comment_id={$this->comment_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return mysqli_fetch_assoc($result)['comment_replies_count'];
+    }
+
+    function get_comment_likes_count() {
+        $query = "SELECT comment_likes_count FROM comments WHERE comment_id={$this->comment_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return mysqli_fetch_assoc($result)['comment_likes_count'];
+    }
+
+    function update_comment_likes($comment_id, $add_remove) {
+        $a_r;
+
+        switch($add_remove) {
+            case "add";
+                $a_r = + 1;
+            break;
+            case "remove";
+                $a_r = - 1;
+            break;
+            default:
+                $a_r = + 1;
+            break;
+        }
+
+        $query = "UPDATE comments SET comment_likes_count = comment_likes_count {$a_r} WHERE comment_id={$comment_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+    function update_replies_count($comment_id, $add_remove) {
+        $a_r;
+
+        switch($add_remove) {
+            case "add";
+                $a_r = + 1;
+            break;
+            case "remove";
+                $a_r = - 1;
+            break;
+            default:
+                $a_r = + 1;
+            break;
+        }
+
+        $query = "UPDATE comments SET comment_replies_count = comment_replies_count {$a_r} WHERE comment_id={$comment_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+    function get_all_comments_by_user_id() {
+        $query = "SELECT * FROM comments WHERE user_id={$this->user_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return $result;
+    }
+
+    function get_comment_by_id() {
+        $query = "SELECT * FROM comments WHERE blog_id={$this->comment_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return mysqli_fetch_assoc($result);
+    }
+
+    function add_comment() {
+        $comment_time = date("Y-m-d H:i:s");
+        $query = "INSERT INTO comments(comment_content, user_id, comment_time, thread_id)";
+        $query .= "VALUES('{$this->comment_content}', $this->user_id, '{$this->comment_time}', $tis->thread_id)";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+    function set_id($id) {
+        $this->comment_id = $id;
+    }
+
+    function set_comment_content($content) {
+        $this->comment_content = $content;
+    }
+
+    function set_blog($id) {
+        $this->blog_id = $id;
+    }
+
+    function set_user($id) {
+        $this->user_id = $id;
+    }
+}
+
 class Blogs {
     private $conn;
     protected $blog_id;
@@ -19,8 +153,8 @@ class Blogs {
     protected $blog_image_02;
     protected $image_upload_dir;
 
-    function __construct($conn) {
-        $this->conn = $conn;
+    function __construct($connection) {
+        $this->conn = $connection;
     }
 
     function check_query($result) {
@@ -46,10 +180,10 @@ class Blogs {
     }
 
     function get_blog_comment_count() {
-        $query = "SELECT blog_comments_count FROM blogs WHERE blog_id={$this->blog_id}";
+        $query = "SELECT * FROM comments WHERE blog_id={$this->blog_id}";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
-        return mysqli_fetch_assoc($result)['blog_comments_count'];
+        echo mysqli_num_rows($result);
     }
 
     function update_blog_views() {
@@ -187,8 +321,8 @@ class Threads {
     protected $board_id;
     
 
-    function __construct($conn) {
-        $this->conn = $conn;
+    function __construct($connection) {
+        $this->conn = $connection;
     }
 
     function set_id($id) {
@@ -286,33 +420,10 @@ class Users {
     protected $user_username;
     protected $user_email;
     protected $user_title;
+    protected $user_description;
 
-    function __construct($conn) {
-        $this->conn = $conn;
-    }
-
-    function set_id($id) {
-        $this->user_id = $id;
-    }
-
-    function set_title($title) {
-        $this->user_title = $title;
-    }
-
-    function set_firstname($name) {
-        $this->user_name_first = $name;
-    }
-
-    function set_lastname($name) {
-        $this->user_name_last = $name;
-    }
-
-    function set_username($username) {
-        $this->user_username = $username;
-    }
-
-    function set_email($email) {
-        $this->user_email = $email;
+    function __construct($connection) {
+        $this->conn = $connection;
     }
 
     function add_user() {
@@ -336,6 +447,90 @@ class Users {
         $result = mysqli_query($this->conn, $query);
         check_query($result);
         return mysqli_fetch_assoc($result);
+    }
+
+    function set_id($id) {
+        $this->user_id = $id;
+    }
+
+    function set_title($title) {
+        $this->user_title = $title;
+    }
+
+    function set_firstname($name) {
+        $this->user_name_first = $name;
+    }
+
+    function set_lastname($name) {
+        $this->user_name_last = $name;
+    }
+
+    function set_description($description) {
+        $this->user_description = $description;
+    }
+
+    function set_username($username) {
+        $this->user_username = $username;
+    }
+
+    function set_email($email) {
+        $this->user_email = $email;
+    }
+
+}
+
+class Favorites {
+    protected $favorite_id;
+    protected $user_id;
+    protected $blog_id;
+    protected $comment_id;
+    private $conn;
+
+    function __construct($connection) {
+        $this->conn = $connection;
+    }
+
+    function set_id($id) {
+        $this->favorite_id = $id;
+    }
+
+    function set_user($id) {
+        $this->user_id = $id;
+    }
+
+    function set_blog($id) {
+        $this->blog_id = $id;
+    }
+
+    function set_comment($id) {
+        $this->comment_id = $id;
+    }
+
+    function add_favorite() {
+        $query = "INSERT INTO favorites(user_id, blog_id, comment_id) ";
+        $query .= "VALUES('{$this->user_id}', '{$this->blog_id}', '{$this->comment_id}')";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+    function remove_favorite() {
+        $query = "DELETE FROM favorites WHERE user_id={$this->user_id} AND blog_id={$this->blog_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+    function get_favorite_by_blog_user_id() {
+        $query = "SELECT * FROM favorites WHERE blog_id={$this->blog_id} AND user_id={$this->user_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return $result;
+    }
+
+    function get_all_favorites() {
+        $query = "SELECT * FROM favorites";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return $result;
     }
 
 }

@@ -274,3 +274,39 @@ function blogs_preview() {
         </div>";
     }
 }
+
+function social($user_id) {
+    global $connection;
+    $usersObj = new Users($connection);
+    $usersObj->set_id($user_id);
+    $user = $usersObj->get_user_by_id();
+    if($user['twitter'] != null) {
+        echo "<div class='col-lg-1'><a href='{$user['twitter']}'><i class='fa fa-twitter'></i></a></div>";
+    }
+    if($user['facebook']) {
+        echo "<div class='col-lg-1'><a href='{$user['facebook']}'><i class='fa fa-facebook'></i></a></div>";
+    }
+    if($user['instagram']) {
+        echo "<div class='col-lg-1'><a href='{$user['instagram']}'><i class='fa fa-instagram'></i></a></div>";
+    }
+}
+
+function comments($blog_id) {
+    global $connection;
+    $commentsObj = new Comments($connection);
+    $usersObj = new Users($connection);
+    $comments = $commentsObj->get_all_comments_sorted("blog_id", $blog_id);
+    while($row = mysqli_fetch_assoc($comments)) {
+        $usersObj->set_id($row['user_id']);
+        $user = $usersObj->get_user_by_id();
+        $time = $row['comment_time'];
+        $timeSincePost = time_elapsed_string($time);
+        echo "<div class='comment'>
+            <h1>{$user['user_username']}</h1>
+            <p class='date'><span>$timeSincePost</span></p>
+            <span class='ln'></span>
+            <p class='comment-comment'>{$row['comment_content']}</p>
+            <button>reply</button>
+        </div>";
+    }
+}

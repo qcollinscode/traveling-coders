@@ -14,12 +14,27 @@ window.onbeforeunload = function() {
 
               $('.loader-container').hide();
 
+        $('.button-test').on('click', function() {
+            var blog_id = $('.button-test').attr("value");
+            $.ajax({
+                cache: false,
+                url: '/remove_favorite.php?p=' + blog_id,
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        });
+
         popular.forEach((el) => {
             el.addEventListener("click", (e) => {
                 if(e.target === popular[0] && e.target.classList.contains("selected") === false) {
+                    
                     removeClass(popular, "selected");
+
                     el.classList.add("selected");
+
                     $('.loader-container').show();
+                    
                     $('.blogs').fadeOut(() => {
                         $.ajax({
                             cache: false,
@@ -33,8 +48,11 @@ window.onbeforeunload = function() {
                         });
                     });
                 } else if(e.target === popular[1] && e.target.classList.contains("selected") === false) {
+                    
                     removeClass(popular, "selected");
-                e.target.classList.add("selected");
+                    
+                    e.target.classList.add("selected");
+                    
                     $('.blogs').fadeOut(() => {
                         $.ajax({
                             url: "/blog_gallery_new.php",
@@ -43,6 +61,7 @@ window.onbeforeunload = function() {
                             }
                         });
                     });
+
                 }
                 
             });
