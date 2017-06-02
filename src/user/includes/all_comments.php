@@ -1,5 +1,7 @@
 <?php 
     $user_id = $_SESSION['userId'];
+    $commentsObj = new Comments($connection);
+    $commentsObj->set_user($user_id);
 ?>
 
 <div class="row">
@@ -7,24 +9,16 @@
         <tr class="info">
             <th>Comment</th>
             <th>Date</th>
-            <th>Thread</th>
         </tr>
 
         <?php 
-            $result = getAllCommentsByUser($user_id);
+            $result = $commentsObj->get_all_comments_by_user_id();
             while($comment = mysqli_fetch_assoc($result)) {
-                $threadId = $comment['thread_id'];
-                $thread = getSingleThread($threadId);
-                $boardId = $thread['board_id'];
-                $board = getSingleThreadBoard($boardId);
-                $category_id = $board['category_id'];
-                $category = getSingleCat($category_id);
         ?>
 
             <tr>
                 <th class="col-md-10"><a href=''><?php echo $comment['comment_content']; ?></a></th>
                 <th><?php echo $comment['comment_time']; ?></th>
-                <th><?php echo $category['category_name']; ?></th>
             </tr>
 
 

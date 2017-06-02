@@ -6,8 +6,9 @@
   include_once('../includes/db.php');
   include_once("../functions.php");
   session_start();
-  $userId = $_SESSION['userId'];
-  $user = getSingleUser($userId);
+  $usersObj = new Users($connection);
+  $usersObj->set_id($_SESSION['userId']);
+  $user = $usersObj->get_user_by_id();
 ?>
 
 <!DOCTYPE html>

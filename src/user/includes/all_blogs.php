@@ -1,5 +1,8 @@
 <?php 
     $user_id = $_SESSION['userId'];
+    $blogObj = new Blogs($connection);
+    $categoryObj = new Categories($connection);
+    $blogObj->set_user_id($user_id);
 ?>
 
 <div class="row">
@@ -12,10 +15,10 @@
         </tr>
 
         <?php 
-            $result = getAllBlogsByUser($user_id);
-            while($blog = mysqli_fetch_assoc($result)) {
-                $category_id = $blog['category_id'];
-                $category = getSingleCat($category_id);
+            $blogs = $blogObj->get_all_blogs_by_user_id();
+            while($blog = mysqli_fetch_assoc($blogs)) {
+                $categoryObj->set_id($blog['category_id']);
+                $category = $categoryObj->get_category_by_id();
         ?>
 
             <tr>
