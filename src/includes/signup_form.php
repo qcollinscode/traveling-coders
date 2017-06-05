@@ -1,22 +1,28 @@
 <?php
+    $message = false;
     if(isset($_POST['add_user'])) {
-        $user_name_first = mysqli_real_escape_string($connection, $_POST['user_name_first']);
-        $user_name_last = mysqli_real_escape_string($connection, $_POST['user_name_last']);
-        $user_password = mysqli_real_escape_string($connection, $_POST['user_password']);
-        $user_email = mysqli_real_escape_string($connection, $_POST['user_email']);
-        $user_username = mysqli_real_escape_string($connection, $_POST['user_username']);
-
-        $query = "INSERT INTO users(user_name_first, user_name_last, user_password, user_email, user_username)";
-        $query .= "VALUES('{$user_name_first}', '{$user_name_last}', '{$user_password}', '{$user_email}', '{$user_username}')";
-        $insert_user = mysqli_query($connection, $query);
-
-        check_query($insert_user);
-        header("Location: /sw.php?p=login");
+        $user = new Users($connection);
+        $user->set_firstname($_POST['user_name_first']);
+        $user->set_lastname($_POST['user_name_last']);
+        $user->set_email($_POST['user_email']);
+        $user->set_username($_POST['user_username']);
+        $user->set_password($_POST['user_password']);
+        $message = $user->register();
     }
 ?>
 
 <div class="container signup-section">
     <form action="" method="POST">
+    <?php 
+        if($message["error"]) {
+            echo "<div class='row'>
+                    <div class='message col-md-12 text-center'>
+                        <p>{$message['message']}</p>
+                    </div>
+                </div>
+                <br/>";
+        }
+    ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="row">

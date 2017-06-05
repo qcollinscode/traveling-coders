@@ -1,39 +1,23 @@
 <?php
     $message = false;
+    $user = new Users($connection);
     if(isset($_POST['login'])) {
-        $user_username = mysqli_real_escape_string($connection, $_POST['user_username']);
-        $user_password = mysqli_real_escape_string($connection, $_POST['user_password']);
-        $query = "SELECT * FROM users WHERE user_username='{$user_username}'";
-        $result = mysqli_query($connection, $query);
-        check_query($result);
-
-        if(mysqli_num_rows($result) >= 1) {
-            $user = mysqli_query($connection, $query);
-            check_query($connection, $query);
-            $row = mysqli_fetch_assoc($user);
-            $db_password = $row['user_password'];
-            $db_username = $row['user_username'];
-
-            if($db_password === $user_password) {
-                 $_SESSION['userId'] = getIdByUsername($db_username);
-                 $cookie_name = "username";
-                 $cookie_value = $db_username;
-                 setcookie($cookie_name, $cookie_value, time() + ( 86400 * 30 ), "/");
-                 header("Location: index.php");
-            } else {
-                $message = "Wrong password!!!!";
-            }
-        } else {
-            $message = "Username does not exist!!!";
-        }     
+        $user->set_username($_POST['user_username']);
+        $user->set_password($_POST['user_password']);
+        $message = $user->login();
     }
 ?>
 
 <div class="container login-section">
     <form action="" method="POST">
         <?php 
-            if($message != false) {
-                echo "<div class='row'><div class='message col-md-12 text-center'><p>{$message}</p></div></div><br/>";
+            if($message["error"]) {
+                echo "<div class='row'>
+                        <div class='message col-md-12 text-center'>
+                            <p>{$message["message"]}</p>
+                        </div>
+                    </div>
+                    <br/>";
             }
         ?>
         <div class="row">
