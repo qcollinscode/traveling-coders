@@ -106,6 +106,10 @@
     }
 }
 
+.jumbotron-container {
+    background: black;
+}
+
 .home-jumbotron {
     border-radius: 0!important;
     height: 85vh;
@@ -116,9 +120,11 @@
     background-repeat: no-repeat;
     margin-bottom: 0;
     position: relative;
+    opacity: 1;
     overflow: hidden;
     text-align: center;
     background-attachment: fixed;
+    z-index: 10000;
     &:after {
         content: '';
         height: 100%;
@@ -127,7 +133,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 0.6;
+        opacity: 0.4;
     }
     .logo {
         display: flex;
@@ -135,8 +141,8 @@
         flex-direction: column;
         width: 100%;
         position: relative;
-        top: -4em;
-        z-index: 1000;
+        top: 0;
+        z-index: 100000;
         height: 100%;
     }
 }

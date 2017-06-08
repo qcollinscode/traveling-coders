@@ -1,7 +1,7 @@
 <?php
     include "includes/header.php";
 ?>
-<div class="container-fluid">
+<div class="container-fluid jumbotron-container">
     <div class="row">
         <div class="home-jumbotron jumbotron">
             <div class="logo">
@@ -48,12 +48,7 @@
             <div class="row blogs text-center">
                 <div class="loader-container">
                     <div class="loader"></div>
-                </div>
-
-
-                <?php blogs_preview(); ?>
-
-                
+                </div>                
             </div>
         </section>
     </div>

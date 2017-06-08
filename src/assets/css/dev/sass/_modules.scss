@@ -202,14 +202,15 @@
 
 footer {
     background: $mainColor;
-    min-height: 10em;
-    padding: 2em 0 2em 0;
+    padding: 1em 0 1em 0;
     .copy {
         color: white;
         text-transform: uppercase;
         text-align: left;
         display: block;
-        padding-top: 1em;
+        font-size: 1.3em;
+        padding-left: 0.5em;
+        font-weight: 900;
         @include bp-xlarge {
             text-align: center;
         }
@@ -223,36 +224,6 @@ footer {
             text-align: center;
         }
     }
-    .icons {
-        a {
-            color: white;
-            i {
-                font-size: 1.8em;
-                padding-top: 0.7em;
-                pointer-events: auto;
-                cursor: pointer;
-            }
-        }
-    }
-    h3 {
-        color: white;
-        font-size: 1.9em;
-        font-weight: 900;
-        text-transform: uppercase;
-        & + div {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            & > span {
-                color: white;
-                font-size: 1.2em;
-                text-transform: uppercase;
-                & + span {
-
-                }
-            }
-        }
-    }
     nav {
         ul {
             list-style: none;
@@ -264,9 +235,9 @@ footer {
                     border: none;
                 }
                 a {
-                    font-size: 1.9em;
+                    font-size: 1em;
                     color: white;
-                    font-weight: 900;
+                    font-weight: 500;
                     &:hover, &:visited, &:focus {
                         color: white;
                         text-decoration: none;

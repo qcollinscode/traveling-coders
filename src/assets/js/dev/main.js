@@ -1,29 +1,90 @@
-window.onbeforeunload = function() {
-    window.scrollTo(0, 0);
-}
 (function() {
+    $(window).scrollTop(0)
     window.addEventListener("DOMContentLoaded", function () {
 
-        const searchForm = document.querySelector('.search-form'),
-              searchSection = document.querySelector('.search'),
-              searchFormButtom = document.querySelector('.search-form .fa-search'),
-              body             = document.body,
-              navSearchButton  = document.querySelector('.navbar-default .search-icon-lnk'),
-              blogGallery = document.querySelector('.blogs'),
-              popular = document.querySelectorAll('.sort>h1>span');
+        const searchForm            = document.querySelector('.search-form'),
+              searchSection         = document.querySelector('.search'),
+              searchFormButtom      = document.querySelector('.search-form .fa-search'),
+              body                  = document.body,
+              navSearchButton       = document.querySelector('.navbar-default .search-icon-lnk'),
+              blogGallery           = document.querySelector('.blogs'),
+              popular               = document.querySelectorAll('.sort>h1>span'),
+              navigation            = document.querySelector('.navbar-default'),
+              $wrapper              = $('.wrapper'),
+              logo                  = document.querySelector('.logo'),
+              $landingImg           = $('.home-jumbotron'),
+              range                 = 800,
+              speed                 = 0.5;
 
+/**
+ * Loader Default State
+ */
               $('.loader-container').hide();
+              $('.loader-container').fadeOut();
+/**
+ * Blogs Preview Default State
+ */
 
-        $('.button-test').on('click', function() {
-            var blog_id = $('.button-test').attr("value");
-            $.ajax({
-                cache: false,
-                url: '/remove_favorite.php?p=' + blog_id,
-                success: function(data) {
-                    console.log(data);
-                }
-            })
-        });
+        $('.blogs').fadeOut(() => {
+                $('.loader-container').show();
+                $('.loader-container').fadeIn();
+
+
+                $.ajax({
+                    cache: false,
+                    url: "/test.php",
+                    success: function(response) {
+                        $('.loader-container').hide();
+                        $('.blogs').hide()
+                        console.log(response)
+                        $('.blogs').html(response).fadeIn();
+                    }
+                });
+            });
+
+        window.onscroll = function() {
+            /**
+             * Navigation Background Color
+             */
+            var y = this.pageYOffset,
+                $wrapperLoc = $wrapper.offset().top;
+    
+            if (y > $wrapperLoc) {
+                navigation.classList.add('nav-bg');
+            } else if (y < $wrapperLoc) {
+                navigation.classList.remove('nav-bg');
+            }
+
+            /**
+             * Landing Image Opacity
+             */
+
+             var $scrollTop        = $(this).scrollTop(),
+                 $landingImgOffset = $landingImg.offset().top,
+                 $landingImgHeight = $landingImg.outerHeight();
+
+             $landingImgOffset     = $landingImgOffset + $landingImgHeight / 2;
+             
+             var $calc             = 1.4 - ($scrollTop - $landingImgOffset + range) / range;
+             $landingImg.css({ 'opacity': $calc });
+
+             if ($calc > '1' ) {
+                 $landingImg.css({ 'opacity': 1 });
+             } else if ( $calc < '0') {
+                 $landingImg.css({ 'opacity': 0 });
+             }
+
+             /**
+              * Logo Parallax
+              */
+
+              $(logo).css({"top": (y * speed) + "px"});
+
+              console.log(y * speed)
+
+            
+
+        };
 
         popular.forEach((el) => {
             el.addEventListener("click", (e) => {
@@ -32,18 +93,17 @@ window.onbeforeunload = function() {
                     removeClass(popular, "selected");
 
                     el.classList.add("selected");
-
-                    $('.loader-container').show();
                     
                     $('.blogs').fadeOut(() => {
+                        $('.loader-container').show();
+                        $('.loader-container').fadeIn();
                         $.ajax({
                             cache: false,
                             url: "/blog_gallery_pop.php",
                             success: function(response) {
                                 $('.loader-container').hide();
-                                let oldResponse;
+                                $('.blogs').hide()
                                 $('.blogs').html(response).fadeIn();
-                                oldResponse = response;
                             }
                         });
                     });
@@ -54,9 +114,13 @@ window.onbeforeunload = function() {
                     e.target.classList.add("selected");
                     
                     $('.blogs').fadeOut(() => {
+                        $('.loader-container').show();
+                        $('.loader-container').fadeIn();
                         $.ajax({
                             url: "/blog_gallery_new.php",
                             success: function(response) {
+                                $('.loader-container').hide();
+                                $('.blogs').hide()
                                 $('.blogs').html(response).fadeIn();
                             }
                         });
