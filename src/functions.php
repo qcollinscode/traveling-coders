@@ -174,11 +174,11 @@ function blogs_preview($order = "ASC") {
         $user_name_full = $user['user_name_first']." ".$user['user_name_last'];
         $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).'... <a href="#">Read More</a>';
         $timeSincePost = time_elapsed_string($row['blog_time']);
-        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 blog'>
+        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-12 blog'>
             <div>
                 <figure>
                     <div class='row'>
-                        <img src='assets/img/{$row['blog_image_preview']}' style='height: 350px' alt='' class='col-xs-12 col-sm-12 img-responsive'>
+                        <img src='assets/img/{$row['blog_image_preview']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
                     </div>
                     <figcaption>
                         <h1>{$row['blog_title']}</h1>
@@ -187,7 +187,7 @@ function blogs_preview($order = "ASC") {
                 </figure>
                 <div class='row'>
                     <div class='col-xs-12 col-sm-6 text-info-container'><span class='nm'>{$user_name_full}</span> | <span>{$timeSincePost}</span></div>
-                    <div class='col-xs-12 col-sm-6 info-icons'><i class='fa fa-user'></i> <span>{$row['blog_view_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
+                    <div class='col-xs-12 col-sm-6 info-icons'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
                 </div>
             </div>
         </div>";
@@ -218,11 +218,12 @@ function threads_aside() {
     $threadObj = new Threads($connection);
     $threads = $threadObj->get_all_threads_sorted("thread_time", "ASC");
     while($row = mysqli_fetch_assoc($threads)) {
+        $title_thread = ucfirst($row["thread_title"]);
         echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
                 <a href='post.php'>
                     <img src='assets/img/tianjin.jpg' alt=''>
                     <div>
-                        <h4>{$row["thread_title"]}</h4>
+                        <h4>{$title_thread}</h4>
                         <span>{$row["thread_views_count"]} Users</span>
                     </div>
                 </a>

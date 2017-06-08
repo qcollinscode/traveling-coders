@@ -16,7 +16,7 @@
         <aside class="col-lg-3">
             <div class="row">
                 <div class="user-blog col-lg-12">
-                    <h1>User Blogs</h1>
+                    <h1>Top Blogs</h1>
                     <ul class="row">
 
 
@@ -24,7 +24,6 @@
 
 
                     </ul>
-                    <button type="button" class="btn btn-block">Load more</button>
                 </div>
             </div>
             <div class="row">
@@ -35,7 +34,6 @@
                         <?php echo threads_aside() ?>
 
                     </ul>
-                    <button type="button" class="btn btn-block">Load more</button>
                 </div>
             </div>
         </aside>

@@ -100,8 +100,7 @@
 .user-blog {
     h1 {
         font-size: 1.4em;
-        padding: 1.56em;
-        margin-bottom: 6px;
+        margin: 2em 0;
         background: rgb(236, 240, 241);
         text-transform: uppercase;
         color: $mainColor;
@@ -111,8 +110,8 @@
         padding-left: 10px;
         li {
             position: relative;
-            margin-bottom: 6px;
-            border-top: 1px dotted $mainColor;
+            margin-bottom: 18px;
+
             a {
                 position: relative;
                 width: 100%;
@@ -279,15 +278,14 @@ footer {
 }
 
 button {
-    background: rgb(236, 240, 241);
-    font-size: 1.3em!important;
-    border: 1px solid $mainColor!important;
-    color: white;
-    font-weight: 600!important;
+    font-size: 1em!important;
+    color: black;
     text-transform: uppercase;
-    border-radius: 0!important;
     transition: background 0.1s ease-out, color 0.2s ease-out;
-    background: $mainColor;
+    background: transparent;
+    font-weight: 700!important;
+    max-width: 130px;
+    align-self: right;
     &:hover, &:focus, &:active {
         color: $mainColor!important;
         background: transparent;
