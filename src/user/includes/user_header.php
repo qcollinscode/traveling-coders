@@ -23,9 +23,41 @@
 </head>
 <body>
     <?php include '../includes/navigation.php'; ?>
-    <div class="container_fluid">
-        <div class="user-wrapper">
-            <aside class="col-md-2 user-aside">
+    <div class="container_fluid user-section">
+        <?php 
+            echo "<div class='row'>
+                <div class='col-md-12 text-right img-bg'>
+                    <div class='row'>
+                        <div class='col-md-10'>
+                            <div class='title'><h1>Welcome {$user['user_name_first']}</h1></div>
+                        </div>>
+                    </div>
+                </div>
+            </div>";
+        ?>
+        <div class="temp">
+            
+        </div>
+    <div class="user-menu">
+        <div class="user-name">
+            <h1><?php echo ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']); ?></h1>
+        </div>
+        <div class="user-avatar" style="background-image:url('../assets/img/73.jpg')">
+        </div>
+        <div class="user-title">
+            <p class="title"><?php echo $user['user_title'] ?></p>
+        </div>
+        <ul>
+            <li><a href="/user/?p=blogs"><i class="fa fa-sticky-note-o"></i> Blogs</a></li>
+            <li><a href="/user/?p=comments"><i class="fa fa-comment"></i> Comments</a></li>
+            <li><a href="/user/?p=threads"><i class="fa fa-newspaper-o"></i> Threads</a></li>
+            <li><a href="/user/?p=messages"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a></li>
+            <li><a href=""><i class="fa fa-th" aria-hidden="true"></i> Settings</a></li>
+        </ul>
+    </div>
+     </div>
+
+     <!--<aside class="user-aside">
                 <div class="user-info">
                     <div class="user-name">
                         <a href="../index?p=avatar"><img src="../assets/img/73.jpg" alt=""></a>
@@ -42,5 +74,4 @@
                         </ul>
                     </nav>
                 </div>
-            </aside>
-            <section class="col-md-10">
+            </aside>-->

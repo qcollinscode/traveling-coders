@@ -9,15 +9,22 @@
 <?php
     if(isset($_SESSION['userId'])) {
         echo "<div class='row'>
-                <div class='col-md-12 text-right'>
-                    <p><a href='forums.php?p=create_board'><button>Create New Board</button></a></p>
+                <div class='col-md-12 text-right img-bg'>
+                    <div class='row'>
+                        <div class='col-md-10'>
+                            <div class='title'><h1>Boards</h1></div>
+                        </div>
+                        <div class='col-md-2'>
+                            <p><a href='forums.php?p=create_board'><button>New Board <i class='fa fa-plus' aria-hidden='true'></i></button></a></p>
+                        </div>
+                    </div>
                 </div>
             </div>";
     }
 ?>
     <div class="row">
         <table class="table table-responsive">
-            <tr class="info">
+            <tr class="headings">
                 <th>Title</th>
                 <th>Views</th>
                 <th>Users</th>
@@ -33,12 +40,14 @@
                     $category = mysqli_fetch_assoc(getById("categories", "category_id", $category_id));
             ?>
 
-                <tr>
-                    <th class="col-md-10"><a href='forums.php?p=threads&board=<?php echo $board["board_id"]?>'><?php echo $board['board_title']; ?></a></th>
-                    <th><?php echo $board['board_views_count']; ?></th>
-                    <th><?php echo $board['board_users_count']; ?></th>
-                    <th><?php echo $category['category_name']; ?></th>
-                </tr>
+                    <tr class="data" onclick="window.location = 'forums.php?p=threads&board=<?php echo $board["board_id"]?>'">
+                            
+                            <td class="col-md-10"><?php echo $board['board_title']; ?></td>
+                            <td><?php echo $board['board_views_count']; ?></td>
+                            <td><?php echo $board['board_users_count']; ?></td>
+                            <td><?php echo $category['category_name']; ?></td>
+
+                    </tr>
 
 
             <?php

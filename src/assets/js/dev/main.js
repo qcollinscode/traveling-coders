@@ -11,7 +11,11 @@
               popular               = document.querySelectorAll('.sort>h1>span'),
               navigation            = document.querySelector('.navbar-default'),
               $wrapper              = $('.wrapper'),
-              logo                  = document.querySelector('.logo'),
+              $logo                 = $('.logo'),
+              $boardSectionTitle     = $('.boards-section').find('.title'),
+              $threadSectionTitle    = $('.threads-section').find('.title'),
+              $boardSectionButton    = $('.boards-section').find('button'),
+              $threadSectionButton   = $('.threads-section').find('button'),
               $landingImg           = $('.home-jumbotron'),
               range                 = 800,
               speed                 = 0.5;
@@ -25,42 +29,59 @@
             /**
              * Navigation Background Color
              */
-            var y = this.pageYOffset,
-                $wrapperLoc = $wrapper.offset().top;
+            var y = this.pageYOffset;
+
+            if($wrapper.length !== 0) {
+                var $wrapperLoc = $wrapper.offset().top;
     
-            if (y > $wrapperLoc) {
-                navigation.classList.add('nav-bg');
-            } else if (y < $wrapperLoc) {
-                navigation.classList.remove('nav-bg');
+                if (y > $wrapperLoc) {
+                    navigation.classList.add('nav-bg');
+                } else if (y < $wrapperLoc) {
+                    navigation.classList.remove('nav-bg');
+                }
             }
 
             /**
              * Landing Image Opacity
              */
 
-             var $scrollTop        = $(this).scrollTop(),
+             if($landingImg.length !== 0) {
+                 var $scrollTop        = $(this).scrollTop(),
                  $landingImgOffset = $landingImg.offset().top,
                  $landingImgHeight = $landingImg.outerHeight();
 
-             $landingImgOffset     = $landingImgOffset + $landingImgHeight / 2;
-             
-             var $calc             = 1.4 - ($scrollTop - $landingImgOffset + range) / range;
-             $landingImg.css({ 'opacity': $calc });
+                $landingImgOffset     = $landingImgOffset + $landingImgHeight / 2;
+                
+                var $calc             = 1.4 - ($scrollTop - $landingImgOffset + range) / range;
+                $landingImg.css({ 'opacity': $calc });
 
-             if ($calc > '1' ) {
-                 $landingImg.css({ 'opacity': 1 });
-             } else if ( $calc < '0') {
-                 $landingImg.css({ 'opacity': 0 });
+                if ($calc > '1' ) {
+                    $landingImg.css({ 'opacity': 1 });
+                } else if ( $calc < '0') {
+                    $landingImg.css({ 'opacity': 0 });
+                }
              }
 
              /**
               * Logo Parallax
               */
 
-              $(logo).css({"top": (y * speed) + "px"});
+              if ($logo.length !== 0) {
+                  $logo.css({"top": (y * speed) + "px"});
+              }
 
-              console.log(y * speed)
 
+
+              function threadBoardParallax($title, $button) {
+                  $title.css({"top": (y * speed) + "px"});
+                  $button.css({"top": (y * speed) + "px"});
+              }
+
+              if($boardSectionTitle.length !== 0) {
+                  threadBoardParallax($boardSectionTitle, $boardSectionButton);
+              } else if ($threadSectionTitle.length !== 0) {
+                  threadBoardParallax($threadSectionTitle, $threadSectionButton);
+              }
             
 
         };
@@ -72,9 +93,8 @@
     $('.blogs').fadeOut(() => {
             $.ajax({
             cache: false,
-            url: "/blog_gallery_new.php",
+            url: "/blog_gallery_pop.php",
             success: function(response) {
-
                 $('.loader-container').fadeOut().hide();
                 $('.blogs').html(response).fadeIn();
             }

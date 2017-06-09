@@ -249,17 +249,17 @@ footer {
 }
 
 button {
-    font-size: 1em!important;
-    color: black;
+    font-size: 1.3em!important;
+    color: #fff;
     text-transform: uppercase;
+    border: 2px solid #fff;
     transition: background 0.1s ease-out, color 0.2s ease-out;
     background: transparent;
     font-weight: 700!important;
-    max-width: 130px;
-    align-self: right;
+    max-width: 170px;
     &:hover, &:focus, &:active {
         color: $mainColor!important;
-        background: transparent;
+        background: $mainColor2;
     }
 }
 

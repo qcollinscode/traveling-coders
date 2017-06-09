@@ -39,7 +39,7 @@
                 include "includes/preview.php";
             break;
             default:
-                include "includes/all_blogs.php";
+                // include "includes/all_blogs.php";
             break;
         }
     ?>
