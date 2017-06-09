@@ -13,10 +13,14 @@
               $wrapper              = $('.wrapper'),
               $logo                 = $('.logo'),
               $boardSectionTitle     = $('.boards-section').find('.title'),
+              $userSectionTitle     = $('.user-section').find('.title'),
               $threadSectionTitle    = $('.threads-section').find('.title'),
               $boardSectionButton    = $('.boards-section').find('button'),
               $threadSectionButton   = $('.threads-section').find('button'),
               $landingImg           = $('.home-jumbotron'),
+              $userMenu             = $('.user-section').find('.user-menu'),
+              $userSectionWrapper   = $('.temp'),
+              $userSectionMenuBtn       = $('.user-section').find('.fa-bars'),
               range                 = 800,
               speed                 = 0.5;
 
@@ -39,6 +43,19 @@
                 } else if (y < $wrapperLoc) {
                     navigation.classList.remove('nav-bg');
                 }
+            }
+
+            if($userSectionWrapper.length !== 0) {
+                var $userSectionWrapperLoc = $userSectionWrapper.offset().top - 100;
+
+                if(y > $userSectionWrapperLoc) {
+                    $userSectionMenuBtn.addClass('menu-btn-clr');
+                    navigation.classList.add('nav-bg');
+                } else {
+                    $userSectionMenuBtn.removeClass('menu-btn-clr');
+                    navigation.classList.remove('nav-bg');
+                }
+
             }
 
             /**
@@ -72,19 +89,36 @@
 
 
 
-              function threadBoardParallax($title, $button) {
-                  $title.css({"top": (y * speed) + "px"});
-                  $button.css({"top": (y * speed) + "px"});
+              function threadBoardParallax(arr) {
+                  var len = arr.length;
+                  for(var i = 0; i < len; i++) {
+                      arr[i].css({"top": (y * speed) + "px"});
+                  }
               }
 
               if($boardSectionTitle.length !== 0) {
-                  threadBoardParallax($boardSectionTitle, $boardSectionButton);
+                  threadBoardParallax([$boardSectionTitle, $boardSectionButton]);
               } else if ($threadSectionTitle.length !== 0) {
-                  threadBoardParallax($threadSectionTitle, $threadSectionButton);
+                  threadBoardParallax([$threadSectionTitle, $threadSectionButton]);
+              } else if ($userSectionTitle.length !== 0) {
+                  threadBoardParallax([$userSectionTitle]);
               }
             
 
         };
+
+         if ($userSectionMenuBtn.length !== 0) {
+                $userSectionMenuBtn.on('click', function(event) {
+                    if($(this).hasClass('menu-btn-rotate')) {
+                        $(this).removeClass('menu-btn-rotate');
+                        $userMenu.removeClass('show-menu');
+                    } else {
+                        $(this).addClass('menu-btn-rotate');
+                        $userMenu.addClass('show-menu');
+                    }
+                    event.stopPropagation();
+                });
+            }
 
 /**
  * Blogs Preview Default State

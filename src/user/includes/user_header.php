@@ -27,6 +27,7 @@
         <?php 
             echo "<div class='row'>
                 <div class='col-md-12 text-right img-bg'>
+                <i class='fa fa-bars' aria-hidden='true'></i>
                     <div class='row'>
                         <div class='col-md-10'>
                             <div class='title'><h1>Welcome {$user['user_name_first']}</h1></div>
@@ -36,7 +37,7 @@
             </div>";
         ?>
         <div class="temp">
-            
+
         </div>
     <div class="user-menu">
         <div class="user-name">
