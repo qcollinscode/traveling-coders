@@ -24,7 +24,8 @@
  * Blogs Preview Default State
  */
 
-$('.blogs').fadeOut(() => {
+setTimeout(function() {
+    $('.blogs').fadeOut(() => {
             $.ajax({
             cache: false,
             url: "/blog_gallery_new.php",
@@ -35,6 +36,7 @@ $('.blogs').fadeOut(() => {
             }
         });
     });
+}, 0)
 
         window.onscroll = function() {
             /**
