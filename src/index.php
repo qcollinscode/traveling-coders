@@ -45,10 +45,10 @@
                     </div>
                 </div>
             </div>
+            <div class="loader-container">
+                <div class="loader"></div>
+            </div>                
             <div class="row blogs text-center">
-                <div class="loader-container">
-                    <div class="loader"></div>
-                </div>                
             </div>
         </section>
     </div>

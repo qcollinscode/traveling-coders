@@ -19,28 +19,22 @@
 /**
  * Loader Default State
  */
-              $('.loader-container').hide();
-              $('.loader-container').fadeOut();
+
 /**
  * Blogs Preview Default State
  */
 
-        $('.blogs').fadeOut(() => {
-                $('.loader-container').show();
-                $('.loader-container').fadeIn();
+$('.blogs').fadeOut(() => {
+            $.ajax({
+            cache: false,
+            url: "/blog_gallery_new.php",
+            success: function(response) {
 
-
-                $.ajax({
-                    cache: false,
-                    url: "/test.php",
-                    success: function(response) {
-                        $('.loader-container').hide();
-                        $('.blogs').hide()
-                        console.log(response)
-                        $('.blogs').html(response).fadeIn();
-                    }
-                });
-            });
+                $('.loader-container').fadeOut().hide();
+                $('.blogs').html(response).fadeIn();
+            }
+        });
+    });
 
         window.onscroll = function() {
             /**
@@ -95,14 +89,13 @@
                     el.classList.add("selected");
                     
                     $('.blogs').fadeOut(() => {
-                        $('.loader-container').show();
-                        $('.loader-container').fadeIn();
-                        $.ajax({
+                        $('.loader-container').fadeIn().show();
+
+                            $.ajax({
                             cache: false,
                             url: "/blog_gallery_pop.php",
                             success: function(response) {
-                                $('.loader-container').hide();
-                                $('.blogs').hide()
+                                $('.loader-container').fadeOut().hide();
                                 $('.blogs').html(response).fadeIn();
                             }
                         });
@@ -114,13 +107,11 @@
                     e.target.classList.add("selected");
                     
                     $('.blogs').fadeOut(() => {
-                        $('.loader-container').show();
-                        $('.loader-container').fadeIn();
+                        $('.loader-container').fadeIn().show();
                         $.ajax({
                             url: "/blog_gallery_new.php",
                             success: function(response) {
-                                $('.loader-container').hide();
-                                $('.blogs').hide()
+                                $('.loader-container').fadeOut().hide();
                                 $('.blogs').html(response).fadeIn();
                             }
                         });
