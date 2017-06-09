@@ -20,23 +20,6 @@
  * Loader Default State
  */
 
-/**
- * Blogs Preview Default State
- */
-
-setTimeout(function() {
-    $('.blogs').fadeOut(() => {
-            $.ajax({
-            cache: false,
-            url: "/blog_gallery_new.php",
-            success: function(response) {
-
-                $('.loader-container').fadeOut().hide();
-                $('.blogs').html(response).fadeIn();
-            }
-        });
-    });
-}, 0)
 
         window.onscroll = function() {
             /**
@@ -82,47 +65,64 @@ setTimeout(function() {
 
         };
 
-        popular.forEach((el) => {
-            el.addEventListener("click", (e) => {
-                if(e.target === popular[0] && e.target.classList.contains("selected") === false) {
-                    
-                    removeClass(popular, "selected");
+/**
+ * Blogs Preview Default State
+ */
 
-                    el.classList.add("selected");
-                    
-                    $('.blogs').fadeOut(() => {
-                        $('.loader-container').fadeIn().show();
+    $('.blogs').fadeOut(() => {
+            $.ajax({
+            cache: false,
+            url: "/blog_gallery_new.php",
+            success: function(response) {
 
-                            $.ajax({
-                            cache: false,
-                            url: "/blog_gallery_pop.php",
-                            success: function(response) {
-                                $('.loader-container').fadeOut().hide();
-                                $('.blogs').html(response).fadeIn();
-                            }
-                        });
-                    });
-                } else if(e.target === popular[1] && e.target.classList.contains("selected") === false) {
-                    
-                    removeClass(popular, "selected");
-                    
-                    e.target.classList.add("selected");
-                    
-                    $('.blogs').fadeOut(() => {
-                        $('.loader-container').fadeIn().show();
-                        $.ajax({
-                            url: "/blog_gallery_new.php",
-                            success: function(response) {
-                                $('.loader-container').fadeOut().hide();
-                                $('.blogs').html(response).fadeIn();
-                            }
-                        });
-                    });
-
-                }
-                
-            });
+                $('.loader-container').fadeOut().hide();
+                $('.blogs').html(response).fadeIn();
+            }
         });
+    });
+
+
+    popular.forEach((el) => {
+        el.addEventListener("click", (e) => {
+            if(e.target === popular[0] && e.target.classList.contains("selected") === false) {
+                
+                removeClass(popular, "selected");
+
+                el.classList.add("selected");
+                
+                $('.blogs').fadeOut(() => {
+                    $('.loader-container').fadeIn().show();
+
+                        $.ajax({
+                        cache: false,
+                        url: "/blog_gallery_pop.php",
+                        success: function(response) {
+                            $('.loader-container').fadeOut().hide();
+                            $('.blogs').html(response).fadeIn();
+                        }
+                    });
+                });
+            } else if(e.target === popular[1] && e.target.classList.contains("selected") === false) {
+                
+                removeClass(popular, "selected");
+                
+                e.target.classList.add("selected");
+                
+                $('.blogs').fadeOut(() => {
+                    $('.loader-container').fadeIn().show();
+                    $.ajax({
+                        url: "/blog_gallery_new.php",
+                        success: function(response) {
+                            $('.loader-container').fadeOut().hide();
+                            $('.blogs').html(response).fadeIn();
+                        }
+                    });
+                });
+
+            }
+            
+        });
+    });
 
 
         searchFormButtom.addEventListener("click", function () {
