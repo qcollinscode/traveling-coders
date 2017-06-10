@@ -9,20 +9,30 @@
 
 <div class="container-fluid threads-section">
     <?php 
-        if(isset($_SESSION['userId'])) {
-            echo "<div class='row'>
+         $col = 10;
+         if(isset($_SESSION['userId'])) {
+                if($_SESSION['userId'] == 1) {
+                    $col = 12;
+                }
+         }
+        echo "<div class='row'>
                 <div class='col-md-12 text-right img-bg'>
                     <div class='row'>
-                        <div class='col-md-10'>
+                        <div class='col-md-{$col}'>
                             <div class='title'><h1>Threads</h1></div>
-                        </div>
-                        <div class='col-md-2'>
-                            <p><a href='forums.php?p=create_thread&board={$boardId}'><button>New Thread <i class='fa fa-plus' aria-hidden='true'></i></button></a></p>
-                        </div>
-                    </div>
+                        </div>";
+
+                    if(isset($_SESSION['userId'])) {
+                        if($_SESSION['userId'] == 1) {
+                            echo "<div class='col-md-12'>
+                                <p><a href='forums.php?p=create_thread&board={$boardId}'><button>New Thread <i class='fa fa-plus' aria-hidden='true'></i></button></a></p>
+                            </div>";
+                        }
+                    }
+
+                    echo "</div>
                 </div>
             </div>";
-        }
     
     ?>
     <div class="row">
@@ -47,10 +57,10 @@
             ?>
 
                 <tr class="data" onclick="window.location = '../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'">
-                    <td class="col-md-8"><?php echo $row['thread_title']; ?></td>
-                    <td class="col-md-1 text-center"><?php echo $row['thread_views_count']; ?></td>
-                    <td class="col-md-1 text-center"><?php echo $row['thread_likes_count']; ?></td>
-                    <td class="col-md-1 text-center"><?php echo $count['Total'] === NULL ? 0 : $count['Total']; ?></td>
+                    <td class="col-md-10"><?php echo $row['thread_title']; ?></td>
+                    <td><?php echo $row['thread_views_count']; ?></td>
+                    <td><?php echo $row['thread_likes_count']; ?></td>
+                    <td><?php echo $count['Total'] === NULL ? 0 : $count['Total']; ?></td>
                 </tr>
 
 

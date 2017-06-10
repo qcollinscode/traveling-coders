@@ -21,7 +21,7 @@
     }
     .title {
         text-align: center;
-        padding: 2em 0;
+        padding: 2em 0 1em 0;
         height: 100%;
         top: 0;
         z-index: 10;
@@ -29,14 +29,15 @@
         h1 {
             color: white!important;
             text-transform: uppercase;
+            font-size: 3.5em;
             font-family: $mainFontFamily;
             position: relative;
-            left: 160px;
         }
     }
     button {
         position: relative;
         top: 0;
+        left: 0;
     }
 }
 
@@ -75,7 +76,7 @@
             td {
                 color: #000;
                 font-weight: 500;
-                font-size: 1.3em;
+                font-size: 1.1em;
                 border-top: 0;
                 font-family: $mainFontFamily;
             }
@@ -490,18 +491,13 @@ form {
             &:hover {
                 background: rgba(200, 200, 200, 1);
             }
-            a {
-                display: block;
-                height: 100%;
-                width: 100%;
-            }
             td:nth-child(2), td:nth-child(3), td:nth-child(4) {
                 text-align: center;
             }
             td {
                 color: #000;
                 font-weight: 500;
-                font-size: 1.3em;
+                font-size: 1.1em;
                 border-top: 0;
                 font-family: $mainFontFamily;
             }
@@ -580,7 +576,22 @@ form {
     animation: spin 2s linear infinite;
 }
 
+
 .user-section {
+    overflow: hidden;
+    &:after {
+        content: '';
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: $mainColor;
+        opacity: 0;
+        z-index: 10000000;
+        transition: 0.6s ease-in-out;
+        position: fixed;
+
+    }
     .img-bg {
         .title {
             h1 {
@@ -593,15 +604,22 @@ form {
         font-size: 2em;
         position: fixed;
         right: 0;
-        z-index: 100000000000000000000;
+        z-index: 1000000000;
         padding: 1em;
         cursor: pointer;
         transition: 0.2s ease-in-out;
     }
 }
 
+.show-overlay {
+    &:after {
+        opacity: 0.7!important;
+    }
+}
+
 .menu-btn-rotate {
     transform: rotate(90deg)!important;
+    color: #fff!important;
 }
 
 .menu-btn-clr {
@@ -634,14 +652,14 @@ form {
             padding: 1em;
             transition: 0.2s ease-in-out;
             background: $mainColor2;
+            cursor: pointer;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.95em;
+            font-family: $mainFontFamily;
+            letter-spacing: 0.1em;
             &:hover {
                 background: lightgrey;
-            }
-            a {
-                color: #000;
-                &:hover {
-                    text-decoration: none;
-                }
             }
         }
     }
@@ -664,10 +682,11 @@ form {
     }
     .user-name {
         padding: 0.75em 0;
+        height: 3.55em;
         h1 {
             color: #fff!important;
             text-align: center;
-            font-size: 1.9em;
+            font-size: 1.6em;
         }
     }
 }

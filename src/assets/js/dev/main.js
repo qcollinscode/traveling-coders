@@ -17,6 +17,7 @@
               $threadSectionTitle    = $('.threads-section').find('.title'),
               $boardSectionButton    = $('.boards-section').find('button'),
               $threadSectionButton   = $('.threads-section').find('button'),
+              $userSection          = $('.user-section'),
               $landingImg           = $('.home-jumbotron'),
               $userMenu             = $('.user-section').find('.user-menu'),
               $userSectionWrapper   = $('.temp'),
@@ -49,7 +50,9 @@
                 var $userSectionWrapperLoc = $userSectionWrapper.offset().top - 100;
 
                 if(y > $userSectionWrapperLoc) {
-                    $userSectionMenuBtn.addClass('menu-btn-clr');
+                    if(!$userSectionMenuBtn.hasClass('menu-btn-rotate')) {
+                        $userSectionMenuBtn.addClass('menu-btn-clr');
+                    }
                     navigation.classList.add('nav-bg');
                 } else {
                     $userSectionMenuBtn.removeClass('menu-btn-clr');
@@ -97,9 +100,9 @@
               }
 
               if($boardSectionTitle.length !== 0) {
-                  threadBoardParallax([$boardSectionTitle, $boardSectionButton]);
+                  threadBoardParallax([$boardSectionTitle]);
               } else if ($threadSectionTitle.length !== 0) {
-                  threadBoardParallax([$threadSectionTitle, $threadSectionButton]);
+                  threadBoardParallax([$threadSectionTitle]);
               } else if ($userSectionTitle.length !== 0) {
                   threadBoardParallax([$userSectionTitle]);
               }
@@ -108,16 +111,39 @@
         };
 
          if ($userSectionMenuBtn.length !== 0) {
+
+                function reset() {
+                    $(this).removeClass('menu-btn-rotate');
+                    $userMenu.removeClass('show-menu');
+                    $userSection.removeClass('show-overlay');
+                    if(window.pageYOffset > $userSectionWrapper.offset().top - 100) {
+                        $(this).addClass('menu-btn-clr');
+                    }
+                    $("body").css({"overflow": "auto"});
+                }
+
+                function showMenu() {
+                    $(this).removeClass('menu-btn-clr');
+                    $(this).addClass('menu-btn-rotate');
+                    $userMenu.addClass('show-menu');
+                    $("body").css({"overflow": "hidden"});
+                    $userSection.addClass('show-overlay');
+                }
+
                 $userSectionMenuBtn.on('click', function(event) {
                     if($(this).hasClass('menu-btn-rotate')) {
-                        $(this).removeClass('menu-btn-rotate');
-                        $userMenu.removeClass('show-menu');
+                        reset.call(this);
                     } else {
-                        $(this).addClass('menu-btn-rotate');
-                        $userMenu.addClass('show-menu');
+                        showMenu.call(this);
                     }
                     event.stopPropagation();
                 });
+
+                $userSection.on('click', function(event) {
+                    if(event.target !== $userMenu[0] && event.target === $userSection[0]) {
+                        reset.call($userSectionMenuBtn);
+                    }
+                })
             }
 
 /**

@@ -7,20 +7,30 @@
 ?>
 <div class="container-fluid boards-section">
 <?php
-    if(isset($_SESSION['userId'])) {
+        $col = 10;
+         if(isset($_SESSION['userId'])) {
+                if($_SESSION['userId'] == 1) {
+                    $col = 12;
+                }
+         }
         echo "<div class='row'>
                 <div class='col-md-12 text-right img-bg'>
                     <div class='row'>
-                        <div class='col-md-10'>
+                        <div class='col-md-{$col}'>
                             <div class='title'><h1>Boards</h1></div>
-                        </div>
-                        <div class='col-md-2'>
-                            <p><a href='forums.php?p=create_board'><button>New Board <i class='fa fa-plus' aria-hidden='true'></i></button></a></p>
-                        </div>
-                    </div>
+                        </div>";
+
+                    if(isset($_SESSION['userId'])) {
+                        if($_SESSION['userId'] == 1) {
+                            echo "<div class='col-md-12'>
+                                <p><a href='forums.php?p=create_board'><button>New Board <i class='fa fa-plus' aria-hidden='true'></i></button></a></p>
+                            </div>";
+                        }
+                    }
+
+                    echo "</div>
                 </div>
             </div>";
-    }
 ?>
     <div class="row">
         <table class="table table-responsive">

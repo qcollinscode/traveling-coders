@@ -43,17 +43,17 @@
         <div class="user-name">
             <h1><?php echo ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']); ?></h1>
         </div>
-        <div class="user-avatar" style="background-image:url('../assets/img/73.jpg')">
+        <div class="user-avatar" style="background-image:url('../assets/img/bag.jpg')">
         </div>
         <div class="user-title">
             <p class="title"><?php echo $user['user_title'] ?></p>
         </div>
         <ul>
-            <li><a href="/user/?p=blogs"><i class="fa fa-sticky-note-o"></i> Blogs</a></li>
-            <li><a href="/user/?p=comments"><i class="fa fa-comment"></i> Comments</a></li>
-            <li><a href="/user/?p=threads"><i class="fa fa-newspaper-o"></i> Threads</a></li>
-            <li><a href="/user/?p=messages"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a></li>
-            <li><a href=""><i class="fa fa-th" aria-hidden="true"></i> Settings</a></li>
+            <li onclick="window.location = '/user/?p=blogs'"><i class="fa fa-sticky-note-o"></i> Blogs</li>
+            <li onclick="window.location = '/user/?p=comments'"><i class="fa fa-comment"></i> Comments</li>
+            <li onclick="window.location = '/user/?p=threads'"><i class="fa fa-newspaper-o"></i> Threads</li>
+            <li onclick="window.location = '/user/?p=messages'"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</li>
+            <li><i class="fa fa-th" aria-hidden="true"></i> Settings</li>
         </ul>
     </div>
      </div>

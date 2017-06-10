@@ -19,8 +19,24 @@
 ?>
 
 <div class="container-fluid">
+    <?php
+        $col = 10;
+         if(isset($_SESSION['userId'])) {
+                if($_SESSION['userId'] == 1) {
+                    $col = 12;
+                }
+         }
+        echo "<div class='row'>
+                <div class='col-md-12 text-right img-bg'>
+                    <div class='row'>
+                        <div class='col-md-{$col}'>
+                            <div class='title'><h1>Comments</h1></div>
+                        </div>
+                    </div>
+                </div>
+            </div>";
+?>
     <div class="row">
-        <div class="comments-page-hd col-md-12"></div>
         <div class="comments-page-bd col-md-12">
             <div class="row comments">
                 <?php
