@@ -218,13 +218,15 @@ function threads_aside() {
     $threadObj = new Threads($connection);
     $threads = $threadObj->get_all_threads_sorted("thread_time", "ASC");
     while($row = mysqli_fetch_assoc($threads)) {
+        $threadObj->set_id($row['thread_id']);
         $title_thread = ucfirst($row["thread_title"]);
+        $comment_count = $threadObj->get_thread_comments_count();
         echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
-                <a href='post.php'>
+                <a href='threads/?tid={$row['thread_id']}&p=comments'>
                     <img src='assets/img/tianjin.jpg' alt=''>
                     <div>
                         <h4>{$title_thread}</h4>
-                        <span>{$row["thread_views_count"]} Users</span>
+                        <span>{$comment_count} Comments</span>
                     </div>
                 </a>
             </li>";

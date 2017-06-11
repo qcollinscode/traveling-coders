@@ -5,14 +5,19 @@
     if(isset($_SESSION['userId'])) {
         $id = $_SESSION['userId'];
     }
+    $boardObj = new Boards($connection);
+    $boardObj->set_id($boardId);
+    $userObj = new Users($connection);
+    $boards = $boardObj->get_all_board_threads();
+    $threadObj = new Threads($connection);
 ?>
 
 <div class="container-fluid threads-section">
     <?php 
-         $col = 10;
+         $col = 12;
          if(isset($_SESSION['userId'])) {
                 if($_SESSION['userId'] == 1) {
-                    $col = 12;
+                    $col = 10;
                 }
          }
         echo "<div class='row'>
@@ -35,40 +40,66 @@
             </div>";
     
     ?>
-    <div class="row">
-        <table class="table table-responsive">
-            <tr class="headings">
-                <th>Title</th>
-                <th class="text-center">Views</th>
-                <th class="text-center">Likes</th>
-                <th class="text-center">Comments</th>
-            </tr>
+    <?php 
+        while($row = mysqli_fetch_assoc($boards)) {
+            $threadObj->set_board($row['board_id']);
+            $threadObj->set_id($row['thread_id']);
+            $latestCommentRow = mysqli_fetch_row($threadObj->get_all_thread_comments_sorted());
+            $commentCount = $threadObj->get_thread_comments_count();
+            $latestComment = $latestCommentRow[3] == NULL ? $row['thread_time'] : $latestCommentRow[3];
+            $user = $userObj->get_user_by_id($row['user_id']);
+    ?>
 
-            <?php 
 
-                $query = "SELECT * FROM threads WHERE board_id={$boardId}";
-                $result = mysqli_query($connection, $query);
-                check_query($result);
-                $countQuery = "SELECT count(comments.comment_id) as Total FROM comments JOIN threads WHERE threads.thread_id=comments.thread_id GROUP BY threads.thread_id";
-                $countResult = mysqli_query($connection, $countQuery);
-                check_query($countResult);
-                while($row = mysqli_fetch_assoc($result)) {
-                        $count = mysqli_fetch_assoc($countResult);
-            ?>
+    <div class="row" onclick="window.location = '../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'">
+        <div class="thread" onclick="window.location = 'forums.php?p=threads&board=<?php echo $board["board_id"]?>'">
+            <div class="title_date">
+                <div class="title">
+                    <h1><?php echo $row['thread_title']; ?></h1>
+                </div>
+                <div class="comment-count">
+                    <span>Comments</span>
+                    <?php echo $commentCount; ?>
+                </div>
+            </div>
+            <div class="comment-user-cat">
+                <div class="user-info">
+                    <img src="../assets/img/73.jpg" alt="">
+                    <div class="user-name">
+                        <span>User</span>
+                        <p><?php echo $user['user_username']; ?></p>
+                    </div>
+                </div>
+                <div class="last-comment-info">
+                    <span>Latest Comment</span>
+                    <p><?php echo $latestCommentRow[1] == NULL ? $row['thread_content'] : $latestCommentRow[1]; ?></p>
+                </div>
+                <div class="thread-created">
+                    <span>Thread Created</span>
+                    <?php echo time_elapsed_string($row['thread_time']); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--<div class="row">
+
 
                 <tr class="data" onclick="window.location = '../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'">
                     <td class="col-md-10"><?php echo $row['thread_title']; ?></td>
                     <td><?php echo $row['thread_views_count']; ?></td>
                     <td><?php echo $row['thread_likes_count']; ?></td>
-                    <td><?php echo $count['Total'] === NULL ? 0 : $count['Total']; ?></td>
+                    <td><?php echo $comment_count === NULL ? 0 : $comment_count; ?></td>
                 </tr>
 
 
-            <?php
-                }
-            ?>
 
-
-        </table>
-    </div>
+    </div>-->
+    <?php
+        }
+    ?>
 </div>

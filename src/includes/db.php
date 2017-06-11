@@ -12,7 +12,7 @@
         // private $db = "traveling_coders";
         private $conn;
 
-        function connect() {
+        public function connect() {
             $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db);
             if(!$this->conn) die('Connection Failed');
             return $this->conn;

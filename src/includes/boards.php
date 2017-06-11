@@ -3,14 +3,16 @@
     if(isset($_SESSION['userId'])) {
         $id = $_SESSION['userId'];
     }
+    $boardObj = new Boards($connection);
+    $boards = $boardObj->get_all_boards();
     
 ?>
 <div class="container-fluid boards-section">
 <?php
-        $col = 10;
+        $col = 12;
          if(isset($_SESSION['userId'])) {
                 if($_SESSION['userId'] == 1) {
-                    $col = 12;
+                    $col = 10;
                 }
          }
         echo "<div class='row'>
@@ -32,39 +34,43 @@
                 </div>
             </div>";
 ?>
+<?php 
+    while($board = mysqli_fetch_assoc($boards)) {
+        $boardObj->set_category($board['category_id']);
+        $boardObj->set_id($board['board_id']);
+        $category = $boardObj->get_board_category();
+        $thread_count = $boardObj->get_board_thread_count();
+?>
     <div class="row">
-        <table class="table table-responsive">
-            <tr class="headings">
-                <th>Title</th>
-                <th>Views</th>
-                <th>Users</th>
-                <th>Category</th>
-            </tr>
+        <div class="board" onclick="window.location = 'forums.php?p=threads&board=<?php echo $board["board_id"]?>'">
+            <div class="title_date">
+                <div class="title">
+                    <h1><?php echo $board['board_title']; ?></h1>
+                </div>
+                <div class="thread-count">
+                    <span>Threads</span>
+                    <?php echo $thread_count; ?>
+                </div>
+            </div>
+            <div class="thread-user-cat">
+                <div class="category-name">
+                    <span>Category</span>
+                    <p><?php echo $category['category_name']; ?></p>
+                </div>
+                <div class="last-thread-info">
+                    <span>Latest Thread</span>
+                    <p><?php echo $category['category_name']; ?></p>
+                </div>
+                <div class="last-thread">
+                    <span>Last Thread Created</span>
+                    <?php echo time_elapsed_string($board['board_date']); ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <?php 
-                $query = "SELECT * FROM boards";
-                $result = mysqli_query($connection, $query);
-                check_query($result);
-                while($board = mysqli_fetch_assoc($result)) {
-                    $category_id = $board['category_id'];
-                    $category = mysqli_fetch_assoc(getById("categories", "category_id", $category_id));
-            ?>
-
-                    <tr class="data" onclick="window.location = 'forums.php?p=threads&board=<?php echo $board["board_id"]?>'">
-                            
-                            <td class="col-md-10"><?php echo $board['board_title']; ?></td>
-                            <td><?php echo $board['board_views_count']; ?></td>
-                            <td><?php echo $board['board_users_count']; ?></td>
-                            <td><?php echo $category['category_name']; ?></td>
-
-                    </tr>
-
-
-            <?php
-                }
-            ?>
-
-
-        </table>
+<?php
+    }
+?>
     </div>
 </div>

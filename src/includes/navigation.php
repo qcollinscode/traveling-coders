@@ -46,13 +46,13 @@
                 $url_encoded = $url . "?p=" . urlencode($text);
 
                 if(!isset($_SESSION['userId'])) {
-                echo "<li><a href='/sw.php?p=login'><i class='fa fa-sign-in'></i>Login</a></li>";
+                echo "<li><a href='/sw.php?p=login'>Login</a></li>";
                 } else {
-                echo "<li><a href='/sw.php?p=logout'><i class='fa fa-sign-out'></i>Logout</a></li>";
-                echo "<li><a href='/user/'><i class='fa fa-cog'></i>Account</a></li>";
+                echo "<li><a href='/sw.php?p=logout'>Logout</a></li>";
+                echo "<li><a href='/user/'>Account</a></li>";
                 }
             ?>
-            <li><a href="/forums.php?p=boards"><i class="fa fa-newspaper-o"></i> Forums</a></li>
+            <li><a href="/forums.php?p=boards">Forums</a></li>
             <li><a href="#" class="search-icon-lnk"><i class="fa fa-search"></i></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

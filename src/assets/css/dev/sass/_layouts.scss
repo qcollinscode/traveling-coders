@@ -20,16 +20,16 @@
         margin-top: 3.5em;
     }
     .title {
-        text-align: center;
         padding: 2em 0 1em 0;
         height: 100%;
+        text-align: center;
         top: 0;
         z-index: 10;
         position: relative;
         h1 {
             color: white!important;
             text-transform: uppercase;
-            font-size: 3.5em;
+            font-size: 4em;
             font-family: $mainFontFamily;
             position: relative;
         }
@@ -43,6 +43,108 @@
 
 .boards-section {
     @extend .signup-section;
+    .row:nth-child(2) {
+        margin-top: 1em;
+    }
+    .board {
+        margin: 0em 1em 1em 1em;
+        padding: 0.3em;
+        cursor: pointer;
+        background: rgba(200, 200, 200, 1);
+        position: relative;
+        z-index: 100000;
+        .title_date {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .title {
+                background: rgba(220, 220, 220, 1);
+                flex: 1;
+                font-weight: 600;
+                font-family: $mainFontFamily;
+                line-height: 150%;
+                letter-spacing: 0.05em;
+                padding: 10px;
+                margin-right: 0.3em;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                h1 {
+                    font-size: 1.8em;
+                }
+            }
+            .thread-count {
+                display: flex;
+                flex-direction: column;
+                background: rgba(220, 220, 220, 1);
+                font-weight: 200;
+                font-family: $mainFontFamily;
+                line-height: 150%;
+                letter-spacing: 0.05em;
+                padding: 10px;
+                text-align: center;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+        }
+        .thread-user-cat {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .category-name {
+                background: rgba(220, 220, 220, 1);
+                margin-top: 0.3em;
+                padding: 10px;
+                display: flex;
+                font-family: $mainFontFamily;
+                justify-content: center;
+                flex-direction: column;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+            .last-thread-info {
+                display: flex;
+                flex-direction: column;
+                background: rgba(220, 220, 220, 1);
+                margin: 0.3em 0.3em 0 0.3em;
+                padding: 10px;
+                flex: 1;
+                letter-spacing: 0.05em;
+                line-height: 150%;
+                font-family: $mainFontFamily;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+            .last-thread {
+                display: flex;
+                flex-direction: column;
+                background: rgba(220, 220, 220, 1);
+                margin-top: 0.3em;
+                padding: 10px;
+                letter-spacing: 0.05em;
+                line-height: 150%;
+                font-family: $mainFontFamily;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+        }
+    }
+
+
+
+
     table {
         .headings {
             th:nth-child(2), th:nth-child(3), th:nth-child(4) {
@@ -469,6 +571,113 @@ form {
 
 .threads-section {
     min-height: 100vh;
+    .row:nth-child(2) {
+        margin-top: 1em;
+    }
+     .thread {
+        margin: 0em 1em 1em 1em;
+        padding: 0.3em;
+        cursor: pointer;
+        background: rgba(200, 200, 200, 1);
+        position: relative;
+        z-index: 100000;
+        .title_date {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .title {
+                background: rgba(220, 220, 220, 1);
+                flex: 1;
+                font-weight: 600;
+                font-family: $mainFontFamily;
+                line-height: 150%;
+                letter-spacing: 0.05em;
+                padding: 10px;
+                margin-right: 0.3em;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                h1 {
+                    font-size: 1.8em;
+                }
+            }
+            .comment-count {
+                display: flex;
+                flex-direction: column;
+                background: rgba(220, 220, 220, 1);
+                font-weight: 200;
+                font-family: $mainFontFamily;
+                line-height: 150%;
+                letter-spacing: 0.05em;
+                padding: 10px;
+                text-align: center;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+        }
+        .comment-user-cat {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .user-info {
+                background: rgba(220, 220, 220, 1);
+                margin-top: 0.3em;
+                padding: 11px;
+                display: flex;
+                font-family: $mainFontFamily;
+                justify-content: center;
+                flex-direction: row;
+                img {
+                    max-width: auto;
+                    height: 60px;
+                    margin-right: 11px;
+                }
+                .user-name {
+                    display: flex;
+                    flex-direction: column;
+                    span {
+                        font-weight: 600;
+                        border-bottom: 2px solid rgba(170, 170, 170, 1);
+                        margin-bottom: 0.2em;
+                    }
+                }
+            }
+            .last-comment-info {
+                display: flex;
+                flex-direction: column;
+                background: rgba(220, 220, 220, 1);
+                margin: 0.3em 0.3em 0 0.3em;
+                padding: 10px;
+                flex: 1;
+                letter-spacing: 0.05em;
+                line-height: 150%;
+                font-family: $mainFontFamily;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+            .thread-created {
+                display: flex;
+                flex-direction: column;
+                background: rgba(220, 220, 220, 1);
+                margin-top: 0.3em;
+                padding: 10px;
+                letter-spacing: 0.05em;
+                line-height: 150%;
+                font-family: $mainFontFamily;
+                span {
+                    font-weight: 600;
+                    border-bottom: 2px solid rgba(170, 170, 170, 1);
+                    margin-bottom: 0.2em;
+                }
+            }
+        }
+     }
     table {
         .headings {
             th:nth-child(2), th:nth-child(3), th:nth-child(4) {
