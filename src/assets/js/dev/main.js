@@ -22,6 +22,7 @@
               $userMenu             = $('.user-section').find('.user-menu'),
               $userSectionWrapper   = $('.temp'),
               $userSectionMenuBtn       = $('.user-section').find('.fa-bars'),
+              $commentsLikeButton   = $('.comments-page-bd').find('.fa-heart'),
               range                 = 800,
               speed                 = 0.5;
 
@@ -203,6 +204,19 @@
             
         });
     });
+
+
+
+    $commentsLikeButton.on('click', function() {
+        $.post({
+            url: "/comment_likes.php?cid",
+            success: function(response) {
+                $('.loader-container').fadeOut().hide();
+                $('.blogs').html(response).fadeIn();
+            }
+        });
+    });
+
 
 
         searchFormButtom.addEventListener("click", function () {

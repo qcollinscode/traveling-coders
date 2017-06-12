@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="user-favorites col-lg-12">
+                <div class="top-threads col-lg-12">
                     <h1>Top Threads</h1>
                     <ul class="row">
 

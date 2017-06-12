@@ -5,6 +5,7 @@
     }
     $boardObj = new Boards($connection);
     $boards = $boardObj->get_all_boards();
+
     
 ?>
 <div class="container-fluid boards-section">
@@ -36,8 +37,10 @@
 ?>
 <?php 
     while($board = mysqli_fetch_assoc($boards)) {
+        $board_id = $board['board_id'];
         $boardObj->set_category($board['category_id']);
-        $boardObj->set_id($board['board_id']);
+        $boardObj->set_id($board_id);
+        $thread = mysqli_fetch_assoc($boardObj->get_all_board_threads_sorted());
         $category = $boardObj->get_board_category();
         $thread_count = $boardObj->get_board_thread_count();
 ?>
@@ -59,11 +62,11 @@
                 </div>
                 <div class="last-thread-info">
                     <span>Latest Thread</span>
-                    <p><?php echo $category['category_name']; ?></p>
+                    <p><?php echo empty($thread['thread_title']) ? "None" : $thread['thread_title']; ?></p>
                 </div>
                 <div class="last-thread">
                     <span>Last Thread Created</span>
-                    <?php echo time_elapsed_string($board['board_date']); ?>
+                    <?php echo empty($thread['thread_title']) ? "N/A" : time_elapsed_string($thread['thread_time']); ?>
                 </div>
             </div>
         </div>

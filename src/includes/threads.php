@@ -8,7 +8,7 @@
     $boardObj = new Boards($connection);
     $boardObj->set_id($boardId);
     $userObj = new Users($connection);
-    $boards = $boardObj->get_all_board_threads();
+    $boards = $boardObj->get_all_board_threads_sorted();
     $threadObj = new Threads($connection);
 ?>
 
@@ -52,7 +52,7 @@
 
 
     <div class="row" onclick="window.location = '../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'">
-        <div class="thread" onclick="window.location = 'forums.php?p=threads&board=<?php echo $board["board_id"]?>'">
+        <div class="thread">
             <div class="title_date">
                 <div class="title">
                     <h1><?php echo $row['thread_title']; ?></h1>
@@ -62,14 +62,7 @@
                     <?php echo $commentCount; ?>
                 </div>
             </div>
-            <div class="comment-user-cat">
-                <div class="user-info">
-                    <img src="../assets/img/73.jpg" alt="">
-                    <div class="user-name">
-                        <span>User</span>
-                        <p><?php echo $user['user_username']; ?></p>
-                    </div>
-                </div>
+            <div class="latest-comment_thread-created">
                 <div class="last-comment-info">
                     <span>Latest Comment</span>
                     <p><?php echo $latestCommentRow[1] == NULL ? $row['thread_content'] : $latestCommentRow[1]; ?></p>
@@ -82,23 +75,6 @@
         </div>
     </div>
 
-
-
-
-
-    <!--<div class="row">
-
-
-                <tr class="data" onclick="window.location = '../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'">
-                    <td class="col-md-10"><?php echo $row['thread_title']; ?></td>
-                    <td><?php echo $row['thread_views_count']; ?></td>
-                    <td><?php echo $row['thread_likes_count']; ?></td>
-                    <td><?php echo $comment_count === NULL ? 0 : $comment_count; ?></td>
-                </tr>
-
-
-
-    </div>-->
     <?php
         }
     ?>

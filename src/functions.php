@@ -206,7 +206,7 @@ function blogs_aside() {
                     <img src='assets/img/73.jpg'/>
                     <div>
                         <h4>{$row['blog_title']}</h4>
-                        <span>{$timeSincePost}</span>
+                        <span>Posted: {$timeSincePost}</span>
                     </div>
                 </a>
             </li>";
@@ -221,12 +221,12 @@ function threads_aside() {
         $threadObj->set_id($row['thread_id']);
         $title_thread = ucfirst($row["thread_title"]);
         $comment_count = $threadObj->get_thread_comments_count();
+        $comment_count = $comment_count == 1 ? $comment_count.' Comment' : $comment_count.' Comments';
         echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
                 <a href='threads/?tid={$row['thread_id']}&p=comments'>
-                    <img src='assets/img/tianjin.jpg' alt=''>
                     <div>
                         <h4>{$title_thread}</h4>
-                        <span>{$comment_count} Comments</span>
+                        <span class='comment-count'>{$comment_count}</span>
                     </div>
                 </a>
             </li>";
@@ -268,4 +268,11 @@ function comments($blog_id) {
             <button>reply</button>
         </div>";
     }
+}
+
+function add_comment_like($id, $user) {
+    $favoritesObj = new Favorites();
+    $favoritesObj->set_comment($id);
+    $favoritesObj->set_user($user);
+    $favoritesObj->add_thread_comment_favorite();
 }

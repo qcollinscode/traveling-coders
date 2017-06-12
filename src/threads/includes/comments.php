@@ -1,17 +1,21 @@
 <?php 
     $threadId = $_GET['tid'];
     $userId = "";
+    $threadObj = new Threads($connection);
+    $threadObj->set_id($_GET['tid']);
+    $userObj = new Users($connection);
+    $threadObj->set_id($threadId);
+    $thread = $threadObj->get_thread_by_id();
+    $userObj->set_id($thread['user_id']);
+    $threadUser = $userObj->get_user_by_id();
     if(isset($_SESSION['userId'])) {
         $userId = $_SESSION['userId'];
     }
 
     if(isset($_POST['post_comment'])) {
-        $comment_content = mysqli_real_escape_string($connection, $_POST['comment_content']);
-        $comment_time = date("Y-m-d H:i:s");
-        $query = "INSERT INTO comments(comment_content, user_id, comment_time, thread_id)";
-        $query .= "VALUES('{$comment_content}', $userId, '{$comment_time}', $threadId)";
-        $result = mysqli_query($connection, $query);
-        check_query($result);
+        $threadObj->set_comment_content($_POST['comment_content']);
+        $threadObj->set_user_id($userId);
+        $threadObj->add_comment();
     }
 
 
@@ -20,51 +24,95 @@
 
 <div class="container-fluid">
     <?php
-        $col = 10;
-         if(isset($_SESSION['userId'])) {
-                if($_SESSION['userId'] == 1) {
-                    $col = 12;
-                }
-         }
         echo "<div class='row'>
                 <div class='col-md-12 text-right img-bg'>
                     <div class='row'>
-                        <div class='col-md-{$col}'>
+                        <div class='col-md-12'>
                             <div class='title'><h1>Comments</h1></div>
                         </div>
                     </div>
                 </div>
             </div>";
 ?>
+
     <div class="row">
         <div class="comments-page-bd col-md-12">
             <div class="row comments">
+                    <div class="row">
+                        <div class="thread">
+                            <div class="title_date">
+                                <div class="title">
+                                    <h1><?php echo $thread['thread_title']; ?></h1>
+                                </div>
+                            </div>
+                            <div class="comment-user-cat">
+                                <div class="user-info" onclick="window.location = '../user/<?php echo $threadUser['user_username']; ?>'">
+                                    <img src="../assets/img/73.jpg" alt="">
+                                    <div class="user-name">
+                                        <span>User</span>
+                                        <p><?php echo $threadUser['user_username']; ?></p>
+                                    </div>
+                                </div>
+                                <div class="last-comment-info">
+                                    <p><?php echo $thread['thread_content']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <?php
-                    $i = 0;
-                    $comments = getById("comments", "thread_id", $threadId);
+                    $comments = $threadObj->get_all_thread_comments_sorted("ASC");
                     while($row = mysqli_fetch_assoc($comments)) {
-                        $user_id = $row['user_id'];
-                        $user = mysqli_fetch_assoc(getById("users", "user_id", $user_id));
-                        $time = $row['comment_time'];
-                        $timeSincePost = time_elapsed_string($time);
+                        $userObj->set_id($row['user_id']);
+                        $user = $userObj->get_user_by_id();
+                        $timeSincePost = time_elapsed_string($row['comment_time']);
                 ?>
 
-                <div class="col-lg-12">
+                <div class="row">
                     <div class="comment">
-                        <h1><?php echo $user['user_username']; ?></h1>
-                        <p class="date"><span><?php echo $timeSincePost; ?></span></p>
-                        <span class="ln"></span>
-                        <p class="comment-comment"><?php echo $row['comment_content']; ?></p>
-                        <button>reply</button>
+                        <div class="comment-user-cat">
+                            <div class="user-info" onclick="window.location = '../user/<?php echo $user['user_username']; ?>'">
+                                <img src="../assets/img/73.jpg" alt="">
+                                <div class="user-name">
+                                    <span>User</span>
+                                    <p><?php echo $user['user_username']; ?></p>
+                                </div>
+                            </div>
+                            <div class="comment-content-likes">
+                                <div class="content">
+                                    <p><?php echo $row['comment_content']; ?></p>
+                                </div>
+                                <div class="likes">
+                                    <p><i class="fa fa-heart"></i></p><span>
+                                        <?php 
+                                            $likes_count = $row['comment_likes_count'];
+                                            if ($likes_count == 0) {
+                                                echo "";
+                                            } else if($likes_count == 1) {
+                                                echo $likes_count . " " . "Like";
+                                            } else if($likes_count > 1 ) {
+                                                echo $likes_count . " " . "Likes";
+                                            }
+                                        
+                                        ?>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="comment-created">
+                                <span>Comment Posted</span>
+                                <?php echo time_elapsed_string($row['comment_time']); ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 <?php 
                     }
                 ?>
             </div>
         </div>
     </div>
+
+
+
     <?php if(isset($_SESSION['userId'])) { ?>
         <div class="row leave-reply">
             <div class="col-lg-12">

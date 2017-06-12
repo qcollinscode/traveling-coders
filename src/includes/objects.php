@@ -55,7 +55,7 @@ class Comments {
         return mysqli_fetch_assoc($result)['comment_likes_count'];
     }
 
-    public function update_comment_likes($comment_id, $add_remove) {
+    public function update_comment_likes($add_remove) {
         $a_r;
 
         switch($add_remove) {
@@ -70,7 +70,7 @@ class Comments {
             break;
         }
 
-        $query = "UPDATE comments SET comment_likes_count = comment_likes_count {$a_r} WHERE comment_id={$comment_id}";
+        $query = "UPDATE comments SET comment_likes_count = comment_likes_count {$a_r} WHERE comment_id={$this->comment_id}";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
     }
@@ -102,6 +102,10 @@ class Comments {
         return $result;
     }
 
+    public function get_all_comments_by_thread_id() {
+
+    }
+
     public function get_comment_by_id() {
         $query = "SELECT * FROM comments WHERE blog_id={$this->comment_id}";
         $result = mysqli_query($this->conn, $query);
@@ -118,19 +122,23 @@ class Comments {
     }
 
     public function set_id($id) {
-        $this->comment_id = $id;
+        $this->comment_id = mysqli_real_escape_string($this->conn, $id);
     }
 
     public function set_comment_content($content) {
-        $this->comment_content = $content;
+        $this->comment_content = mysqli_real_escape_string($this->conn, $content);
     }
 
     public function set_blog($id) {
-        $this->blog_id = $id;
+        $this->blog_id = mysqli_real_escape_string($this->conn, $id);
+    }
+
+    public function set_thread($id) {
+        $this->thread_id = mysqli_real_escape_string($this->conn, $id);
     }
 
     public function set_user($id) {
-        $this->user_id = $id;
+        $this->user_id = mysqli_real_escape_string($this->conn, $id);
     }
 }
 
@@ -316,8 +324,8 @@ class Threads {
     protected $thread_id;
     protected $user_id;
     protected $thread_title;
-    protected $thread_time;
     protected $thread_tags;
+    protected $comment_content;
     protected $board_id;
     
 
@@ -346,8 +354,13 @@ class Threads {
     }
 
     public function set_board($boardId) {
-        $this->thread_tags = mysqli_real_escape_string($this->conn, $boardId);
+        $this->board_id = mysqli_real_escape_string($this->conn, $boardId);
     }
+
+    public function set_comment_content($content) {
+        $this->comment_content = mysqli_real_escape_string($this->conn, $content);
+    }
+
 
     public function get_all_threads() {
         $query = "SELECT * FROM threads";
@@ -391,7 +404,7 @@ class Threads {
         $query = "SELECT * FROM threads WHERE thread_id={$this->thread_id}";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
-        return $result;
+        return mysqli_fetch_assoc($result);
     }
 
     public function get_thread_by_board_id() {
@@ -401,10 +414,27 @@ class Threads {
         return $result;
     }
 
+    public function get_thread_by_board_id_sorted($column = "thread_time", $order = "DESC") {
+        $columnStr = mysqli_real_escape_string($this->conn, $column);
+        $orderStr = mysqli_real_escape_string($this->conn, $order);
+        $query = "SELECT * FROM threads WHERE board_id={$this->board_id} ORDER BY {$columnStr} {$orderStr}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return mysqli_fetch_assoc($result);
+    }
+
     public function add_thread() {
-        $blog_time = date("Y-m-d H:i:s");
+        $time = date("Y-m-d H:i:s");
         $query = "INSERT INTO threads(thread_title, thread_tags, board_id, user_id, thread_time)";
-        $query .= "VALUES('{$this->thread_title}', '{$this->thread_tags}', {$this->board_id}, {$this->user_id}, '{$this->thread_time}')";
+        $query .= "VALUES('{$this->thread_title}', '{$this->thread_tags}', {$this->board_id}, {$this->user_id}, '{$time}')";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+    public function add_comment() {
+        $time = date("Y-m-d H:i:s");
+        $query = "INSERT INTO comments(comment_content, user_id, comment_time, thread_id)";
+        $query .= "VALUES('{$this->comment_content}', $this->user_id, '{$time}', $this->thread_id)";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
     }
@@ -570,6 +600,7 @@ class Favorites {
     protected $favorite_id;
     protected $user_id;
     protected $blog_id;
+    protected $thread_id;
     protected $comment_id;
     private $conn;
 
@@ -578,30 +609,43 @@ class Favorites {
     }
 
     public function set_id($id) {
-        $this->favorite_id = $id;
+        $this->favorite_id = mysqli_real_escape_string($this->conn, $id);
     }
 
     public function set_user($id) {
-        $this->user_id = $id;
+        $this->user_id = mysqli_real_escape_string($this->conn, $id);
     }
 
     public function set_blog($id) {
-        $this->blog_id = $id;
+        $this->blog_id = mysqli_real_escape_string($this->conn, $id);
     }
 
     public function set_comment($id) {
-        $this->comment_id = $id;
+        $this->comment_id = mysqli_real_escape_string($this->conn, $id);
     }
 
-    public function add_favorite() {
+    public function set_thread($id) {
+        $this->thread_id = mysqli_real_escape_string($this->conn, $id);
+    }
+
+    public function add_blog_comment_favorite() {
         $query = "INSERT INTO favorites(user_id, blog_id, comment_id) ";
         $query .= "VALUES('{$this->user_id}', '{$this->blog_id}', '{$this->comment_id}')";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
     }
 
+
+    public function add_comment_favorite() {
+        $query = "INSERT INTO favorites(user_id, comment_id) ";
+        $query .= "VALUES('{$this->user_id}', '{$this->comment_id}')";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+    }
+
+
     public function remove_favorite() {
-        $query = "DELETE FROM favorites WHERE user_id={$this->user_id} AND blog_id={$this->blog_id}";
+        $query = "DELETE FROM favorites WHERE user_id={$this->user_id} AND comment_id={$this->comment_id}";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
     }
@@ -717,6 +761,15 @@ class Boards {
 
     public function get_all_board_threads() {
         $query = "SELECT * FROM threads WHERE board_id={$this->board_id}";
+        $result = mysqli_query($this->conn, $query);
+        check_query($result);
+        return $result;
+    }
+
+    public function get_all_board_threads_sorted($column = "thread_time", $order = "DESC") {
+        $columnStr = mysqli_real_escape_string($this->conn, $column);
+        $orderStr = mysqli_real_escape_string($this->conn, $order);
+        $query = "SELECT * FROM threads WHERE board_id={$this->board_id} ORDER BY {$columnStr} {$orderStr}";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
         return $result;
