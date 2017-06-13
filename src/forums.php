@@ -4,29 +4,46 @@
 
 
 <?php 
-    if(isset($_GET['p'])) {
-        $source = $_GET['p'];
-    } else {
-        $source = '';
-    }
 
-    switch($source) {
-        case "boards";
-            include "includes/boards.php";
-        break;
-        case "threads";
-            include "includes/threads.php";
-        break;
-        case "create_board";
-            include "includes/create_board.php";
-        break;
-        case "create_thread";
-            include "includes/create_thread.php";
-        break;
-        default:
+    // Comments page?
+    if(isset($_GET['comments'])) {
+
+        // Index must to be a number.
+        if(is_numeric($_GET['comments'])) {
+            include "includes/threads/comments.php";
+        } else {
             include "wrongpage.php";
-        break;
+        }
+
+    // Thread page?
+    } else if(isset($_GET['thread'])) {
+
+        // Index must be a number.
+        if(is_numeric($_GET['thread'])) {
+            include "includes/threads/index.php";
+        
+        } else if ($_GET['thread'] == "create") {
+            include "includes/threads/create_thread.php";
+        } else {
+            include "wrongpage.php";
+        }
+
+    // Board page?
+    } else if(isset($_GET['board'])) {
+
+        if(is_numeric($_GET['board'])) {
+            include "includes/threads/index.php";
+        } else if ($_GET['board'] == "create") {
+            include "includes/boards/create_board.php";
+        } else {
+            include "wrongpage.php";
+        }
+
+    } else {
+
+        include "includes/boards/index.php";
     }
+ 
 ?>
 
 <?php

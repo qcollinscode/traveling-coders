@@ -22,6 +22,10 @@
               $userMenu             = $('.user-section').find('.user-menu'),
               $userSectionWrapper   = $('.temp'),
               $userSectionMenuBtn       = $('.user-section').find('.fa-bars'),
+              loginFormButton      = document.querySelector('.login-signup>.login-signup-buttons>.login'),
+              signupFormButton      = document.querySelector('.login-signup>.login-signup-buttons>.signup'),
+              $loginForm             = $('.login-signup>.login-form-container'),
+              $signupForm             = $('.login-signup>.signup-form-container'),
               $commentsLikeButton   = $('.comments-page-bd').find('.fa-heart'),
               range                 = 800,
               speed                 = 0.5;
@@ -29,7 +33,6 @@
 /**
  * Loader Default State
  */
-
 
         window.onscroll = function() {
             /**
@@ -111,6 +114,10 @@
 
         };
 
+
+        /**
+         * User Account Menu
+         */
          if ($userSectionMenuBtn.length !== 0) {
 
                 function reset() {
@@ -163,6 +170,9 @@
     });
 
 
+/**
+ * Font Page Sort Blog Button
+ */
     popular.forEach((el) => {
         el.addEventListener("click", (e) => {
             if(e.target === popular[0] && e.target.classList.contains("selected") === false) {
@@ -207,6 +217,9 @@
 
 
 
+    /**
+     * Comment Like Button
+     */
     $commentsLikeButton.on('click', function() {
         $.post({
             url: "/comment_likes.php?cid",
@@ -219,10 +232,12 @@
 
 
 
+    /**
+     * Search Page
+     */
         searchFormButtom.addEventListener("click", function () {
             searchForm.submit();
         });
-
 
         navSearchButton.addEventListener("click", function() {
             if(body.classList.contains('dsble')) {
@@ -235,6 +250,37 @@
                 searchSection.classList.add('showSearch');
             }
         });
+
+
+/**
+ * Login/Signup Page 
+ */
+        if( loginFormButton !== null) {
+            var formButtons = [loginFormButton, signupFormButton];
+        
+            $signupForm.hide();
+
+            formButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    removeClass(formButtons, "login-signup-selected");
+                    this.classList.add('login-signup-selected');
+                    if(this === formButtons[0]) {
+                        $signupForm.fadeOut(function() {
+                            $signupForm.hide();
+                        });
+                        $loginForm.fadeIn();
+                    } else if (this === formButtons[1]) {
+                        $loginForm.fadeOut(function() {
+                            $loginForm.hide();
+                        });
+                        $signupForm.fadeIn();
+                    }
+                });
+            });
+        }
+
+
+
     });
 
     function removeClass(elName, className) {
@@ -247,6 +293,8 @@
         }
         return elName;
     }
+
+
 
 
 

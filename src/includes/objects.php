@@ -694,6 +694,7 @@ class Categories {
         $query = "SELECT * FROM categories";
         $result = mysqli_query($this->conn, $query);
         check_query($result);
+        return $result;
     }
 
     public function get_category_by_id() {

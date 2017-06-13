@@ -1,9 +1,3 @@
-<?php
-
-    $varr = $_GET['p'];
-    $varr = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",urldecode($varr)); 
-    echo $varr;
-?>
 
 <!DOCTYPE html>
 <html lang="en">

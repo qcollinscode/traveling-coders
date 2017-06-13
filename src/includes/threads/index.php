@@ -51,7 +51,7 @@
     ?>
 
 
-    <div class="row" onclick="window.location = '../threads/?tid=<?php echo $row['thread_id']."&p=comments"; ?>'">
+    <div class="row" onclick="window.location = 'forums.php?board=<?php echo $boardId; ?>&thread=<?php echo $row['thread_id']; ?>&comments=1'">
         <div class="thread">
             <div class="title_date">
                 <div class="title">

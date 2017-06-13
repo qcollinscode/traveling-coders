@@ -25,18 +25,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Homepage</a></li>
-            <?php 
-                $nav = getAll("categories");
-                while($row = mysqli_fetch_assoc($nav)) {
-                    $category_name = $row['category_name'];
-                    $category_id = $row['category_id'];
-                    $category_name_url = strtolower($category_name);
-            ?>
-                <li><a href="<?php echo '/sw.php?p='.$category_name_url; ?>"><?php echo $category_name;?></a></li>
-            <?php 
-            
-                } 
-            ?>
+            <li><a href="/blogs.php">Blogs</a></li>
+            <li><a href="/forums.php">Forums</a></li>
             <?php
 
                 $url_page = "forums";
@@ -52,7 +42,6 @@
                 echo "<li><a href='/user/'>Account</a></li>";
                 }
             ?>
-            <li><a href="/forums.php?p=boards">Forums</a></li>
             <li><a href="#" class="search-icon-lnk"><i class="fa fa-search"></i></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

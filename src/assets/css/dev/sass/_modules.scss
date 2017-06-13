@@ -80,14 +80,14 @@
             pointer-events: none;
             .selected {
                 color: $mainColor;
-                border-bottom: 3px solid $mainColor;
-                padding-bottom: 6px;
+                background: rgba(220, 220, 220, 1);
             }
             span {
                 pointer-events: auto;
                 user-select: none;
                 cursor: pointer;
                 margin-left: 1em;
+                padding: 10px;
                 text-transform: uppercase;
                 &:nth-child(3) {
                     text-transform: uppercase;
@@ -111,8 +111,8 @@
         li {
             position: relative;
             margin: 0em 1em 1em 1em;
-            padding: 0.3em;
-            background: rgba(200, 200, 200, 1);
+            padding: 0;
+            background: rgba(220, 220, 220, 1);
             position: relative;
             a {
                 position: relative;
@@ -128,6 +128,7 @@
                     color: $mainColor;
                     background: rgba(220, 220, 220, 1);;
                     padding: 8px;
+                    border-bottom: 0.1em solid rgba(240, 240, 240, 1);
                 }
                 &:hover, &:visited, &:focus {
                     text-decoration: none;
@@ -137,7 +138,6 @@
                 min-height: 70px;
                 max-height: 85px;
                 max-width: auto;
-                margin-right: 0.3em;
                 & + div {
                     display: flex;
                     flex-direction: column;
@@ -145,7 +145,7 @@
                     span {
                         margin-top: 4px;
                         height: 100%;
-                        background: rgba(220, 220, 220, 1);;
+                        background: rgba(220, 220, 220, 1);
                         padding: 8px;
                     }
                 }
@@ -168,8 +168,8 @@
         li {
             position: relative;
             margin: 0em 1em 1em 1em;
-            padding: 0.3em;
-            background: rgba(200, 200, 200, 1);
+            padding: 0;
+            background: rgba(220, 220, 220, 1);
             position: relative;
             a {
                 position: relative;
@@ -186,6 +186,7 @@
                     color: $mainColor;
                     background: rgba(220, 220, 220, 1);;
                     padding: 8px;
+                    border-bottom: 0.1em solid rgba(240, 240, 240, 1);
                 }
                 &:hover, &:visited, &:focus {
                     text-decoration: none;
@@ -256,10 +257,10 @@
 }
 
 footer {
-    background: $mainColor;
-    padding: 1em 0 1em 0;
+    background: rgba(220, 220, 220, 1);
+    padding: 1em 0 0em 0;
     .copy {
-        color: white;
+        color: #000;
         text-transform: uppercase;
         text-align: left;
         display: block;
@@ -283,19 +284,20 @@ footer {
         ul {
             list-style: none;
             li {
-                border-right: 1px solid white;
                 text-align: center;
 
                 &:nth-child(4) {
                     border: none;
                 }
                 a {
-                    font-size: 1em;
-                    color: white;
+                    font-size: 1.3em;
+                    font-family: $mainFontFamily;
+                    color: #000;
                     font-weight: 500;
+                    transition: 0.2s ease-in-out;
+                    width: 100%;
                     &:hover, &:visited, &:focus {
-                        color: white;
-                        text-decoration: none;
+                        color: #000;
                     }
                 }
             }

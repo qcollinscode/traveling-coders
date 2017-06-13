@@ -168,11 +168,15 @@ function blogs_preview($order = "ASC") {
     global $connection;
     $blogObj = new Blogs($connection);
     $userObj = new Users($connection);
+    $categoriesObj = new Categories($connection);
     $blogs = $blogObj->get_all_blogs_sorted("blog_time", $order);
     while($row = mysqli_fetch_assoc($blogs)) {
+        $categoriesObj->set_id($row['category_id']);
+        $category = $categoriesObj->get_category_by_id();
         $user = $userObj->get_user_by_id($row['user_id']);
         $user_name_full = $user['user_name_first']." ".$user['user_name_last'];
-        $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).'... <a href="#">Read More</a>';
+        $url = '... <a href="/blogs.php?category='.strtolower($category['category_name'])."&blog=".$row['blog_id'].'">Read More</a>';
+        $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).$url;
         $timeSincePost = time_elapsed_string($row['blog_time']);
         echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-12 blog'>
             <div>
@@ -198,11 +202,15 @@ function blogs_preview($order = "ASC") {
 function blogs_aside() {
     global $connection;
     $blogObj = new Blogs($connection);
+    $categoriesObj = new Categories($connection);
     $blogs = $blogObj->get_all_blogs_sorted("blog_time", "ASC");
     while($row = mysqli_fetch_assoc($blogs)) {
+        $categoriesObj->set_id($row['category_id']);
+        $category = $categoriesObj->get_category_by_id();
         $timeSincePost = time_elapsed_string($row['blog_time']);
-        echo "<li class='col-xs-12 col-sm-6 col-md-3 col-lg-12'>
-                <a href='post.php?p={$row["blog_id"]}'>
+        $url = "blogs.php?category=".strtolower($category['category_name'])."&blog=".$row['blog_id'];
+        echo "<li class='col-sm-6 col-md-6 col-lg-12'>
+                <a href='{$url}'>
                     <img src='assets/img/73.jpg'/>
                     <div>
                         <h4>{$row['blog_title']}</h4>
@@ -221,12 +229,11 @@ function threads_aside() {
         $threadObj->set_id($row['thread_id']);
         $title_thread = ucfirst($row["thread_title"]);
         $comment_count = $threadObj->get_thread_comments_count();
-        $comment_count = $comment_count == 1 ? $comment_count.' Comment' : $comment_count.' Comments';
-        echo "<li class='col-xs-12 col-sm-6 col-md-6 col-lg-12'>
-                <a href='threads/?tid={$row['thread_id']}&p=comments'>
+        echo "<li class='col-sm-6 col-md-6 col-lg-12'>
+                <a href='forums.php?board={$row['board_id']}&thread={$row['thread_id']}&comments=1'>
                     <div>
                         <h4>{$title_thread}</h4>
-                        <span class='comment-count'>{$comment_count}</span>
+                        <span class='comment-count'><i class='fa fa-comment'></i> {$comment_count}</span>
                     </div>
                 </a>
             </li>";

@@ -1,10 +1,9 @@
 <?php
-    include "includes/header.php";
     $blogObj = new Blogs($connection);
     $userObj = new Users($connection);
     $commentObj = new Comments($connection);
 
-    $blog_id = $_GET['p'];
+    $blog_id = $_GET['blog'];
 
     // Blog ID
     $blogObj->set_id($blog_id);
@@ -151,7 +150,3 @@
         ?>
     </div>
 </section>
-
-<?php
-    include "includes/footer.php";
-?>

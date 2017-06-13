@@ -5,25 +5,31 @@
 
 <div class="blogs-section">
 
-
 <?php 
-    if(isset($_GET['p'])) {
-        $source = $_GET['p'];
+
+    // Blog page?
+    if(isset($_GET['blog'])) {
+
+        // Index must to be a number.
+        if(is_numeric($_GET['blog'])) {
+            include "includes/blogs/index.php";
+        } else {
+            include "wrongpage.php";
+        }
+
+    // Categories page?
+    } else if(isset($_GET['category'])) {
+        if($_GET['category'] == "travel" | $_GET['category'] == "life" | $_GET['category'] == "money") {
+            include "includes/blogs/categories/category/index.php";
+        } else {
+            include "wrongpage.php";
+        }
+
     } else {
-        $source = '';
+        include "includes/blogs/categories/index.php";
     }
-
-    switch($source) {
-        case "create_blog";
-            include "includes/create_blog.php";
-        break;        
-        default:
-            include "index.php";
-        break;
-    }
+ 
 ?>
-
-
 
 </div>
 

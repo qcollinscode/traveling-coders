@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-xs-12">
                 <label for="password">Email</label>
                 <input type="email" name="user_email" placeholder="Email" class="form-control" required>
             </div>

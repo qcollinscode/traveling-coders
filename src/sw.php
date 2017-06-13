@@ -18,18 +18,6 @@
             case "logout";
                 include "includes/logout.php";
             break;
-            case "forums";
-                include "forums.php";
-            break;
-            case "travel";
-                include "includes/blog_page.php";
-            break;
-            case "life";
-                include "includes/blog_page.php";
-            break;
-            case "money";
-                include "includes/blog_page.php";
-            break;
             default:
                 include "wrongpage.php";
             break;

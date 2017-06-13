@@ -1,8 +1,8 @@
 <?php 
-    $threadId = $_GET['tid'];
+    $threadId = $_GET['thread'];
     $userId = "";
     $threadObj = new Threads($connection);
-    $threadObj->set_id($_GET['tid']);
+    $threadObj->set_id($_GET['thread']);
     $userObj = new Users($connection);
     $threadObj->set_id($threadId);
     $thread = $threadObj->get_thread_by_id();
@@ -49,7 +49,6 @@
                                 <div class="user-info" onclick="window.location = '../user/<?php echo $threadUser['user_username']; ?>'">
                                     <img src="../assets/img/73.jpg" alt="">
                                     <div class="user-name">
-                                        <span>User</span>
                                         <p><?php echo $threadUser['user_username']; ?></p>
                                     </div>
                                 </div>
@@ -59,6 +58,7 @@
                             </div>
                         </div>
                     </div>
+                <h3>Comments</h3>
                 <?php
                     $comments = $threadObj->get_all_thread_comments_sorted("ASC");
                     while($row = mysqli_fetch_assoc($comments)) {
@@ -70,10 +70,9 @@
                 <div class="row">
                     <div class="comment">
                         <div class="comment-user-cat">
-                            <div class="user-info" onclick="window.location = '../user/<?php echo $user['user_username']; ?>'">
+                            <div class="user-info" onclick="window.location = 'user/<?php echo $user['user_username']; ?>'">
                                 <img src="../assets/img/73.jpg" alt="">
                                 <div class="user-name">
-                                    <span>User</span>
                                     <p><?php echo $user['user_username']; ?></p>
                                 </div>
                             </div>

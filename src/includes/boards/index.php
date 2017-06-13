@@ -45,7 +45,7 @@
         $thread_count = $boardObj->get_board_thread_count();
 ?>
     <div class="row">
-        <div class="board" onclick="window.location = 'forums.php?p=threads&board=<?php echo $board["board_id"]?>'">
+        <div class="board" onclick="window.location = 'forums.php?board=<?php echo $board["board_id"]?>'">
             <div class="title_date">
                 <div class="title">
                     <h1><?php echo $board['board_title']; ?></h1>
