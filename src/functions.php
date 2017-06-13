@@ -178,7 +178,7 @@ function blogs_preview($order = "ASC") {
         $url = '... <a href="/blogs.php?category='.strtolower($category['category_name'])."&blog=".$row['blog_id'].'">Read More</a>';
         $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).$url;
         $timeSincePost = time_elapsed_string($row['blog_time']);
-        echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-12 blog'>
+        echo "<div class='col-xs-12 blog'>
             <div>
                 <figure>
                     <div class='row'>
@@ -189,9 +189,9 @@ function blogs_preview($order = "ASC") {
                         <p>{$blog_content}</p>
                     </figcaption>
                 </figure>
-                <div class='row'>
-                    <div class='col-xs-12 col-sm-6 text-info-container'><span class='nm'>{$user_name_full}</span> | <span>{$timeSincePost}</span></div>
-                    <div class='col-xs-12 col-sm-6 info-icons'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
+                <div class='row info'>
+                    <div class='col-xs-6 col-sm-6 text-info-container'><span class='nm'>{$user_name_full} | {$timeSincePost}</div>
+                    <div class='col-xs-6 col-sm-6 info-icons'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
                 </div>
             </div>
         </div>";

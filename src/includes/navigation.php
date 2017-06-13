@@ -36,7 +36,7 @@
                 $url_encoded = $url . "?p=" . urlencode($text);
 
                 if(!isset($_SESSION['userId'])) {
-                echo "<li><a href='/sw.php?p=login'>Login</a></li>";
+                echo "<li><a href='login.php'>Login</a></li>";
                 } else {
                 echo "<li><a href='/sw.php?p=logout'>Logout</a></li>";
                 echo "<li><a href='/user/'>Account</a></li>";

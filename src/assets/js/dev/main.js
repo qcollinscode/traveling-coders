@@ -161,7 +161,7 @@
     $('.blogs').fadeOut(() => {
             $.ajax({
             cache: false,
-            url: "/blog_gallery_pop.php",
+            url: "/ajax/blog_gallery_pop.php",
             success: function(response) {
                 $('.loader-container').fadeOut().hide();
                 $('.blogs').html(response).fadeIn();
@@ -186,7 +186,7 @@
 
                         $.ajax({
                         cache: false,
-                        url: "/blog_gallery_pop.php",
+                        url: "/ajax/blog_gallery_pop.php",
                         success: function(response) {
                             $('.loader-container').fadeOut().hide();
                             $('.blogs').html(response).fadeIn();
@@ -202,7 +202,7 @@
                 $('.blogs').fadeOut(() => {
                     $('.loader-container').fadeIn().show();
                     $.ajax({
-                        url: "/blog_gallery_new.php",
+                        url: "/ajax/blog_gallery_new.php",
                         success: function(response) {
                             $('.loader-container').fadeOut().hide();
                             $('.blogs').html(response).fadeIn();

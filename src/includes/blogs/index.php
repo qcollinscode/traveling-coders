@@ -69,7 +69,7 @@
             <p><?php echo $blog['blog_content_sect_04']; ?></p>
         </div>
     </div>
-    <div class="row tags-soc">
+    <div class="row tags-sec">
         <div class="col-lg-10 tags">
             <p>TAGS:
                 <span><a href="#"> Tech </a><span class="slash">|</span> </span>
@@ -104,11 +104,9 @@
             <div class="col-lg-12">
                 <div class="row txt-con">
                     <div class="col-lg-6">
-                        <p><?php echo $user['user_description']; ?></p>
+                        <p><?php echo "sdfsdfdf".$user['user_description']; ?></p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12 mt">
                 <div class="row font-con">
                     <?php social($user['user_id']); ?>
                 </div>
