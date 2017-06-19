@@ -9,12 +9,6 @@
         $source = $_GET['p'];
 
         switch($source) {
-            case "signup";
-                include "includes/signup_form.php";
-            break;
-            case "login";
-                include "includes/login_form.php";
-            break;
             case "logout";
                 include "includes/logout.php";
             break;

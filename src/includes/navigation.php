@@ -2,7 +2,7 @@
 
 <div class="search hideSearch container-fluid">
     <div class="form-container row">
-        <form autocomplete="off" class="search-form col-lg-12" action="search.php" method="GET">
+        <form autocomplete="off" class="search-form col-lg-12" action="/search.php" method="GET">
             <div><input autocomplete="off" type="text" name="q" placeholder="Search"><span class="fa fa-search"></span></div>
         </form>
     </div>
@@ -42,7 +42,7 @@
                 echo "<li><a href='/user/'>Account</a></li>";
                 }
             ?>
-            <li><a href="#" class="search-icon-lnk"><i class="fa fa-search"></i></a></li>
+            <li><a href="" class="search-icon-lnk"><i class="fa fa-search"></i></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

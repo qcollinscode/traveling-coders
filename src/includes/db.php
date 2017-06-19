@@ -10,11 +10,13 @@
         // private $user = "root";
         // private $password = "";
         // private $db = "traveling_coders";
+
         private $conn;
 
         public function connect() {
             // Connect to MySQL
             $this->conn =  new mysqli($this->host, $this->user, $this->password, $this->db);
+            
             if ( mysqli_connect_errno() ) {
                 echo "Can't connect: " . mysqli_connect_error();
             }

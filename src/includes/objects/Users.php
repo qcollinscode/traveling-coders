@@ -55,10 +55,10 @@ class Users {
                  setcookie($cookie_name, $cookie_value, time() + ( 86400 * 30 ), "/");
                  header("Location: index.php");
             } else {
-                return $this->error_message("Wrong Password!!!");
+                return $this->error_message("Username or password is incorrect!!");
             }
         } else {
-            return $this->error_message("Username doesn't exist!!!");
+            return $this->error_message("Username or password is incorrect!!");
         }
 
     }

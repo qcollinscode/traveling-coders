@@ -2,8 +2,9 @@
     include "includes/header.php";
     $tags = $_GET['q'];
     $blogsObj = new Blogs($connection);
-    $blogsObj->set_search_query($tags);
+    $usersObj = new Users($connection);
     $categoriesObj = new Categories($connection);
+    $blogsObj->set_search_query($tags);
 ?>
 
 <?php
@@ -27,6 +28,7 @@
 
 <div class="blog-page container">
     <div class="row">
+
         <?php
             $blogs = $blogsObj->search_blogs();
             $len = mysqli_num_rows($blogs);
@@ -36,10 +38,10 @@
             }
             while($row = mysqli_fetch_assoc($blogs)) {
                 $time = $row['blog_time'];
-                $user = getById("users", "user_id", $row['user_id']);
-                $userRow = mysqli_fetch_assoc($user);
-                $name_first = $userRow['user_name_first'];
-                $name_last = $userRow['user_name_last'];
+                $usersObj->set_id($row['user_id']);
+                $user = $usersObj->get_user_by_id();
+                $name_first = $user['user_name_first'];
+                $name_last = $user['user_name_last'];
                 $category = $row['category_id'];
                 $blog_id = $row['blog_id'];
                 $categoriesObj->set_id($category);
@@ -47,7 +49,7 @@
                 $user_full_name = $name_first." ".$name_last;
                 $blog_content = $row['blog_content_sect_01'];
                 $url = '<a href="blogs.php?category='.strtolower($category_name['category_name']).'&blog='.$blog_id.'">Read More</a>';
-               if(strlen($blog_content) > 100) {
+                if(strlen($blog_content) > 100) {
                     $limitStr = substr($blog_content, 0, 350);
                     $blog_content = substr($limitStr, 0, strrpos($limitStr, ' ')).'... '.$url;
                 }
@@ -66,12 +68,9 @@
                 </div>
             </div>";
             }
-
-
-
         ?>
-    </div>
 
+    </div>
 </div>
 
 <?php

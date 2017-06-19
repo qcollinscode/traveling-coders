@@ -121,7 +121,7 @@ class Blogs {
     }
 
     public function search_blogs() {
-        $stmt = $this->conn->prepare("SELECT * FROM blogs WHERE (blog_tags LIKE '%{$this->blog_search}%')");
+        $stmt = $this->conn->prepare("SELECT * FROM blogs WHERE (blog_tags OR blog_title LIKE '%{$this->blog_search}%')");
         $stmt->execute();
         $result = $stmt->get_result();
         check_query($result);

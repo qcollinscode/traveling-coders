@@ -5,6 +5,7 @@
   ini_set("display_errors", 1);
   include_once('../includes/db.php');
   include_once("../functions.php");
+  include_once('../includes/objects/Users.php');
   session_start();
   $usersObj = new Users($connection);
   $usersObj->set_id($_SESSION['userId']);

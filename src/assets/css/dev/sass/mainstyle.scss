@@ -334,6 +334,17 @@ p {
         height: calc(40em + 67px);
         position: relative;
         max-width: 40em;
+        button {
+            background: rgba(230, 230, 230, 1);
+            color: rgba(10, 10, 10, 1);
+            font-family: $mainFontFamily;
+            font-weight: 100;
+            transition: 0.08s ease-in-out;
+            border-radius: 0;
+            &:hover {
+                background: rgba(180, 180, 180, 1);
+            }
+        }
         .login-signup-buttons {
             background: rgba(180, 180, 180, 1);
             text-align: center;
@@ -357,15 +368,26 @@ p {
         }
         input {
             border-radius: 0;
-            background: rgba(220, 220, 220, 1);
+            background: rgba(230, 230, 230, 1);
             font-family: $mainFontFamily;
             box-shadow: none;
             border: 0;
             font-weight: 700;
             padding: 1.5em 1.5em 1.5em 1em;
+            transition: 0.2s ease-in-out;
+            &:focus {
+                background: rgba(255, 255, 255, 1);
+            }
         }
-        .form-group {
-            
+
+        p {
+            text-transform: uppercase;
+            background: red;
+            color: white!important;
+            font-family: $mainFontFamily;
+            letter-spacing: 0.2em;
+            padding: 0.4em;
+            margin: 0em 1em;
         }
 
         button {

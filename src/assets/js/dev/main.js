@@ -239,7 +239,12 @@
             searchForm.submit();
         });
 
-        navSearchButton.addEventListener("click", function() {
+        navSearchButton.addEventListener("click", function(e) {
+            
+            var event = window.event || e;
+            // Prevent browser refresh
+            event.preventDefault();
+
             if(body.classList.contains('dsble')) {
                 body.classList.remove('dsble');
                 searchSection.classList.remove('showSearch');

@@ -2,6 +2,7 @@
     $login_message = false;
     $signup_message = false;
     $user = new Users($connection);
+
     if(isset($_POST['login'])) {
         $user->set_username($_POST['user_username']);
         $user->set_password($_POST['user_password']);
