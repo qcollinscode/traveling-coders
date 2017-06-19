@@ -411,6 +411,7 @@ p {
     background: #ecf0f1;
     position: relative;
     overflow: hidden;
+    height: 100%;
     width: 100%;
     margin: 0em 0 2.9em 0;
     .post {
@@ -436,7 +437,7 @@ p {
                     color: $mainColor!important;
                     width: 40%;
                     min-width: 80%;
-                    padding-right: 1.3em;
+                    padding: 0 0.5em;
                     border: 3px solid $mainColor!important;
                     background: transparent;
                     @include bp-small {

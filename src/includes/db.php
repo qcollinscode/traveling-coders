@@ -13,8 +13,11 @@
         private $conn;
 
         public function connect() {
-            $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db);
-            if(!$this->conn) die('Connection Failed');
+            // Connect to MySQL
+            $this->conn =  new mysqli($this->host, $this->user, $this->password, $this->db);
+            if ( mysqli_connect_errno() ) {
+                echo "Can't connect: " . mysqli_connect_error();
+            }
             return $this->conn;
         }
     }

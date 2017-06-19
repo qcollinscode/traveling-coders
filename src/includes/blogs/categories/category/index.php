@@ -45,9 +45,10 @@
                 $name_last = $userRow['user_name_last'];
                 $user_full_name = $name_first." ".$name_last;
                 $blog_content = $row['blog_content_sect_01'];
+                $url = '<a href="blogs.php?category='.$_GET['category'].'&blog='.$row['blog_id'].'">Read More</a>';
                if(strlen($blog_content) > 100) {
                     $limitStr = substr($blog_content, 0, 350);
-                    $blog_content = substr($limitStr, 0, strrpos($limitStr, ' ')).'... <a href="#">Read More</a>';
+                    $blog_content = substr($limitStr, 0, strrpos($limitStr, ' ')).'... '.$url;
                 }
                 $timeSincePost = time_elapsed_string($time);
                 echo "<div class='post col-md-4'>
@@ -63,7 +64,6 @@
                         </div>
                     </div>
                 </div>";
-                $i++;
             }
 
 
