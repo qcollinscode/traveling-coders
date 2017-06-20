@@ -149,7 +149,9 @@ p {
         position: relative;
         z-index: 100000;
         margin: 0em 3em 3em 3em;
-        padding: 0;
+        padding: 1em;
+        border-radius: 8px!important;
+        overflow: hidden;
         background: rgba(220, 220, 220, 1);
         .title_date {
             display: flex;
@@ -433,7 +435,7 @@ p {
     background: #ecf0f1;
     position: relative;
     overflow: hidden;
-    min-height: 100%;
+    min-height: 100vh;
     width: 100%;
     margin: 0em 0 2.9em 0;
     .post {
@@ -916,10 +918,14 @@ p {
         cursor: pointer;
         position: relative;
         z-index: 100000;
+        padding: 1em;
         .title_date {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            overflow: hidden;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
             .title {
                 background: rgba(220, 220, 220, 1);
                 flex: 1;
@@ -927,7 +933,7 @@ p {
                 font-family: $mainFontFamily;
                 line-height: 150%;
                 letter-spacing: 0.05em;
-                padding: 10px;
+                padding: 1em;
                 margin-right: 0.1em;
                 display: flex;
                 flex-direction: column;
@@ -944,7 +950,7 @@ p {
                 font-family: $mainFontFamily;
                 line-height: 150%;
                 letter-spacing: 0.05em;
-                padding: 10px;
+                padding: 1em;
                 text-align: center;
                 span {
                     font-weight: 600;
@@ -956,12 +962,15 @@ p {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            overflow: hidden;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
             .last-comment-info {
                 display: flex;
                 flex-direction: column;
                 background: rgba(220, 220, 220, 1);
                 margin: 0.1em 0.1em 0 0em;
-                padding: 10px;
+                padding: 1em;
                 flex: 1;
                 letter-spacing: 0.05em;
                 line-height: 150%;
@@ -976,7 +985,7 @@ p {
                 flex-direction: column;
                 background: rgba(220, 220, 220, 1);
                 margin-top: 0.1em;
-                padding: 10px;
+                padding: 1em;
                 letter-spacing: 0.05em;
                 line-height: 150%;
                 font-family: $mainFontFamily;
@@ -1035,6 +1044,10 @@ p {
 
 .blogs-section {
     min-height: calc(100% - 49px);
+    background: url('../img/boat.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .img-responsive {
@@ -1225,28 +1238,25 @@ p {
 
 
 .categories {
-    height: 100%;
+    min-height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    &:after {
-        content: '';
-        height: 100%;
-        width: 100%;
-        background: black;
-        opacity: 0.2;
-        position: absolute;
-        top: 0;
-    }
+    flex-wrap: wrap;
+    background: rgba(180, 180, 180, 1);
     .category-container {
         margin: 1em auto;
-        width: 50%;
-        padding: 2em;
+        width: 500px;
+        height: 500px;
+        border-radius: 10px;
         background: rgba(210, 210, 210, 1);
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-size: 1.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         position: relative;
         cursor: pointer;
         z-index: 1000;
@@ -1527,7 +1537,7 @@ footer {
         text-align: center;
         display: block;
         font-size: 1.3em;
-        padding: 1em;
+        padding: 0.8em 0;
         font-weight: 900;
         @include bp-xlarge {
             text-align: center;

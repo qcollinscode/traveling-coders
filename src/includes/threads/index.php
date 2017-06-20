@@ -46,7 +46,7 @@
             $threadObj->set_id($row['thread_id']);
             $latestCommentRow = mysqli_fetch_row($threadObj->get_all_thread_comments_sorted());
             $commentCount = $threadObj->get_thread_comments_count();
-            $latestComment = $latestCommentRow[3] == NULL ? $row['thread_time'] : $latestCommentRow[3];
+            $latestComment = $latestCommentRow[3] == NULL ? "N/A" : $latestCommentRow[3];
             $user = $userObj->get_user_by_id($row['user_id']);
     ?>
 
@@ -56,6 +56,10 @@
             <div class="title_date">
                 <div class="title">
                     <h1><?php echo $row['thread_title']; ?></h1>
+                    <div class="thread-created">
+                        <span>Created</span>
+                        <?php echo time_elapsed_string($row['thread_time']) ?>
+                    </div>
                 </div>
                 <div class="comment-count">
                     <span>Comments</span>
@@ -68,8 +72,8 @@
                     <p><?php echo $latestCommentRow[1] == NULL ? $row['thread_content'] : $latestCommentRow[1]; ?></p>
                 </div>
                 <div class="thread-created">
-                    <span>Thread Created</span>
-                    <?php echo time_elapsed_string($row['thread_time']); ?>
+                    <span>Comment Created</span>
+                    <?php echo time_elapsed_string($latestComment); ?>
                 </div>
             </div>
         </div>
