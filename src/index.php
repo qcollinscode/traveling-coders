@@ -15,40 +15,28 @@
     <div class="row">
         <aside class="col-lg-3">
             <div class="row">
-                <div class="user-blog col-lg-12">
-                    <h1>Top Blogs</h1>
-                    <ul class="row">
+                <div class="users-list-container col-lg-12">
+                    <h1>Top 5 Bloggers</h1>
+                    <ul class="row users-list">
 
 
-                        <?php echo blogs_aside(); ?>
+                        <?php echo bloggers_aside(); ?>
 
-
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="top-threads col-lg-12">
-                    <h1>Top Threads</h1>
-                    <ul class="row">
-
-                        <?php echo threads_aside() ?>
 
                     </ul>
                 </div>
             </div>
         </aside>
-        <section class="col-lg-7 col-lg-push-1 main-section">
+        <section class="col-lg-7 col-lg-push-1 blogs-preview-section">
             <div class="row header">
                 <div class="col-lg-12">
-                    <div class="row sort">
-                        <h1><span class="selected">popular</span> <span>newest</span></h1>
+                    <div class="row">
+                        <h1>Recent Blogs</h1>
                     </div>
                 </div>
-            </div>
-            <div class="loader-container">
-                <div class="loader"></div>
-            </div>                
-            <div class="row blogs text-center">
+            </div>              
+            <div class="row blogs">
+                <?php echo blogs_preview("ASC") ?>
             </div>
         </section>
     </div>

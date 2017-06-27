@@ -1,0 +1,107 @@
+// Login Page
+
+.login-signup-section {
+    height: 100%;
+    background: url('./../img/tea.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .login-signup-container {
+        &:before {
+            content: '';
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.89) 50%, rgba(255,255,255,0.89) 51%, rgba(255,255,255,0.84) 71%, rgba(255,255,255,0.78) 100%);
+            background: -webkit-gradient(left bottom, left top, color-stop(0%, rgba(255,255,255,1)), color-stop(50%, rgba(255,255,255,0.89)), color-stop(51%, rgba(255,255,255,0.89)), color-stop(71%, rgba(255,255,255,0.84)), color-stop(100%, rgba(255,255,255,0.78)));
+            background: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.89) 50%, rgba(255,255,255,0.89) 51%, rgba(255,255,255,0.84) 71%, rgba(255,255,255,0.78) 100%);
+            background: -o-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.89) 50%, rgba(255,255,255,0.89) 51%, rgba(255,255,255,0.84) 71%, rgba(255,255,255,0.78) 100%);
+            background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.89) 50%, rgba(255,255,255,0.89) 51%, rgba(255,255,255,0.84) 71%, rgba(255,255,255,0.78) 100%);
+            background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.89) 50%, rgba(255,255,255,0.89) 51%, rgba(255,255,255,0.84) 71%, rgba(255,255,255,0.78) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c8c8c8', endColorstr='#c8c8c8', GradientType=0 );
+            position: absolute;
+        }
+    }
+    .login-signup {
+        box-shadow: 0px 0px 40px -10px black;
+        background:rgba(255, 255, 255, 1);
+        min-height: calc(40em + 67px);
+        height: calc(40em + 67px);
+        position: relative;
+        max-width: 40em;
+        button {
+            background: rgba(230, 230, 230, 1);
+            color: rgba(10, 10, 10, 1);
+            font-family: $mainFontFamilyItalic;
+            font-weight: 100;
+            transition: 0.08s ease-in-out;
+            border-radius: 0;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 0em 1em 1em 0;
+            &:hover {
+                background: rgba(180, 180, 180, 1);
+            }
+        }
+        .login-signup-buttons {
+            background: rgba(80, 80, 80, 1);
+            text-align: center;
+            position: relative;
+            div {
+                padding: 15px;
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+            }
+            p {
+                font-size: 1.6em;
+            }
+        }
+    }
+    form {
+        padding: 15px;
+        label {
+            font-family: $mainFontFamilyItalic;
+            letter-spacing: 0.1em;
+        }
+        input {
+            border-radius: 0;
+            background: rgba(230, 230, 230, 1);
+            font-family: $mainFontFamilyItalic;
+            box-shadow: none;
+            border: 0;
+            font-weight: 700;
+            padding: 1.5em 1.5em 1.5em 1em;
+            transition: 0.2s ease-in-out;
+            &:focus {
+                background: rgba(255, 255, 255, 1);
+            }
+        }
+
+        p {
+            text-transform: uppercase;
+            background: red;
+            color: white;
+            font-family: $mainFontFamilyRegular;
+            letter-spacing: 0.2em;
+            padding: 0.4em;
+            margin: 0em 1em;
+        }
+    }
+    .login-form-container {
+        height: 40em;
+        position: absolute;
+        content: '';
+        left: 0;
+        width: 100%;
+    }
+    .signup-form-container {
+        @extend .login-form-container;
+        display: none;
+    }
+}

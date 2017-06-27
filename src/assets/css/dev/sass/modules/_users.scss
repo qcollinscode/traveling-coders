@@ -1,0 +1,46 @@
+// HOME PAGE
+
+// TOP BLOGGERS
+
+.users-list-container {
+    h1 {
+        margin: 1em 0;
+    }
+    .users-list {
+        padding-left: 10px;
+        .users-list-item {
+            position: relative;
+            margin: 0em 0em 1em 0em;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .content-wrapper {
+                padding: 5px 0 0 0px;;
+                max-width: 100%;
+                a {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 5px;
+                    .new {
+                        border: 1px solid black;
+                        padding: 1px 2px;
+                        font-size: 1em;
+                    }
+                }
+            }
+            .thumb-wrapper {
+                min-height: 70px;
+                padding-left: 0;
+                padding-right: 0;
+                margin-right: 16px;
+                img {
+                    width: auto;
+                    border-radius: 50%;
+                    min-height: 80px;
+                    max-height: 80px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,97 @@
+// HOME PAGE
+
+// BLOGS PREVIEW
+.blogs-preview-section {
+    .header {
+        height: 5.95em;
+        text-align: center;
+        h1 {
+            margin-top: 1em;
+        }
+    }
+    .blog {
+        min-height: 55em;
+        margin: 0em;
+        h1 {
+            margin: 20px 0px;
+            text-align: center;
+        }
+        figcaption {
+            a {
+                font-weight: bolder;
+                padding-bottom: 0.2px;
+                border-bottom: 2px solid $mainFontColor;
+                transition: 0.2s ease-in-out;
+                &:hover {
+                    color: dimgrey;
+                    border-bottom: 2px solid dimgrey;
+                }
+            }
+        }
+        p {
+            padding: 1em 0;
+            font-size: 1.15em;
+        }
+        .info {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .published {
+                padding: 0em 15px 15px 15px;
+                span:first-child {
+                    font-weight: bolder;
+                }
+            }
+            .info-icons {
+                text-align: right;
+                padding: 0em 15px 15px 15px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                .comments {
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}
+
+// Category Blogs
+
+.category-blogs {
+    padding-top: 1.9em;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+    .blog {
+        margin-bottom: 3em;
+        .title_author {
+            padding-bottom: 0.8em;
+            text-align: center;
+            h2 {
+                padding: 0.9em 0em 0em 0em;
+            }
+        }
+        .img {
+            height: 275px;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        a {
+            font-weight: 700;
+            border-bottom: 1px solid black;
+        }
+        p {
+            padding: 1em 0em;
+        }
+        .info-box {
+            .published {
+                padding: 0;
+                span {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

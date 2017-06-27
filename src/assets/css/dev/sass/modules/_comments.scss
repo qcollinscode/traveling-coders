@@ -1,0 +1,43 @@
+//Forums
+
+// Comments Page
+
+.comments-page {
+    height: 100%;
+    .comment-container {
+        margin: 1em auto;
+        padding: 1em 1em 2em 1em;
+        background: rgba(245, 245, 245, 1);
+        box-shadow: 0px 0px 4px -2px black;
+        .posted {
+            text-align: right;
+        }
+        .user-info {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 0.8em;
+            padding-bottom: 1em;
+            .img {
+                background: url('../img/73.jpg');
+                background-size: cover;
+                background-position: center;
+                height: 5em;
+                width: 5em;
+                border-radius: 50%;
+            }
+            a {
+                padding: 1em;
+                align-self: center;
+                font-size: 1.3em;
+            }
+        }
+        .m-comment {
+            span {
+                font-size: 2em;
+            }
+        }
+        .comment {
+            padding-left: 7em;
+        }
+    }
+}

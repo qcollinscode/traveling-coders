@@ -1,0 +1,43 @@
+// HOME PAGE
+
+@keyframes spin {
+    0% { 
+        transform: rotate(0deg);
+        border-color: $mainColor2;
+        border-top-color: $loaderColor;
+    }
+    50% {
+        border-color: $loaderColor;
+        border-top-color: $mainColor2;
+    }
+    100% { 
+        transform: rotate(360deg); 
+        border-color: $mainColor2;
+        border-top-color: $loaderColor;
+    }
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding: 7em;
+}
+
+.loader {
+    box-shadow: inset 0px 0px 20px -5px black;
+    border-color: $loaderColor;
+    border-top-color: $mainColor2;
+    border-width: 8px;
+    border-top-width: 8px;
+    border-style: solid;
+    border-top-style: solid;
+    transition: 0.2s ease-in-out;
+    border-radius: 50%;
+    width: 70px;
+    position: absolute;
+    height: 70px;
+    animation: spin 2s linear infinite;
+}
+

@@ -6,9 +6,9 @@
               searchSection         = document.querySelector('.search'),
               searchFormButtom      = document.querySelector('.search-form .fa-search'),
               body                  = document.body,
-              navSearchButton       = document.querySelector('.navbar-default .search-icon-lnk'),
+              navSearchButton       = document.querySelector('.search-icon-lnk'),
               blogGallery           = document.querySelector('.blogs'),
-              popular               = document.querySelectorAll('.sort>h1>span'),
+              popular               = document.querySelectorAll('.sort>h2>span'),
               navigation            = document.querySelector('.navbar-default'),
               $wrapper              = $('.wrapper'),
               $logo                 = $('.logo'),
@@ -24,6 +24,8 @@
               $userSectionMenuBtn       = $('.user-section').find('.fa-bars'),
               loginFormButton      = document.querySelector('.login-signup>.login-signup-buttons>.login'),
               signupFormButton      = document.querySelector('.login-signup>.login-signup-buttons>.signup'),
+              userContentButton    = document.querySelectorAll('.user-content>.tabs>span'),
+              userContentPage      = document.querySelectorAll('.user-content-container>div'),
               $loginForm             = $('.login-signup>.login-form-container'),
               $signupForm             = $('.login-signup>.signup-form-container'),
               $commentsLikeButton   = $('.comments-page-bd').find('.fa-heart'),
@@ -154,67 +156,6 @@
                 })
             }
 
-/**
- * Blogs Preview Default State
- */
-
-    $('.blogs').fadeOut(() => {
-            $.ajax({
-            cache: false,
-            url: "/ajax/blog_gallery_pop.php",
-            success: function(response) {
-                $('.loader-container').fadeOut().hide();
-                $('.blogs').html(response).fadeIn();
-            }
-        });
-    });
-
-
-/**
- * Font Page Sort Blog Button
- */
-    popular.forEach((el) => {
-        el.addEventListener("click", (e) => {
-            if(e.target === popular[0] && e.target.classList.contains("selected") === false) {
-                
-                removeClass(popular, "selected");
-
-                el.classList.add("selected");
-                
-                $('.blogs').fadeOut(() => {
-                    $('.loader-container').fadeIn().show();
-
-                        $.ajax({
-                        cache: false,
-                        url: "/ajax/blog_gallery_pop.php",
-                        success: function(response) {
-                            $('.loader-container').fadeOut().hide();
-                            $('.blogs').html(response).fadeIn();
-                        }
-                    });
-                });
-            } else if(e.target === popular[1] && e.target.classList.contains("selected") === false) {
-                
-                removeClass(popular, "selected");
-                
-                e.target.classList.add("selected");
-                
-                $('.blogs').fadeOut(() => {
-                    $('.loader-container').fadeIn().show();
-                    $.ajax({
-                        url: "/ajax/blog_gallery_new.php",
-                        success: function(response) {
-                            $('.loader-container').fadeOut().hide();
-                            $('.blogs').html(response).fadeIn();
-                        }
-                    });
-                });
-
-            }
-            
-        });
-    });
-
 
 
     /**
@@ -235,15 +176,14 @@
     /**
      * Search Page
      */
-        searchFormButtom.addEventListener("click", function () {
-            searchForm.submit();
-        });
+
 
         navSearchButton.addEventListener("click", function(e) {
             
             var event = window.event || e;
             // Prevent browser refresh
-            event.preventDefault();
+            e.preventDefault();
+
 
             if(body.classList.contains('dsble')) {
                 body.classList.remove('dsble');
@@ -284,9 +224,50 @@
             });
         }
 
+/**
+ * User Page 
+ */
+        if( userContentButton !== null) {
+        var blogsPage = userContentPage[0],
+            threadsPage = userContentPage[1],
+            commentsPage = userContentPage[2];            
+
+            userContentButton.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    removeClass(userContentButton, "selected");
+                    this.classList.add('selected');
+
+                    if(this.classList.contains("blogs-tab")) {
+                        fadeHideShow([threadsPage, commentsPage], blogsPage);
+                    } else if(this.classList.contains("threads-tab")) {
+                        fadeHideShow([blogsPage, commentsPage], threadsPage);
+                    } else if(this.classList.contains("comments-tab")) {
+                        fadeHideShow([blogsPage, threadsPage], commentsPage);
+                    }
+
+
+                });
+            });
+        }
 
 
     });
+
+    function fadeHide(arr) {
+        var len = arr.length;
+        for(var i = 0; i < len; i++) {
+            $(arr[i]).fadeOut(function() {
+                $(arr[i]).hide();
+            });
+        }
+    }
+
+    function fadeHideShow(arr, el) {
+        fadeHide(arr);
+        $(el).fadeIn(function() {
+            $(el).show()
+        });
+    }
 
     function removeClass(elName, className) {
         if (elName.length > 0) {

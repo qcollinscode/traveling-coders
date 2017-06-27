@@ -2,9 +2,6 @@
     include "includes/header.php";
 ?>
 
-
-<div class="blogs-section">
-
 <?php 
 
     // Blog page?
@@ -29,10 +26,4 @@
         include "includes/blogs/categories/index.php";
     }
  
-?>
-
-</div>
-
-<?php
-    include "includes/footer.php";
 ?>

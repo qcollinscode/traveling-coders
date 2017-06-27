@@ -1,0 +1,85 @@
+// HOME PAGE
+
+// Thread Aside
+    .threads-list-container {
+        h1 {
+            margin: 1em 0;
+        }
+        .threads-list {
+            padding-left: 10px;
+            .threads-list-item {
+                position: relative;
+                margin: 0em;
+                padding: 15px 10px;
+                min-height: 145px;
+                .content-wrapper {
+                    h3 {
+                        margin-bottom: 10px;
+                    }
+                    .comment-count-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        .comment-count {
+                            margin-top: 10px;
+                        }
+                    }
+                    .new {
+                        margin-bottom: 10px;
+                        border: 1px solid black;
+                        padding: 1px 2px;
+                        font-size: 0.8em;
+                    }
+                }
+            }
+        }
+    }
+
+    // Forums
+
+    // Threads Section
+
+    .threads-section {
+        min-height: 100%;
+        height: 100%;
+        .row:nth-child(2) {
+            margin-top: 3em;
+        }
+        .thread {
+            position: relative;
+            padding: 1em;
+            background: rgba(245, 245, 245, 1);
+            margin: 0em 3em 3em 3em;
+            cursor: pointer;
+            a {
+                border-bottom: 1px solid rgba(20, 20, 20, 0.4);
+            }
+            .title_date {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                overflow: hidden;
+                .title {
+                    letter-spacing: 0.05em;
+                    padding: 1em;
+                }
+                .comment-count {
+                        align-self: center;
+                        padding: 1em;
+                }
+            }
+            .latest-comment_comment-created {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                overflow: hidden;
+                justify-content: space-between;
+                .last-comment-info {
+                    padding: 1em;
+                }
+                .comment-created {
+                    padding: 1em;
+                }
+            }
+        }
+    }

@@ -173,24 +173,26 @@ function blogs_preview($order = "ASC") {
         $categoriesObj->set_id($row['category_id']);
         $category = $categoriesObj->get_category_by_id();
         $user = $userObj->get_user_by_id($row['user_id']);
-        $user_name_full = $user['user_name_first']." ".$user['user_name_last'];
+        $user_name_full = ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']);
         $url = '... <a href="/blogs.php?category='.strtolower($category['category_name'])."&blog=".$row['blog_id'].'">Read More</a>';
         $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).$url;
         $timeSincePost = time_elapsed_string($row['blog_time']);
-        echo "<div class='col-xs-12 blog'>
+        echo "<div class='col-xs-6 blog'>
             <div>
                 <figure>
+                    <div class='title_author'>
+                        <h1>{$row['blog_title']} <br><small>By: {$user_name_full}</small></h1>
+                    </div>
                     <div class='row'>
                         <img src='assets/img/{$row['blog_image_preview']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
                     </div>
                     <figcaption>
-                        <h1>{$row['blog_title']}</h1>
                         <p>{$blog_content}</p>
                     </figcaption>
                 </figure>
                 <div class='row info'>
-                    <div class='col-xs-6 col-sm-6 text-info-container'><span class='nm'>{$user_name_full} | {$timeSincePost}</div>
-                    <div class='col-xs-6 col-sm-6 info-icons'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span> <i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div>
+                    <div class='col-xs-6 col-sm-6 published'><span>Published</span>: <span>{$timeSincePost}</span></div>
+                    <div class='col-xs-6 col-sm-6 info-icons'><div class='comments'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span></div> <div class='likes'><i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div></div>
                 </div>
             </div>
         </div>";
@@ -198,24 +200,39 @@ function blogs_preview($order = "ASC") {
 }
 
 
-function blogs_aside() {
+function bloggers_aside() {
     global $connection;
     $blogObj = new Blogs($connection);
     $categoriesObj = new Categories($connection);
     $blogs = $blogObj->get_all_blogs_sorted("blog_time", "ASC");
+    $usersObj = new Users($connection);
     while($row = mysqli_fetch_assoc($blogs)) {
         $categoriesObj->set_id($row['category_id']);
         $category = $categoriesObj->get_category_by_id();
+        $blog_id = $row['blog_id'];
+        $usersObj->set_id($row['user_id']);
+        $user = $usersObj->get_user_by_id();
+        $category_name = strtolower($category['category_name']);
         $timeSincePost = time_elapsed_string($row['blog_time']);
-        $url = "blogs.php?category=".strtolower($category['category_name'])."&blog=".$row['blog_id'];
+        $user_info = ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']);
+        $url = 'profile.php?user='.$user['user_username'];
         echo "<li class='col-sm-6 col-md-6 col-lg-12'>
-                <a href='{$url}'>
-                    <img src='assets/img/73.jpg'/>
-                    <div>
-                        <h4>{$row['blog_title']}</h4>
-                        <span>Posted: {$timeSincePost}</span>
+                <div class='users-list-item'>
+                    <div class='thumb-wrapper'>
+                        <a href={$url}>
+                            <img src='assets/img/73.jpg'/>
+                        </a>
                     </div>
-                </a>
+                    <div class='content-wrapper'>
+                            <h3>{$user_info}</h3>
+                            <span class='user-info'><small>12 Blogs </small></span>";
+                            if($timeSincePost < "5 weeks ago") {
+                                    echo "<a href={$url}>
+                                            <p><span class='new'>Profile</span></p>
+                                          </a>";
+                            }
+            echo "</div>
+                </div>
             </li>";
     };
 }
@@ -227,14 +244,26 @@ function threads_aside() {
     while($row = mysqli_fetch_assoc($threads)) {
         $threadObj->set_id($row['thread_id']);
         $title_thread = ucfirst($row["thread_title"]);
+        $timeSincePost = time_elapsed_string($row['thread_time']);
         $comment_count = $threadObj->get_thread_comments_count();
         echo "<li class='col-sm-6 col-md-6 col-lg-12'>
-                <a href='forums.php?board={$row['board_id']}&thread={$row['thread_id']}&comments=1'>
-                    <div>
-                        <h4>{$title_thread}</h4>
-                        <span class='comment-count'><i class='fa fa-comment'></i> {$comment_count}</span>
+                    <div class='threads-list-item'>
+                        <div class='content-wrapper'>
+                            <a href='forums.php?board={$row['board_id']}&thread={$row['thread_id']}&comments=1'>
+                                <h3>{$title_thread}</h3>
+                            </a>";
+                            if($timeSincePost < "5 weeks ago") {
+                                echo "<div class='comment-count-wrapper'>
+                                        <p><span class='new'>NEW</span></p>
+                                        <span class='comment-count'><i class='fa fa-comment'></i> {$comment_count}</span>
+                                    </div>";
+                            } else {
+                                echo "<div class='comment-count-wrapper'>
+                                        <span class='comment-count'><i class='fa fa-comment'></i> {$comment_count}</span>
+                                    </div>";
+                            }
+                    echo "</div>
                     </div>
-                </a>
             </li>";
     };
 }
@@ -281,4 +310,69 @@ function add_comment_like($id, $user) {
     $favoritesObj->set_comment($id);
     $favoritesObj->set_user($user);
     $favoritesObj->add_thread_comment_favorite();
+}
+
+function main_comment($threadId) {
+    global $connection;
+    $threadObj = new Threads($connection);
+    $userObj = new Users($connection);
+    $threadObj->set_id($threadId);
+    $thread = $threadObj->get_thread_by_id();
+    $userObj->set_id($thread['user_id']);
+    $user = $userObj->get_user_by_id();
+    $thread_time = time_elapsed_string($thread['thread_time']);
+    $full_name = ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']);
+    $user_url = 'profile.php?user='.$user['user_username'];
+    echo "<div class='row'>
+        <div class='col-sm-12'>
+            <div class='comment-container'>
+                <div class='row'>
+                    <div class='posted col-sm-12'>
+                        <span>{$thread_time}</span>
+                    </div>
+                    <div class='user-info col-sm-12'>
+                        <div class='img'></div>
+                        <a href='{$user_url}'>{$full_name}</a>
+                    </div>
+                    <div class='m-comment col-sm-12'>
+                        <span>{$thread['thread_content']}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>";
+}
+
+function thread_comments($threadId) {
+    global $connection;
+    $threadObj = new Threads($connection);
+    $userObj = new Users($connection);
+    $threadObj->set_id($threadId);
+    $comments = $threadObj->get_all_thread_comments_sorted("ASC");
+    
+    while($row = mysqli_fetch_assoc($comments)) {
+        $userObj->set_id($row['user_id']);
+        $user = $userObj->get_user_by_id();
+        $timeSincePost = time_elapsed_string($row['comment_time']);
+        $full_name = ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']);
+        $user_url = 'profile.php?user='.$user['user_username'];
+        echo "<div class='row'>
+                <div class='col-sm-12'>
+                    <div class='comment-container'>
+                        <div class='row'>
+                            <div class='posted col-sm-12'>
+                                <span>{$timeSincePost}</span>
+                            </div>
+                            <div class='user-info col-sm-12'>
+                                <div class='img'></div>
+                                <a href='{$user_url}'>{$full_name}</a>
+                            </div>
+                            <div class='comment col-sm-12'>
+                                <span>{$row['comment_content']}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>";
+    }
 }

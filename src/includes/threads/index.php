@@ -48,6 +48,11 @@
             $commentCount = $threadObj->get_thread_comments_count();
             $latestComment = $latestCommentRow[3] == NULL ? "N/A" : $latestCommentRow[3];
             $user = $userObj->get_user_by_id($row['user_id']);
+            $comment_user = $userObj->get_user_by_id($latestCommentRow[2]);
+            $full_name = ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']);
+            $comment_user_full_name = ucwords($comment_user['user_name_first'])." ".ucwords($comment_user['user_name_last']);
+            $user_url = 'profile.php?user='.$user['user_username'];
+            $comment_user_url = 'profile.php?user='.$comment_user['user_username'];
     ?>
 
 
@@ -57,23 +62,22 @@
                 <div class="title">
                     <h1><?php echo $row['thread_title']; ?></h1>
                     <div class="thread-created">
-                        <span>Created</span>
-                        <?php echo time_elapsed_string($row['thread_time']) ?>
+                        <span><?php echo time_elapsed_string($row['thread_time']) ?> by <a href="<?php echo $user_url; ?>"><?php echo $full_name; ?></a></span>
+                        <p> </p>
                     </div>
                 </div>
                 <div class="comment-count">
-                    <span>Comments</span>
-                    <?php echo $commentCount; ?>
+                    <?php echo $commentCount = 1 ? $commentCount."<span> Comment</span>" : $commentCount."<span> Comments</span>"; ?>
                 </div>
             </div>
-            <div class="latest-comment_thread-created">
+            <div class="latest-comment_comment-created">
                 <div class="last-comment-info">
                     <span>Latest Comment</span>
                     <p><?php echo $latestCommentRow[1] == NULL ? $row['thread_content'] : $latestCommentRow[1]; ?></p>
                 </div>
-                <div class="thread-created">
-                    <span>Comment Created</span>
-                    <?php echo time_elapsed_string($latestComment); ?>
+                <div class="comment-created">
+                    <span>Posted <?php echo time_elapsed_string($latestComment); ?></span>
+                    <p>by <a href="<?php echo $comment_user_url; ?>" ><?php echo $comment_user_full_name; ?></a></p>
                 </div>
             </div>
         </div>

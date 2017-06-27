@@ -1,0 +1,39 @@
+// HOME PAGE
+
+.jumbotron-container {
+    background: rgba(0, 0, 0, 1);
+}
+
+.home-jumbotron {
+    height: 85vh;
+    background: transparent;
+    background: url('../img/coffee.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 0;
+    position: relative;
+    opacity: 1;
+    overflow: hidden;
+    text-align: center;
+    background-attachment: fixed;
+    &:after {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.4;
+    }
+    .logo {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        top: 0;
+        position: relative;
+        z-index: 1;
+    }
+}

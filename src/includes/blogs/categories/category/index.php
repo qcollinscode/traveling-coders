@@ -30,7 +30,7 @@
         </div></div>";
 ?>
 
-<div class="blog-page container">
+<div class="category-blogs container">
     <div class="row">
         <?php
             $i = 0;
@@ -43,23 +43,26 @@
                 $userRow = mysqli_fetch_assoc($user);
                 $name_first = $userRow['user_name_first'];
                 $name_last = $userRow['user_name_last'];
-                $user_full_name = $name_first." ".$name_last;
+                $user_full_name = ucwords($name_first)." ".ucwords($name_last);
                 $blog_content = $row['blog_content_sect_01'];
                 $url = '<a href="blogs.php?category='.$_GET['category'].'&blog='.$row['blog_id'].'">Read More</a>';
                if(strlen($blog_content) > 100) {
-                    $limitStr = substr($blog_content, 0, 350);
+                    $limitStr = substr($blog_content, 0, 340);
                     $blog_content = substr($limitStr, 0, strrpos($limitStr, ' ')).'... '.$url;
                 }
                 $timeSincePost = time_elapsed_string($time);
-                echo "<div class='post col-md-4'>
+                echo "<div class='blog col-md-4'>
+                    <div class='title_author'>
+                        <h2 class='col-lg-12'>{$row['blog_title']}</h2>
+                        <br/>
+                        <h3><small>By: {$user_full_name}</small></h3>
+                    </div>
                     <div style='background-image: url(assets/img/{$row['blog_image_01']})' class='col-lg-12 img'></div>
                     <div>
-                        <h1 class='col-lg-12'>{$row['blog_title']}</h1>
                         <p class='col-lg-12'>{$blog_content}</p>
                         <div class='col-lg-12'>
-                            <div class='row text-box'>
-                                <span class='col-lg-6'>Posted: {$timeSincePost}</span>
-                                <span class='col-lg-6'>{$user_full_name}</span>
+                            <div class='row info-box'>
+                                <div class='col-xs-12 col-sm-12 published'><span>Published</span>: {$timeSincePost}</div>
                             </div>
                         </div>
                     </div>

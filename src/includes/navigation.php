@@ -3,7 +3,7 @@
 <div class="search hideSearch container-fluid">
     <div class="form-container row">
         <form autocomplete="off" class="search-form col-lg-12" action="/search.php" method="GET">
-            <div><input autocomplete="off" type="text" name="q" placeholder="Search"><span class="fa fa-search"></span></div>
+            <div><input autocomplete="off" type="text" name="q" placeholder="Search..."></div>
         </form>
     </div>
 </div>
