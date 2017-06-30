@@ -1,3 +1,5 @@
+// var url = "http://eventregistry.org/json/article?apiKey=c79a4cad-6222-42c6-9a4a-5c5b5643f396&conceptUri=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FPolitics&sourceUri=cnn.com&sourceUri=politico.com&lang=eng&action=getArticles&articlesSortBy=date&resultType=articles&articlesCount=20&articlesIncludeArticleImage=true&callback=JSON_CALLBACK";
+
 (function() {
     $(window).scrollTop(0)
     window.addEventListener("DOMContentLoaded", function () {

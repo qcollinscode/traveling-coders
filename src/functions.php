@@ -155,10 +155,10 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
-function limit_blog_preview_content_length($blog_content) {
+function limit_blog_preview_content_length($blog_content, $len) {
     $blog_content = strip_tags($blog_content);
     if(strlen($blog_content) > 100) {
-        $limitStr = substr($blog_content, 0, 400);
+        $limitStr = substr($blog_content, 0, $len);
         return $blog_content = substr($limitStr, 0, strrpos($limitStr, ' '));
     }
 }
@@ -175,27 +175,32 @@ function blogs_preview($order = "ASC") {
         $user = $userObj->get_user_by_id($row['user_id']);
         $user_name_full = ucwords($user['user_name_first'])." ".ucwords($user['user_name_last']);
         $url = '... <a href="/blogs.php?category='.strtolower($category['category_name'])."&blog=".$row['blog_id'].'">Read More</a>';
-        $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01']).$url;
+        $blog_content = limit_blog_preview_content_length($row['blog_content_sect_01'], 200).$url;
         $timeSincePost = time_elapsed_string($row['blog_time']);
-        echo "<div class='col-xs-6 blog'>
-            <div>
-                <figure>
-                    <div class='title_author'>
-                        <h1>{$row['blog_title']} <br><small>By: {$user_name_full}</small></h1>
+        $url = 'profile.php?user='.$user['user_username'];
+        echo "<div class='col-xs-12 blog'>
+                <div>
+                    <figure>
+                        <div class='title_author'>
+                            <h1>{$row['blog_title']}</h1>
+                            <div class='user-info'>
+                                <div class='img'></div>
+                                <a href={$url}><small>{$user_name_full}</small></a>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <img src='assets/img/{$row['blog_image_preview']}' alt='' class='col-sm-12'>
+                            <figcaption class='col-sm-8'>
+                                <p>{$blog_content}</p>
+                            </figcaption>
+                        </div>
+                    </figure>
+                    <div class='row info'>
+                        <div class='col-xs-6 col-sm-6 published'><span>Published</span>: <span>{$timeSincePost}</span></div>
+                        <div class='col-xs-6 col-sm-6 info-icons'><div class='comments'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span></div> <div class='likes'><i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div></div>
                     </div>
-                    <div class='row'>
-                        <img src='assets/img/{$row['blog_image_preview']}' alt='' class='col-xs-12 col-sm-12 img-responsive'>
-                    </div>
-                    <figcaption>
-                        <p>{$blog_content}</p>
-                    </figcaption>
-                </figure>
-                <div class='row info'>
-                    <div class='col-xs-6 col-sm-6 published'><span>Published</span>: <span>{$timeSincePost}</span></div>
-                    <div class='col-xs-6 col-sm-6 info-icons'><div class='comments'><i class='fa fa-comment'></i> <span>{$row['blog_comments_count']}</span></div> <div class='likes'><i class='fa fa-heart'></i> <span>{$row['blog_likes_count']}</span></div></div>
                 </div>
-            </div>
-        </div>";
+            </div>";
     }
 }
 

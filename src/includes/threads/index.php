@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="comment-count">
-                    <?php echo $commentCount = 1 ? $commentCount."<span> Comment</span>" : $commentCount."<span> Comments</span>"; ?>
+                    <?php echo $commentCount == 1 ? $commentCount."<span> Comment</span>" : $commentCount."<span> Comments</span>"; ?>
                 </div>
             </div>
             <div class="latest-comment_comment-created">
